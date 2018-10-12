@@ -8,6 +8,7 @@
 
 ## Links
 - [Trello](https://trello.com/b/Jpje3I1A/scrum-board)
+- [Release Plan](./Documentation/Release\ Plan.pdf)
 
 ## Meeting Times
 - Tuesday   7PM  Keith’s Garage
