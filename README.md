@@ -8,8 +8,8 @@
 
 ## Links
 - [Initial Presentation](https://docs.google.com/presentation/d/1sRWfeSazIiWJtqXJdJSJwQfQrMCYdjYDVDm9w8_U_a0/edit#slide=id.g43bf131c52_0_0)
-- [Trello](https://trello.com/b/Jpje3I1A/scrum-board)
 - [Release Plan](./Documentation/Release%20Plan.pdf)
+- [Trello](https://trello.com/b/Jpje3I1A/scrum-board)
 - **Sprint 1**
   - [Sprint 1 Plan](https://docs.google.com/document/d/1ildubfSnFcw-ZvcTZYPCaSAQCZDYwR1Jf1NYpPwZe8s/edit)
 
