@@ -1,10 +1,10 @@
 # Homie
 ### *An app that helps housemates keep track of their chores, bills, and groceries*
 ## Members
-- [*Ben Pao*](https://github.com/ben-pao)
-- [*Mary Chern*](https://github.com/marychern)
-- [*Andy Wong*](https://github.com/ankwwong)
-- [*Keith Ho*](https://github.com/hkeithk)
+- [Ben Pao](https://github.com/ben-pao)
+- [Mary Chern](https://github.com/marychern)
+- [Andy Wong](https://github.com/ankwwong)
+- [Keith Ho](https://github.com/hkeithk)
 
 ## Links
 - [Initial Presentation](https://docs.google.com/presentation/d/1sRWfeSazIiWJtqXJdJSJwQfQrMCYdjYDVDm9w8_U_a0/edit#slide=id.g43bf131c52_0_0)
