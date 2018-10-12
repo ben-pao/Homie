@@ -1,5 +1,5 @@
 # Homie
-**An app that helps housemates keep track of their chores, bills, and groceries**
+### An app that helps housemates keep track of their chores, bills, and groceries
 ## Members
 - Ben Pao
 - Mary Chern
