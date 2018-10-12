@@ -7,6 +7,7 @@
 - Keith Ho
 
 ## Links
+- [Initial Presentation](https://docs.google.com/presentation/d/1sRWfeSazIiWJtqXJdJSJwQfQrMCYdjYDVDm9w8_U_a0/edit#slide=id.g43bf131c52_0_0)
 - [Trello](https://trello.com/b/Jpje3I1A/scrum-board)
 - [Release Plan](./Documentation/Release\ Plan.pdf)
 
