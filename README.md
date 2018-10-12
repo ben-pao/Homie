@@ -15,9 +15,9 @@
   - [Sprint 1 Plan](https://docs.google.com/document/d/1ildubfSnFcw-ZvcTZYPCaSAQCZDYwR1Jf1NYpPwZe8s/edit)
 
 ### Meeting Times
--       Tuesday   7PM  Keith’s Garage 
--	Thursday  5PM  J Baskin 316 (with TA)
--	Saturday 12PM  Keith’s Garage 
+- Tuesday   7PM  Keith’s Garage 
+- Thursday  5PM  J Baskin 316 (with TA)
+- Saturday 12PM  Keith’s Garage 
 	
 	Next meeting: Sunday @ 7PM location TBD!!!
 
