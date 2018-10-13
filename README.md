@@ -13,6 +13,7 @@
 - [Trello](https://trello.com/b/Jpje3I1A/scrum-board)
 - **Sprint 1**
   - [Sprint 1 Plan](https://docs.google.com/document/d/1ildubfSnFcw-ZvcTZYPCaSAQCZDYwR1Jf1NYpPwZe8s/edit)
+  - [Burnup Chart](https://docs.google.com/spreadsheets/d/1cOyIWfDVUDsRCxxnLtiBYr6xgChQGFMq7fTJufYmN70/edit#gid=0)
 
 ### Meeting Times
 - Tuesday   7PM  Keith’s Garage
