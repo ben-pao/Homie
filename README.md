@@ -19,6 +19,5 @@
 - Tuesday   7PM  Keith’s Garage
 - Thursday  5PM  J Baskin 316 (with TA)
 - Saturday 12PM  Keith’s Garage
-- test
 
     **Next meeting: Sunday @ 7PM location TBD!!!**
