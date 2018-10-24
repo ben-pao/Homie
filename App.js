@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Grocery from './components/Grocery';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
+import Grocery from './Components/Grocery';
 
 import * as firebase from 'firebase';
 
