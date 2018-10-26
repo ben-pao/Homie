@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, TouchableWithoutFeedback } from 'react-native';
 import { createStackNavigator, StackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
+// import DismissKeyboard from 'dismissKeyboard';
+import {Keyboard} from 'react-native'
 
 export default class Login extends Component {
 
@@ -34,47 +36,53 @@ export default class Login extends Component {
 
     return (
       <KeyboardAvoidingView behavior='padding' style={wrapper} enabled>
-        <View style={container}>
-          <Text style={header}>LOGIN</Text>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+          <View style={container}>
+            <Text style={header}>LOGIN</Text>
 
-          <TextInput
-            style={textInput}
-            placeholder='Email'
-            onChangeText={
-              (email) => this.setState({email})
-            }
-            underlineColorAndroid='transparent'
-          />
-
-          <TextInput
-            style={textInput}
-            placeholder='Password'
-            onChangeText={
-              (password) => this.setState({password})
-            }
-            underlineColorAndroid='transparent'
-          />
-
-          <TouchableOpacity
-            style={btn}
-            onPress={
-              () => {
-                this.login(this.state.email, this.state.password)
+            <TextInput
+              style={textInput}
+              placeholder='Email'
+              onChangeText={
+                (email) => this.setState({email})
               }
+              underlineColorAndroid='transparent'
+              // onBlur={() => alert("blurred")}
+              // onEndEditing={this.clearFocus}
+            />
 
-          }>
-            <Text style={btnText}> Log in </Text>
-          </TouchableOpacity>
+            <TextInput
+              style={textInput}
+              placeholder='Password'
+              onChangeText={
+                (password) => this.setState({password})
+              }
+              underlineColorAndroid='transparent'
+            />
 
-          <TouchableOpacity
-            style={btn}
-            onPress={
-              () => this.props.navigation.navigate('Signup')
-          }>
-            <Text style={btnText}> Sign up </Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={btn}
+              onPress={
+                () => {
+                  this.login(this.state.email, this.state.password)
+                }
+
+            }>
+              <Text style={btnText}> Log in </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={btn}
+              onPress={
+                () => this.props.navigation.navigate('Signup')
+            }>
+              <Text style={btnText}> Sign up </Text>
+            </TouchableOpacity>
+
+          </View>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
+
     );
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 
@@ -36,42 +36,43 @@ export default class Signup extends Component {
 
     return (
 
-        <KeyboardAvoidingView behavior='padding' style={wrapper} enabled>
-          <View style={container}>
-            <Text style={header}>SIGN UP</Text>
+      <KeyboardAvoidingView behavior='padding' style={wrapper} enabled>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+        <View style={container}>
+          <Text style={header}>SIGN UP</Text>
 
+          <TextInput style={textInput} placeholder='First Name'
+            onChangeText={(firstname) => this.setState({firstname}) }
+            underlineColorAndroid='transparent'
+            // onBlur={() => alert("blurred")}
+          />
 
-            <TextInput style={textInput} placeholder='First Name'
-              onChangeText={(firstname) => this.setState({firstname}) }
-              underlineColorAndroid='transparent'
-            />
+          <TextInput style={textInput} placeholder='Last Name'
+            onChangeText={(lastname) => this.setState({lastname}) }
+            underlineColorAndroid='transparent'
+          />
 
-            <TextInput style={textInput} placeholder='Last Name'
-              onChangeText={(lastname) => this.setState({lastname}) }
-              underlineColorAndroid='transparent'
-            />
+          <TextInput style={textInput} placeholder='Email'
+            onChangeText={(email) => this.setState({email}) }
+            underlineColorAndroid='transparent'
+          />
 
-            <TextInput style={textInput} placeholder='Email'
-              onChangeText={(email) => this.setState({email}) }
-              underlineColorAndroid='transparent'
-            />
+          <TextInput style={textInput} placeholder='Password'
+            onChangeText={(password) => this.setState({password}) }
+            underlineColorAndroid='transparent'
+          />
 
-            <TextInput style={textInput} placeholder='Password'
-              onChangeText={(password) => this.setState({password}) }
-              underlineColorAndroid='transparent'
-            />
+          <TouchableOpacity
+            style={btn}
+            onPress={
+              () => this.signmeup(this.state.email, this.state.password)
+          }>
+            <Text style={btnText}> Sign up </Text>
+          </TouchableOpacity>
 
-            <TouchableOpacity
-              style={btn}
-              onPress={
-                () => this.signmeup(this.state.email, this.state.password)
-            }>
-              <Text style={btnText}> Sign up </Text>
-            </TouchableOpacity>
-
-          </View>
-
-        </KeyboardAvoidingView>
+        </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
 
     );
   }
