@@ -3,11 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Grocery from './components/Grocery';
+import { createStackNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
-
-
-import { createStackNavigator } from 'react-navigation';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDOWIjm5vykCtb_Tcx98pWuXbB1ejxsCHU",

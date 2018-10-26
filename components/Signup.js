@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-
 import * as firebase from 'firebase';
 
 export default class Signup extends Component {
 
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     firstname: '',
-  //     lastname: '',
-  //     email: '',
-  //     password: '',
-  //
-  //   }
-  // }
   state = {
     firstname: '',
     lastname: '',
@@ -47,7 +36,7 @@ export default class Signup extends Component {
 
     return (
 
-        <KeyboardAvoidingView behavior='padding' style={wrapper}>
+        <KeyboardAvoidingView behavior='padding' style={wrapper} enabled>
           <View style={container}>
             <Text style={header}>SIGN UP</Text>
 

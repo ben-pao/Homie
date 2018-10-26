@@ -1,17 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage } from 'react-native';
 import { createStackNavigator, StackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 
-export default class Login extends React.Component {
+export default class Login extends Component {
 
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     email: '',
-  //     password: '',
-  //   }
-  // }
   state = {
     email: '',
     password: ''
@@ -40,7 +33,7 @@ export default class Login extends React.Component {
     } = styles;
 
     return (
-      <KeyboardAvoidingView behavior='padding' style={wrapper}>
+      <KeyboardAvoidingView behavior='padding' style={wrapper} enabled>
         <View style={container}>
           <Text style={header}>LOGIN</Text>
 
