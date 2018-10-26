@@ -21,7 +21,7 @@ export default class Login extends Component {
     var value = await AsyncStorage.getItem('user');
     if(value !== null){
       //youre logged in so
-      this.props.navigation.navigate('Home');
+      this.props.navigation.navigate('App');
     }
   }
 
@@ -96,7 +96,7 @@ export default class Login extends Component {
       firebase.auth().signInWithEmailAndPassword(email, password).then(
         (user) => {
           console.log(user)
-          navigate('Home')
+          navigate('App')
         }
       )
     }catch(error){

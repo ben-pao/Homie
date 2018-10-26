@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Grocery from './components/Grocery';
+import HomeScreen from './screens/HomeScreen';
 import { createStackNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
@@ -17,26 +18,65 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-
-class HomeScreen extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-      </View>
-    );
-  }
-}
-
-const Application = createStackNavigator(
+const LoginStack = createStackNavigator(
   {
-    Login: { screen: Login},
-    Signup: {screen: Signup},
-    Home: HomeScreen,
-    Grocery: { screen: Grocery}
+    Login: Login,
+    Signup: Signup
   },
   {
-    initialRouteName: 'Login'
+    navigationOptions: {
+      header: null,
+      // headerStyle: {
+      //   backgroundColor: '#f4511e',
+      // },
+    },
+  }
+  // ,
+  // {
+  //   initialRouteName: 'Login'
+  // }
+);
+
+const AppStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Grocery: Grocery,
+    // Chores: Chores,
+    // Payments: Payments,
+    // Messages: Messages,
+    // Invite: Invite,
+    // Settings: SettinsStack
+  },
+  {
+    initialRouteName: 'Home',
+    navigationOptions: {
+      header: null,
+      // headerStyle: {
+      //   backgroundColor: '#f4511e',
+      // },
+    },
+  }
+);
+
+const StackNavigator = createStackNavigator(
+  {
+    Login: LoginStack,
+    App: AppStack,
+  },
+  {
+    // header: null
+    initialRouteName: 'Login',
+    navigationOptions: {
+      header: null
+      // headerStyle: {
+      //   backgroundColor: '#f4511e',
+      // },
+      // headerTintColor: '#fff',
+      // headerTitleStyle: {
+      //   fontWeight: 'bold',
+    },
+      // title: 'Homie'
+
   }
 );
 
@@ -45,7 +85,7 @@ const Application = createStackNavigator(
 export default class App extends Component {
   render() {
     return(
-        <Application />
+        <StackNavigator />
         );
 
   }

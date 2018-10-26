@@ -21,7 +21,7 @@ export default class Signup extends Component {
     var value = await AsyncStorage.getItem('user');
     if(value !== null){
       //youre logged in so
-      this.props.navigation.navigate('Home');
+      this.props.navigation.navigate('App');
     }
   }
 
@@ -87,7 +87,7 @@ export default class Signup extends Component {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(
         (user) => {
           console.log(user);
-          this.props.navigation.navigate('Home');
+          this.props.navigation.navigate('App');
         }
       );
     }catch(error){
