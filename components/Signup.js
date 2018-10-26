@@ -32,7 +32,7 @@ export default class Signup extends Component {
     var value = await AsyncStorage.getItem('user');
     if(value !== null){
       //youre logged in so
-      //this.props.navigation.navigate('PAGE YOU WANT');
+      this.props.navigation.navigate('Home');
     }
   }
 
