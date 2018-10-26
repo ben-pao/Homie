@@ -4,9 +4,6 @@ import { createStackNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
 
-
-
-
 export default class Login extends React.Component {
 
   constructor(props){
@@ -20,7 +17,7 @@ export default class Login extends React.Component {
     }
   }
 
-//checks if logged in before
+  // checks if logged in before
   componentDidMount() {
     this._loadInitialState().done();
   }

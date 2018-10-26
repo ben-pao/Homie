@@ -2,14 +2,19 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage } from 'react-native';
 import { createStackNavigator, StackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
+
 export default class Login extends React.Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-    }
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     email: '',
+  //     password: '',
+  //   }
+  // }
+  state = {
+    email: '',
+    password: ''
   }
 
 //checks if logged in before
@@ -21,46 +26,62 @@ export default class Login extends React.Component {
     var value = await AsyncStorage.getItem('user');
     if(value !== null){
       //youre logged in so
-      //this.props.navigation.navigate('PAGE YOU WANT');
+      this.props.navigation.navigate('Home');
     }
   }
 
   render() {
+    const { container,
+            wrapper,
+            header,
+            textInput,
+            btn,
+            btnText
+    } = styles;
+
     return (
+      <KeyboardAvoidingView behavior='padding' style={wrapper}>
+        <View style={container}>
+          <Text style={header}>LOGIN</Text>
 
-        <KeyboardAvoidingView behavior='padding' style={styles.wrapper}>
-          <View style={styles.container}>
-            <Text style={styles.header}>LOGIN</Text>
+          <TextInput
+            style={textInput}
+            placeholder='Email'
+            onChangeText={
+              (email) => this.setState({email})
+            }
+            underlineColorAndroid='transparent'
+          />
 
-            <TextInput style={styles.textInput} placeholder='Email'
-              onChangeText={(email) => this.setState({email}) }
-              underlineColorAndroid='transparent'
-            />
+          <TextInput
+            style={textInput}
+            placeholder='Password'
+            onChangeText={
+              (password) => this.setState({password})
+            }
+            underlineColorAndroid='transparent'
+          />
 
+          <TouchableOpacity
+            style={btn}
+            onPress={
+              () => {
+                this.login(this.state.email, this.state.password)
+              }
 
+          }>
+            <Text style={btnText}> Log in </Text>
+          </TouchableOpacity>
 
-            <TextInput style={styles.textInput} placeholder='Password'
-              onChangeText={(password) => this.setState({password}) }
-              underlineColorAndroid='transparent'
-            />
-
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={() => this.login(this.state.email, this.state.password)}>
-              <Text> Log in </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={ () => this.props.navigation.navigate('Signup') }>
-              <Text> Sign up </Text>
-            </TouchableOpacity>
-
-
-          </View>
-
-        </KeyboardAvoidingView>
-
+          <TouchableOpacity
+            style={btn}
+            onPress={
+              () => this.props.navigation.navigate('Signup')
+          }>
+            <Text style={btnText}> Sign up </Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 
@@ -68,16 +89,19 @@ export default class Login extends React.Component {
   //  alert(email);
   const { navigate } = this.props.navigation;
     try{
-    //console.log(email)
-    //console.log(password)
-    firebase.auth().signInWithEmailAndPassword(email, password).then(function(user){
-     console.log(user)
-     navigate('Grocery')
+      //console.log(email)
+      //console.log(password)
 
-    })
-  }catch(error){
-    console.log(error.toString())
-  }
+      firebase.auth().signInWithEmailAndPassword(email, password).then(
+        (user) => {
+          console.log(user)
+          navigate('Home')
+        }
+      )
+    }catch(error){
+      alert(error.toString());
+      console.log(error.toString());
+    }
   }
 
 
@@ -86,7 +110,8 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2896d3',
+    // backgroundColor: '#2896d3',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
@@ -99,6 +124,7 @@ const styles = StyleSheet.create({
     fontSize:24,
     marginBottom:60,
     color: '#000',
+    // color: '#fff',
     fontWeight: 'bold',
   },
   textInput: {
@@ -109,8 +135,15 @@ const styles = StyleSheet.create({
   },
   btn: {
     alignSelf: 'stretch',
-    backgroundColor: '#01c853',
+    // backgroundColor: '#01c853',
+    backgroundColor: '#000',
+    // color: '#fff',
     padding: 20,
     alignItems: 'center',
+    margin: 8
   },
+  btnText: {
+    color: '#fff',
+    fontWeight: 'bold'
+  }
 });
