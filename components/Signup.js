@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
 
-export default class Login extends React.Component {
+export default class Signup extends Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      firstname: '',
-      lastname: '',
-      email: '',
-      password: '',
-
-    }
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     firstname: '',
+  //     lastname: '',
+  //     email: '',
+  //     password: '',
+  //
+  //   }
+  // }
+  state = {
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: ''
   }
 
   // checks if logged in before
@@ -31,36 +37,48 @@ export default class Login extends React.Component {
   }
 
   render() {
+    const { container,
+            wrapper,
+            header,
+            textInput,
+            btn,
+            btnText
+    } = styles;
+
     return (
 
-        <KeyboardAvoidingView begavior='padding' style={styles.wrapper}>
-          <View style={styles.container}>
-            <Text style={styles.header}>SIGN UP</Text>
+        <KeyboardAvoidingView behavior='padding' style={wrapper}>
+          <View style={container}>
+            <Text style={header}>SIGN UP</Text>
 
 
-            <TextInput style={styles.textInput} placeholder='First Name'
+            <TextInput style={textInput} placeholder='First Name'
               onChangeText={(firstname) => this.setState({firstname}) }
               underlineColorAndroid='transparent'
             />
-            <TextInput style={styles.textInput} placeholder='Last Name'
+
+            <TextInput style={textInput} placeholder='Last Name'
               onChangeText={(lastname) => this.setState({lastname}) }
               underlineColorAndroid='transparent'
             />
-            <TextInput style={styles.textInput} placeholder='Email'
+
+            <TextInput style={textInput} placeholder='Email'
               onChangeText={(email) => this.setState({email}) }
               underlineColorAndroid='transparent'
             />
 
-
-
-            <TextInput style={styles.textInput} placeholder='Password'
+            <TextInput style={textInput} placeholder='Password'
               onChangeText={(password) => this.setState({password}) }
               underlineColorAndroid='transparent'
             />
 
-
-
-            <Button title= "Sign Up" onPress={ () => this.signmeup(this.state.email, this.state.password)}/>
+            <TouchableOpacity
+              style={btn}
+              onPress={
+                () => this.signmeup(this.state.email, this.state.password)
+            }>
+              <Text style={btnText}> Sign up </Text>
+            </TouchableOpacity>
 
           </View>
 
@@ -76,12 +94,14 @@ export default class Login extends React.Component {
         alert("password atleast length 6")
         return;
       }
-      firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user){
-        console.log(user)
-      })
-
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(
+        (user) => {
+          console.log(user);
+          this.props.navigation.navigate('Home');
+        }
+      );
     }catch(error){
-      console.log(error.toString())
+      console.log(error.toString());
     }
   }
 }
@@ -89,7 +109,8 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2896d3',
+    // backgroundColor: '#2896d3',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
@@ -102,6 +123,7 @@ const styles = StyleSheet.create({
     fontSize:24,
     marginBottom:60,
     color: '#000',
+    // color: '#fff',
     fontWeight: 'bold',
   },
   textInput: {
@@ -112,8 +134,15 @@ const styles = StyleSheet.create({
   },
   btn: {
     alignSelf: 'stretch',
-    backgroundColor: '#01c853',
+    // backgroundColor: '#01c853',
+    backgroundColor: '#000',
+    // color: '#fff',
     padding: 20,
     alignItems: 'center',
+    margin: 8
   },
+  btnText: {
+    color: '#fff',
+    fontWeight: 'bold'
+  }
 });
