@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry } from 'react-native';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Grocery from './components/Grocery';
@@ -81,12 +81,22 @@ const StackNavigator = createStackNavigator(
   }
 );
 
+//create component for Header.js
+const App = () =>(
+  <Header headerText={'Albums'}/>
+  );
+
+//render header to device...
+AppRegistry = registerComponents('Albums', () => App);
 
 
 export default class App extends Component {
   render() {
     return(
+      <View>
+        <Header/>
         <StackNavigator />
+      </View>
         );
 
   }
