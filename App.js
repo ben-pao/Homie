@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Grocery from './components/Grocery';
 import HomeScreen from './screens/HomeScreen';
+import Header from './components/Header';
 import { createStackNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
@@ -48,7 +49,7 @@ const AppStack = createStackNavigator(
     // Settings: SettinsStack
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Header',
     navigationOptions: {
       header: null,
       // headerStyle: {
