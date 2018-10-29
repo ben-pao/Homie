@@ -1,6 +1,8 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, createDrawerNavigator } from 'react-native';
+import * as firebase from 'firebase';
+
 
 class WelcomeScreen extends Component {
   // static navigationOptions = {
@@ -29,6 +31,22 @@ class WelcomeScreen extends Component {
           // () => this.props.navigation.openDrawer()
         }
         title="Create a House"
+      />
+      <Button
+        onPress={
+          () => {
+            firebase.auth().signOut()
+              .then(
+                () => {
+                  alert("Byeeeee!");
+                  this.props.navigation.navigate('Login');
+                }
+              ).catch(
+                (error) => alert(error.toString())
+              )
+          }
+        }
+        title="Sign out"
       />
       </View>
     );

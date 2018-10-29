@@ -93,12 +93,23 @@ export default class Login extends Component {
       //console.log(email)
       //console.log(password)
 
-      firebase.auth().signInWithEmailAndPassword(email, password).then(
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(
         (user) => {
-          console.log(user)
-          navigate('Welcome')
+          console.log(user);
+          navigate('Welcome');
+        }
+      ).catch(
+        (error) => {
+          alert(error.toString());
         }
       )
+      // var user = firebase.auth().currentUser;
+      // console.log(user);
+      // if (user) {
+      //   navigate('Welcome');
+      // }
     }catch(error){
       alert(error.toString());
       console.log(error.toString());
