@@ -4,7 +4,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Grocery from './components/Grocery';
 import HomeScreen from './screens/HomeScreen';
-import Header from './components/Header';
+// import Header from './components/Header';
 import { createStackNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
@@ -82,19 +82,19 @@ const StackNavigator = createStackNavigator(
 );
 
 //create component for Header.js
-const App = () =>(
-  <Header headerText={'Albums'}/>
-  );
+// const App = () =>(
+//   <Header headerText={'Albums'}/>
+//   );
 
 //render header to device...
-AppRegistry = registerComponents('Albums', () => App);
+// AppRegistry = registerComponents('Albums', () => App);
 
 
 export default class App extends Component {
   render() {
     return(
       <View>
-        <Header/>
+        //<Header/>
         <StackNavigator />
       </View>
         );
