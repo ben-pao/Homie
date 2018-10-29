@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Grocery from './components/Grocery';
+import Login from './screens/LoginScreen';
+import Signup from './screens/SignupScreen';
+import Grocery from './screens/GroceryScreen';
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -62,8 +62,8 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    // initialRouteName: 'Login',
-    initialRouteName: 'App', // Skip Login page (for testing)
+    initialRouteName: 'Login',
+    // initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null
     }
