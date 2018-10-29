@@ -87,7 +87,7 @@ export default class Signup extends Component {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(
         (user) => {
           console.log(user);
-          this.props.navigation.navigate('App');
+          this.props.navigation.navigate('Welcome');
         }
       );
     }catch(error){

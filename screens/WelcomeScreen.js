@@ -1,7 +1,8 @@
+
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, createDrawerNavigator } from 'react-native';
 
-class HomeScreen extends Component {
+class WelcomeScreen extends Component {
   // static navigationOptions = {
   //   drawerLabel: 'Home',
   //   // drawerIcon: ({ tintColor }) => (
@@ -14,10 +15,24 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text> This is the home page </Text>
+      <Text>Welcome to Homie</Text>
+      <Button
+        onPress={
+          () => this.props.navigation.navigate('CreateHouse')
+          // () => this.props.navigation.openDrawer()
+        }
+        title="Join a House"
+      />
+      <Button
+        onPress={
+          () => this.props.navigation.navigate('CreateHouse')
+          // () => this.props.navigation.openDrawer()
+        }
+        title="Create a House"
+      />
       </View>
     );
   }
 }
 
-export default HomeScreen;
+export default WelcomeScreen;
