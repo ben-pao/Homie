@@ -78,7 +78,6 @@ export default class Signup extends Component {
   }
 
   signmeup = (email, password) => {
-    //alert('testing');
     try{
       if(this.state.password.length<6){
         alert("password atleast length 6")
@@ -87,9 +86,17 @@ export default class Signup extends Component {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(
         (user) => {
           console.log(user);
-          this.props.navigation.navigate('Welcome');
+          user.updateProfile( {displayName: username} )
+            .then(
+              ()      => {this.props.navigation.navigate('Welcome')},
+              (error) => { alert(error.toString()) }
+            )
         }
-      );
+      ).catch(
+        (error) => {
+          alert(error.toString());
+        }
+      )
     }catch(error){
       console.log(error.toString());
     }
