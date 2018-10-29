@@ -62,7 +62,7 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'App',
     // initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null
@@ -80,6 +80,8 @@ export default class App extends Component {
 
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

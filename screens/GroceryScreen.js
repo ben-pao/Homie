@@ -1,13 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView } from 'react-native';
-
+import { StyleSheet, Text, View, StatusBar, ListView,utton, createDrawerNavigator } from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
-
+import { createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 import * as firebase from 'firebase';
-
-
-import { createStackNavigator } from 'react-navigation';
-
 
 
 var data = []
@@ -56,9 +51,16 @@ export default class Grocery extends React.Component {
 
   render() {
     return(
+
       <Container style={styles.container}>
+
         <Header>
-          <Content>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text> Header </Text>
+          </View>
+        </Header>
+
+
             <Item>
               <Input
                 placeholder='add item'
@@ -70,8 +72,8 @@ export default class Grocery extends React.Component {
                 <Icon name='add'/>
               </Button>
             </Item>
-          </Content>
-        </Header>
+
+
 
         <Content>
           <List
@@ -112,10 +114,12 @@ export default class Grocery extends React.Component {
   }
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ff324f',
   },
   input:{
     backgroundColor: '#fff',

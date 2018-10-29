@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, createDrawerNavigator } from 'react-native';
+import { createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
 class HomeScreen extends Component {
   // static navigationOptions = {
@@ -20,4 +21,14 @@ class HomeScreen extends Component {
   }
 }
 
-export default HomeScreen;
+
+export default createStackNavigator({
+  Home: {
+    screen: HomeScreen,
+  },
+}, 
+  {
+    initialRouteName: 'Home',
+});
+
+// export default HomeScreen;
