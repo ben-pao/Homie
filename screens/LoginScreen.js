@@ -19,11 +19,18 @@ export default class Login extends Component {
 
   _loadInitialState = async () => {
     var value = await AsyncStorage.getItem('user');
+    console.log(value);
     if(value !== null){
       //youre logged in so
-      this.props.navigation.navigate('App');
+      // if User has a House
+        this.props.navigation.navigate('App');
+      // else
+        this.props.navigation.navigate('Welcome');
     }
+
   }
+
+
 
   render() {
     const { container,
