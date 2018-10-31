@@ -9,7 +9,8 @@ export default class Signup extends Component {
     firstname: '',
     lastname: '',
     email: '',
-    password: ''
+    password: '',
+    confirm_password: ''
   }
 
   // checks if logged in before
@@ -57,15 +58,21 @@ export default class Signup extends Component {
             underlineColorAndroid='transparent'
           />
 
-          <TextInput style={textInput} placeholder='Password'
+          <TextInput password={true} style={textInput} placeholder='Password'
             onChangeText={(password) => this.setState({password}) }
+            underlineColorAndroid='transparent'
+          />
+
+          <TextInput password={true} style={textInput} placeholder='Comfirm Password'
+            onChangeText={(comfirm_password) => this.setState({comfirm_password}) }
             underlineColorAndroid='transparent'
           />
 
           <TouchableOpacity
             style={btn}
             onPress={
-              () => this.signmeup(this.state.email, this.state.password)
+              () => this.signmeup(this.state.email, this.state.password,
+                  this.state.comfirm_password, this.state.firstname, this.state.lastname)
           }>
             <Text style={btnText}> Sign up </Text>
           </TouchableOpacity>
@@ -77,21 +84,42 @@ export default class Signup extends Component {
     );
   }
 
-  signmeup = (email, password) => {
+  signmeup = (email, password, comfirm_password, first, last) => {
     //alert('testing');
+    //check if comfirm password = password
+    //
+    if( comfirm_password != password){
+      alert("passwords don't match")
+      return
+    }
+
     try{
-      if(this.state.password.length<6){
-        alert("password atleast length 6")
-        return;
-      }
+
       firebase.auth().createUserWithEmailAndPassword(email, password).then(
         (user) => {
-          console.log(user);
-          this.props.navigation.navigate('App');
+          //console.log(user);
+          //var userjson = user.json
+          console.log(user.user.uid)
+          console.log(user)
+          var userid = user.user.uid
+
+        //    console.log(key);
+          firebase.database().ref('/Users').child(userid).set({
+                  first: first,
+                  last: last,
+                  email: email,
+
+    //            });
+          //pass in firstname and last name into db
+          //pass in email
+          //log in the user
+      //    this.props.navigation.navigate('App');
         }
       );
+      this.props.navigation.navigate('App')
+    })
     }catch(error){
-      console.log(error.toString());
+      alert(error.toString());
     }
   }
 }
