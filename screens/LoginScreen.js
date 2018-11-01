@@ -92,7 +92,7 @@ export default class Login extends Component {
   }
 
   login = (email, password) => {
-    console.log("hi\n");
+    // console.log("hi\n");
   //  alert(email);
   const { navigate } = this.props.navigation;
     try{

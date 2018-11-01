@@ -45,7 +45,7 @@ class CreateHouseScreen extends Component {
   }
 
   addHouse = (houseName) => {
-    console.log("IN addHouse!\n\n");
+    // console.log("IN addHouse!\n\n");
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;
