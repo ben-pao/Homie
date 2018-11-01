@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpaci
 import { createStackNavigator, StackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 // import DismissKeyboard from 'dismissKeyboard';
-import {Keyboard} from 'react-native'
+import { Keyboard } from 'react-native'
 
 export default class Login extends Component {
 
@@ -54,8 +54,6 @@ export default class Login extends Component {
                 (email) => this.setState({email})
               }
               underlineColorAndroid='transparent'
-              // onBlur={() => alert("blurred")}
-              // onEndEditing={this.clearFocus}
             />
 
             <TextInput
@@ -74,8 +72,7 @@ export default class Login extends Component {
                 () => {
                   this.login(this.state.email, this.state.password)
                 }
-
-            }>
+              }>
               <Text style={btnText}> Log in </Text>
             </TouchableOpacity>
 
@@ -95,6 +92,7 @@ export default class Login extends Component {
   }
 
   login = (email, password) => {
+    console.log("hi\n");
   //  alert(email);
   const { navigate } = this.props.navigation;
     try{

@@ -6,6 +6,18 @@ import * as firebase from 'firebase';
 
 class WelcomeScreen extends Component {
 
+  // For testing if user.displayName was stored in signup
+  componentDidMount() {
+    this.printUser();
+  }
+
+  printUser() {
+    user = firebase.auth().currentUser;
+    console.log("\n\n\n\n\nIn welcome");
+    console.log(user);
+  }
+
+
   render() {
     const { containerStyle,
             headerStyle,

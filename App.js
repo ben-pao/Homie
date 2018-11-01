@@ -28,14 +28,11 @@ const LoginStack = createStackNavigator(
     CreateHouse: CreateHouseScreen,
   },
   {
+    initialRouteName: 'Login',
     navigationOptions: {
       header: null,
     },
   }
-  // ,
-  // {
-  //   initialRouteName: 'Login'
-  // }
 );
 
 const AppStack = createStackNavigator(

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity,  KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as firebase from 'firebase';
+import { Keyboard } from 'react-native';
 
 class CreateHouseScreen extends Component {
 
@@ -10,6 +11,7 @@ class CreateHouseScreen extends Component {
 
   render() {
     const { containerStyle,
+            wrapperStyle,
             headerStyle,
             textInputStyle,
             buttonStyle,
@@ -17,26 +19,33 @@ class CreateHouseScreen extends Component {
     } = styles;
 
     return (
-      <View style={containerStyle}>
-        <Text style={headerStyle}>CreateHouse</Text>
-        <TextInput
-          style={textInputStyle}
-          placeholder='Enter a Name for Your House'
-          onChangeText={
-            (houseName) => this.setState({houseName})
-          }
-          underlineColorAndroid='transparent'
-        />
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={ this.addHouse(this.state.houseName) }>
-          <Text style={buttonTextStyle}>Submit</Text>
-        </TouchableOpacity>
-      </View>
+      <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+          <View style={containerStyle}>
+            <Text style={headerStyle}>CreateHouse</Text>
+            <TextInput
+              style={textInputStyle}
+              placeholder='Enter a Name for Your House'
+              onChangeText={
+                (houseName) => this.setState({houseName})
+              }
+              underlineColorAndroid='transparent'
+            />
+            <TouchableOpacity
+              style={buttonStyle}
+              onPress={
+                () => this.addHouse(this.state.houseName)
+              }>
+              <Text style={buttonTextStyle}>Submit</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 
-  addHouse(houseName) {
+  addHouse = (houseName) => {
+    console.log("IN addHouse!\n\n");
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;
@@ -58,6 +67,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 40,
     paddingRight: 40,
+  },
+  wrapperStyle: {
+    flex: 1,
   },
   headerStyle: {
     fontSize:24,

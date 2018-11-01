@@ -34,6 +34,12 @@ export default class Signup extends Component {
             btnText
     } = styles;
 
+    const { firstname,
+            lastname,
+            email,
+            password
+    } = this.state;
+
     return (
 
       <KeyboardAvoidingView behavior='padding' style={wrapper} enabled>
@@ -65,7 +71,7 @@ export default class Signup extends Component {
           <TouchableOpacity
             style={btn}
             onPress={
-              () => this.signmeup(this.state.email, this.state.password)
+              () => this.signmeup(firstname + ' ' + lastname, email, password)
           }>
             <Text style={btnText}> Sign up </Text>
           </TouchableOpacity>
@@ -77,7 +83,8 @@ export default class Signup extends Component {
     );
   }
 
-  signmeup = (email, password) => {
+  signmeup = (username, email, password) => {
+    const { navigate } = this.props.navigation;
     try{
       if(this.state.password.length<6){
         alert("password atleast length 6")
@@ -85,12 +92,13 @@ export default class Signup extends Component {
       }
       firebase.auth().createUserWithEmailAndPassword(email, password).then(
         (user) => {
-          console.log(user);
-          user.updateProfile( {displayName: username} )
-            .then(
-              ()      => {this.props.navigation.navigate('Welcome')},
-              (error) => { alert(error.toString()) }
-            )
+          // console.log(user);
+          user.user.updateProfile( {displayName: username} )
+          .then(
+            ()      => { navigate('Welcome') }
+          ).catch(
+            (error) => { alert(error.toString()) }
+          )
         }
       ).catch(
         (error) => {
