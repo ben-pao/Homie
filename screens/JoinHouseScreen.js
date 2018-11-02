@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity,  KeyboardAvoidingV
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
-class JoinHouse extends Component {
+class JoinHouseScreen extends Component {
 
   state = {
     houseID: ''
@@ -22,12 +22,12 @@ class JoinHouse extends Component {
       <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
           <View style={containerStyle}>
-            <Text style={headerStyle}>Join a House???</Text>
+            <Text style={headerStyle}>Join a House</Text>
             <TextInput
               style={textInputStyle}
-              placeholder='Enter your house ID'
+              placeholder='Enter the ID for Your House'
               onChangeText={
-                (houseName) => this.setState({houseID})
+                (houseID) => this.setState({houseID})
               }
               underlineColorAndroid='transparent'
             />
@@ -56,7 +56,6 @@ class JoinHouse extends Component {
           Users: {uid: userName} }
       );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -69,12 +68,21 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
     paddingRight: 40,
   },
+  wrapperStyle: {
+    flex: 1,
+  },
   headerStyle: {
     fontSize:24,
     marginBottom:60,
     color: '#000',
     // color: '#fff',
     fontWeight: 'bold',
+  },
+  textInputStyle: {
+    alignSelf: 'stretch',
+    padding: 15,
+    marginBottom: 20,
+    backgroundColor: '#fff'
   },
   buttonStyle: {
     alignSelf: 'stretch',
@@ -91,4 +99,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default JoinHouse;
+export default JoinHouseScreen;
