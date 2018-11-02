@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Login from './screens/LoginScreen';
 import Signup from './screens/SignupScreen';
 import Grocery from './screens/GroceryScreen';
+import Chores from './screens/ChoresScreen';
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -39,7 +40,7 @@ const AppStack = createStackNavigator(
   {
     Home: HomeScreen,
     Grocery: Grocery,
-    // Chores: Chores,
+    Chores: Chores,
     // Payments: Payments,
     // Messages: Messages,
     // Invite: Invite,
@@ -55,12 +56,12 @@ const AppStack = createStackNavigator(
 
 const StackNavigator = createStackNavigator(
   {
-    Login: LoginStack,
+    // Login: LoginStack,
     App: AppStack,
   },
   {
-    initialRouteName: 'Login',
-    // initialRouteName: 'App', // Skip Login page (for testing)
+    // initialRouteName: 'Login',
+    initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null
     }
