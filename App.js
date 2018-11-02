@@ -44,7 +44,7 @@ const AppStack = createStackNavigator(
     // Payments: Payments,
     // Messages: Messages,
     // Invite: Invite,
-    // Settings: SettinsStack
+    // Settings: SettingsStack
   },
   {
     initialRouteName: 'Home',
@@ -56,7 +56,7 @@ const AppStack = createStackNavigator(
 
 const StackNavigator = createStackNavigator(
   {
-    // Login: LoginStack,
+    Login: LoginStack,
     App: AppStack,
   },
   {
