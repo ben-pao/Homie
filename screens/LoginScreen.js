@@ -6,6 +6,10 @@ import * as firebase from 'firebase';
 import { Keyboard } from 'react-native'
 
 export default class Login extends Component {
+  // static navigationOptions = {
+  //   header: null,
+  //   /* No more header config here! */
+  // };
 
   state = {
     email: '',
@@ -23,7 +27,7 @@ export default class Login extends Component {
     if(value !== null){
       //youre logged in so
       // if User has a House
-        this.props.navigation.navigate('App');
+        // this.props.navigation.navigate('App');
       // else
         this.props.navigation.navigate('Welcome');
     }
@@ -57,6 +61,7 @@ export default class Login extends Component {
               style={textInput}
               secureTextEntry={true}
               placeholder='Password'
+              value={this.state.password}
               onChangeText={
                 (password) => this.setState({password})
               }
@@ -97,6 +102,7 @@ export default class Login extends Component {
         .then(
           (user) => {
             console.log(user);
+            this.setState( {password: ''} );
             navigate('Welcome');
           }
         ).catch(

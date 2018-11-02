@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 
 export default class Signup extends Component {
-
   state = {
     firstname: '',
     lastname: '',
@@ -41,6 +40,8 @@ export default class Signup extends Component {
             password,
             confirm_password
     } = this.state;
+
+    const { navigate, goBack } = this.props.navigation;
 
     return (
       <KeyboardAvoidingView behavior='padding' style={wrapper} enabled>
@@ -92,6 +93,13 @@ export default class Signup extends Component {
               <Text style={btnText}> Sign up </Text>
             </TouchableOpacity>
 
+            <TouchableOpacity
+              style={btn}
+              onPress={
+                () => goBack()
+            }>
+              <Text style={btnText}> Cancel </Text>
+            </TouchableOpacity>
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
@@ -101,11 +109,21 @@ export default class Signup extends Component {
   signmeup = (first, last, email, password, comfirm_password) => {
     const { navigate } = this.props.navigation;
     //alert('testing');
-    //check if comfirm password = password
-    if(comfirm_password != password){
+    // check if firstname/lastname are filled out
+    if (!first || first.length === 0 ) {
+      alert("Please enter your first name");
+      return;
+    }
+    if (!last || last.length === 0 ) {
+      alert("Please enter your last name");
+      return;
+    }
+    // check if comfirm password = password
+    if (comfirm_password != password) {
       alert("Passwords don't match");
       return;
     }
+
     try {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(
         (user) => {
@@ -129,7 +147,7 @@ export default class Signup extends Component {
               email: email,
             }
           );
-          navigate('App');
+          navigate('Welcome');
         }
       ).catch(
         (error) => {

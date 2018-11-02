@@ -54,7 +54,7 @@ class WelcomeScreen extends Component {
               firebase.auth().signOut()
                 .then(
                   () => {
-                    alert("Byeeeee!");
+                    // alert("Byeeeee!");
                     this.props.navigation.navigate('Login');
                   }
                 ).catch(

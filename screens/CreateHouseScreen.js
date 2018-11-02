@@ -18,6 +18,8 @@ class CreateHouseScreen extends Component {
             buttonTextStyle
     } = styles;
 
+    const { navigate, goBack } = this.props.navigation;
+
     return (
       <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
@@ -37,6 +39,14 @@ class CreateHouseScreen extends Component {
                 () => this.addHouse(this.state.houseName)
               }>
               <Text style={buttonTextStyle}>Submit</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={buttonStyle}
+              onPress={
+                () => goBack()
+            }>
+              <Text style={buttonTextStyle}> Cancel </Text>
             </TouchableOpacity>
           </View>
         </TouchableWithoutFeedback>

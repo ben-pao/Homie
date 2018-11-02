@@ -37,6 +37,7 @@ const LoginStack = createStackNavigator(
     initialRouteName: 'Login',
     navigationOptions: {
       header: null,
+      gesturesEnabled: false,
     },
   }
 );
@@ -55,6 +56,7 @@ const AppStack = createStackNavigator(
     initialRouteName: 'Home',
     navigationOptions: {
       header: null,
+      gesturesEnabled: false,
     },
   }
 );
@@ -73,10 +75,11 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    // initialRouteName: 'Login',
-    initialRouteName: 'App', // Skip Login page (for testing)
+    initialRouteName: 'Login',
+    // initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
-      header: null
+      header: null,
+      gesturesEnabled: false,
     }
   }
 );
@@ -92,10 +95,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     // ...
   }
 });
-
-
-
-
 
 export default class App extends Component {
   render() {
