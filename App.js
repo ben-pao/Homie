@@ -6,6 +6,10 @@ import Grocery from './screens/GroceryScreen';
 import Chores from './screens/ChoresScreen';
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
+import JoinHouseScreen from './screens/JoinHouseScreen';
+import SettingsScreen from './screens/SettingsScreen';
+import AddPeopleScreen from './screens/AddPeopleScreen';
+import ProfileScreen from './screens/ProfileScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
