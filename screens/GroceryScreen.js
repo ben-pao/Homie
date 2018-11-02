@@ -99,9 +99,7 @@ export default class Grocery extends React.Component {
 
               leftOpenValue={-75}
               rightOpenValue={-75}
-
-            />
-
+          />
 
         </Content>
 

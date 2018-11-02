@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Grocery from './components/Grocery';
+import Login from './screens/LoginScreen';
+import Signup from './screens/SignupScreen';
+import Grocery from './screens/GroceryScreen';
 import HomeScreen from './screens/HomeScreen';
-import { createStackNavigator } from 'react-navigation';
+import CreateHouseScreen from './screens/CreateHouseScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
+import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
 
@@ -21,20 +23,16 @@ firebase.initializeApp(firebaseConfig);
 const LoginStack = createStackNavigator(
   {
     Login: Login,
-    Signup: Signup
+    Signup: Signup,
+    Welcome: WelcomeScreen,
+    CreateHouse: CreateHouseScreen,
   },
   {
+    initialRouteName: 'Login',
     navigationOptions: {
       header: null,
-      // headerStyle: {
-      //   backgroundColor: '#f4511e',
-      // },
     },
   }
-  // ,
-  // {
-  //   initialRouteName: 'Login'
-  // }
 );
 
 const AppStack = createStackNavigator(
@@ -51,9 +49,6 @@ const AppStack = createStackNavigator(
     initialRouteName: 'Home',
     navigationOptions: {
       header: null,
-      // headerStyle: {
-      //   backgroundColor: '#f4511e',
-      // },
     },
   }
 );
@@ -66,19 +61,11 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    // header: null
     initialRouteName: 'Login',
+    // initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null
-      // headerStyle: {
-      //   backgroundColor: '#f4511e',
-      // },
-      // headerTintColor: '#fff',
-      // headerTitleStyle: {
-      //   fontWeight: 'bold',
-    },
-      // title: 'Homie'
-
+    }
   }
 );
 
