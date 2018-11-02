@@ -4,15 +4,11 @@ import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
 class JoinHouse extends Component {
-  // static navigationOptions = {
-  //   drawerLabel: 'Home',
-  //   // drawerIcon: ({ tintColor }) => (
-  //   //   <Image
-  //   //     source={require('./chats-icon.png')}
-  //   //     style={[styles.icon, {tintColor: tintColor}]}
-  //   //   />
-  //   // ),
-  // };
+
+  state = {
+    houseID: ''
+  }
+
   render() {
     const { containerStyle,
             headerStyle,
@@ -21,9 +17,28 @@ class JoinHouse extends Component {
     } = styles;
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text> Join a house! </Text>
-      </View>
+      <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+          <View style={containerStyle}>
+            <Text style={headerStyle}>Join a House</Text>
+            <TextInput
+              style={textInputStyle}
+              placeholder='Enter your house ID'
+              onChangeText={
+                (houseName) => this.setState({houseID})
+              }
+              underlineColorAndroid='transparent'
+            />
+            <TouchableOpacity
+              style={buttonStyle}
+              onPress={
+                () => this.addHouse(this.state.houseName)
+              }>
+              <Text style={buttonTextStyle}>Submit</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 }

@@ -22,7 +22,7 @@ class CreateHouseScreen extends Component {
       <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
           <View style={containerStyle}>
-            <Text style={headerStyle}>CreateHouse</Text>
+            <Text style={headerStyle}>Create a House</Text>
             <TextInput
               style={textInputStyle}
               placeholder='Enter a Name for Your House'
