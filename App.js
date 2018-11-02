@@ -77,6 +77,20 @@ const StackNavigator = createStackNavigator(
   }
 );
 
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    StackNavigator.initialRouteName = 'App'
+
+    // ...
+  } else {
+    // User is signed out.
+    // ...
+  }
+});
+
+
+
 
 
 export default class App extends Component {

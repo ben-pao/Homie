@@ -27,10 +27,7 @@ export default class Login extends Component {
       // else
         this.props.navigation.navigate('Welcome');
     }
-
   }
-
-
 
   render() {
     const { container,
@@ -69,9 +66,7 @@ export default class Login extends Component {
             <TouchableOpacity
               style={btn}
               onPress={
-                () => {
-                  this.login(this.state.email, this.state.password)
-                }
+                () => this.login(this.state.email, this.state.password)
               }>
               <Text style={btnText}> Log in </Text>
             </TouchableOpacity>
@@ -93,33 +88,26 @@ export default class Login extends Component {
 
   login = (email, password) => {
     // console.log("hi\n");
-  //  alert(email);
-  const { navigate } = this.props.navigation;
-    try{
-      //console.log(email)
-      //console.log(password)
-
-
-      firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(
-        (user) => {
-          console.log(user);
-          navigate('Welcome');
-        }
-      ).catch(
-        (error) => {
-          alert(error.toString());
-        }
-      )
-      // var user = firebase.auth().currentUser;
-      // console.log(user);
-      // if (user) {
-      //   navigate('Welcome');
-      // }
-    }catch(error){
-      alert(error.toString());
-      console.log(error.toString());
-    }
+    //  alert(email);
+    const { navigate } = this.props.navigation;
+      try {
+        //console.log(email)
+        //console.log(password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(
+          (user) => {
+            console.log(user);
+            navigate('Welcome');
+          }
+        ).catch(
+          (error) => {
+            alert(error.toString());
+          }
+        )
+      } catch(error) {
+        alert(error.toString());
+        console.log(error.toString());
+      }
   }
 
 

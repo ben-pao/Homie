@@ -9,7 +9,8 @@ export default class Signup extends Component {
     firstname: '',
     lastname: '',
     email: '',
-    password: ''
+    password: '',
+    confirm_password: ''
   }
 
   // checks if logged in before
@@ -37,76 +38,106 @@ export default class Signup extends Component {
     const { firstname,
             lastname,
             email,
-            password
+            password,
+            confirm_password
     } = this.state;
 
     return (
-
       <KeyboardAvoidingView behavior='padding' style={wrapper} enabled>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-        <View style={container}>
-          <Text style={header}>SIGN UP</Text>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={container}>
+            <Text style={header}>SIGN UP</Text>
 
-          <TextInput style={textInput} placeholder='First Name'
-            onChangeText={(firstname) => this.setState({firstname}) }
-            underlineColorAndroid='transparent'
-            // onBlur={() => alert("blurred")}
-          />
+            <TextInput style={textInput} placeholder='First Name'
+              onChangeText={(firstname) => this.setState({firstname}) }
+              underlineColorAndroid='transparent'
+              // onBlur={() => alert("blurred")}
+            />
 
-          <TextInput style={textInput} placeholder='Last Name'
-            onChangeText={(lastname) => this.setState({lastname}) }
-            underlineColorAndroid='transparent'
-          />
+            <TextInput style={textInput} placeholder='Last Name'
+              onChangeText={(lastname) => this.setState({lastname}) }
+              underlineColorAndroid='transparent'
+            />
 
-          <TextInput style={textInput} placeholder='Email'
-            onChangeText={(email) => this.setState({email}) }
-            underlineColorAndroid='transparent'
-          />
+            <TextInput style={textInput} placeholder='Email'
+              onChangeText={(email) => this.setState({email}) }
+              underlineColorAndroid='transparent'
+            />
 
-          <TextInput style={textInput} placeholder='Password'
-            onChangeText={(password) => this.setState({password}) }
-            underlineColorAndroid='transparent'
-          />
+            <TextInput
+              password={true}
+              secureTextEntry={true}
+              style={textInput}
+              placeholder='Password'
+              onChangeText={(password) => this.setState({password}) }
+              underlineColorAndroid='transparent'
+            />
 
-          <TouchableOpacity
-            style={btn}
-            onPress={
-              () => this.signmeup(firstname + ' ' + lastname, email, password)
-          }>
-            <Text style={btnText}> Sign up </Text>
-          </TouchableOpacity>
+            <TextInput
+              password={true}
+              secureTextEntry={true}
+              style={textInput}
+              placeholder='Confirm Password'
+              onChangeText={
+                (confirm_password) => this.setState({confirm_password})
+              }
+              underlineColorAndroid='transparent'
+            />
 
-        </View>
+            <TouchableOpacity
+              style={btn}
+              onPress={
+                () => this.signmeup(firstname, lastname, email, password, confirm_password)
+            }>
+              <Text style={btnText}> Sign up </Text>
+            </TouchableOpacity>
+
+          </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-
     );
   }
 
-  signmeup = (username, email, password) => {
+  signmeup = (first, last, email, password, comfirm_password) => {
     const { navigate } = this.props.navigation;
-    try{
-      if(this.state.password.length<6){
-        alert("password atleast length 6")
-        return;
-      }
+    //alert('testing');
+    //check if comfirm password = password
+    if(comfirm_password != password){
+      alert("Passwords don't match");
+      return;
+    }
+    try {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(
         (user) => {
-          // console.log(user);
+          var username = first + ' ' + last;
           user.user.updateProfile( {displayName: username} )
           .then(
-            ()      => { navigate('Welcome') }
+            ()      => { navigate('Welcome'); }
           ).catch(
-            (error) => { alert(error.toString()) }
-          )
+            (error) => { alert(error.toString()); }
+          );
+
+          console.log(user.user.uid);
+          console.log(user);
+          var userid = user.user.uid;
+
+          // Store user's information in Users table
+          firebase.database().ref('/Users').child(userid).set(
+            {
+              first: first,
+              last: last,
+              email: email,
+            }
+          );
+          navigate('App');
         }
       ).catch(
         (error) => {
           alert(error.toString());
         }
       )
-    }catch(error){
-      console.log(error.toString());
+    } catch(error) {
+      alert(error.toString());
     }
   }
 }
@@ -128,7 +159,6 @@ const styles = StyleSheet.create({
     fontSize:24,
     marginBottom:60,
     color: '#000',
-    // color: '#fff',
     fontWeight: 'bold',
   },
   textInput: {
@@ -139,7 +169,6 @@ const styles = StyleSheet.create({
   },
   btn: {
     alignSelf: 'stretch',
-    // backgroundColor: '#01c853',
     backgroundColor: '#000',
     // color: '#fff',
     padding: 20,
