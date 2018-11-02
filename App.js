@@ -27,6 +27,7 @@ const LoginStack = createStackNavigator(
     Signup: Signup,
     Welcome: WelcomeScreen,
     CreateHouse: CreateHouseScreen,
+    JoinHouse: JoinHouseScreen,
   },
   {
     initialRouteName: 'Login',
