@@ -60,20 +60,17 @@ export default class Grocery extends React.Component {
           </View>
         </Header>
 
+        <Item>
+          <Input
+            placeholder='add item'
+            style={styles.input}
+            onChangeText = {(newContact) => this.setState({newContact})}
 
-            <Item>
-              <Input
-                placeholder='add item'
-                style={styles.input}
-                onChangeText = {(newContact) => this.setState({newContact})}
-
-              />
-              <Button onPress={ () => this.addRow(this.state.newContact)}>
-                <Icon name='add'/>
-              </Button>
-            </Item>
-
-
+          />
+          <Button onPress={ () => this.addRow(this.state.newContact)}>
+            <Icon name='add'/>
+          </Button>
+        </Item>
 
         <Content>
           <List
