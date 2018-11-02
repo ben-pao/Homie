@@ -54,6 +54,14 @@ const AppStack = createStackNavigator(
   }
 );
 
+const SettingsStack = createStackNavigator(
+  {
+    Settings: SettingsScreen,
+    AddPeople: AddPeopleScreen,
+    Profile: ProfileScreen
+  }
+)
+
 const StackNavigator = createStackNavigator(
   {
     Login: LoginStack,

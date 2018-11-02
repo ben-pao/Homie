@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, createDrawerNavigator } from 'react-nat
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
-class ChoresScreen extends Component {
+class ProfileScreen extends Component {
   // static navigationOptions = {
   //   drawerLabel: 'Home',
   //   // drawerIcon: ({ tintColor }) => (
@@ -22,7 +22,7 @@ class ChoresScreen extends Component {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text> Chore Wheel </Text>
+        <Text> You can view your profile and edit your profile here! </Text>
       </View>
     );
   }
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ChoresScreen;
+export default ProfileScreen;

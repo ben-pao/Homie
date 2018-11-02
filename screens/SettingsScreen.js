@@ -1,28 +1,26 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, createDrawerNavigator } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity,  KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
-class ChoresScreen extends Component {
-  // static navigationOptions = {
-  //   drawerLabel: 'Home',
-  //   // drawerIcon: ({ tintColor }) => (
-  //   //   <Image
-  //   //     source={require('./chats-icon.png')}
-  //   //     style={[styles.icon, {tintColor: tintColor}]}
-  //   //   />
-  //   // ),
-  // };
+class SettingsScreen extends Component {
+
+  state = {
+    houseName: ''
+  }
+
   render() {
     const { containerStyle,
+            wrapperStyle,
             headerStyle,
+            textInputStyle,
             buttonStyle,
             buttonTextStyle
     } = styles;
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text> Chore Wheel </Text>
+        <Text> Settings </Text>
       </View>
     );
   }
@@ -38,12 +36,21 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
     paddingRight: 40,
   },
+  wrapperStyle: {
+    flex: 1,
+  },
   headerStyle: {
     fontSize:24,
     marginBottom:60,
     color: '#000',
     // color: '#fff',
     fontWeight: 'bold',
+  },
+  textInputStyle: {
+    alignSelf: 'stretch',
+    padding: 15,
+    marginBottom: 20,
+    backgroundColor: '#fff'
   },
   buttonStyle: {
     alignSelf: 'stretch',
@@ -60,4 +67,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ChoresScreen;
+export default SettingsScreen;
