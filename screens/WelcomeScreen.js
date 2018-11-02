@@ -34,7 +34,7 @@ class WelcomeScreen extends Component {
         <TouchableOpacity
           style={buttonStyle}
           onPress={
-            () => this.props.navigation.navigate('CreateHouse')
+            () => this.props.navigation.navigate('JoinHouse')
         }>
           <Text style={buttonTextStyle}> Join a House </Text>
         </TouchableOpacity>
