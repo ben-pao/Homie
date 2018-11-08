@@ -13,6 +13,44 @@ class AddPeopleScreen extends Component {
   //   //   />
   //   // ),
   // };
+
+  constructor() {
+    super();
+    this.state = {
+      houseid: '',
+      houseName: '',
+    }
+
+
+  }
+
+   GetHouseID (){
+   var user = firebase.auth().currentUser;
+   if(user == null){
+     return;
+   }
+   var userName = user.providerData[0].displayName;
+   var uid = user.uid;
+   //var key = firebase.database().ref('/Users').push().key;
+   var userDBref = firebase.database().ref('/Users').child(uid)
+   var userData = "";
+
+   userDBref.once('value').then(function(snapshot){
+     userData = (snapshot.val() && snapshot.val().username);
+     console.log(userData);
+   });
+
+
+
+   // firebase.database().ref('/Users').child(uid).update(
+   //     {
+   //       houseid: ,
+   //     }
+   // );
+
+
+  }
+
   render() {
     const { containerStyle,
             headerStyle,
@@ -23,6 +61,7 @@ class AddPeopleScreen extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text> You can add people to your house here! </Text>
+        {this.GetHouseID()}
       </View>
     );
   }

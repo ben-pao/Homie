@@ -5,7 +5,8 @@ import { Keyboard } from 'react-native';
 
 class HomeScreen extends Component {
   // static navigationOptions = {
-  //   drawerLabel: 'Home',
+  //
+  //   // drawerLabel: 'Home',
   //   // drawerIcon: ({ tintColor }) => (
   //   //   <Image
   //   //     source={require('./chats-icon.png')}
@@ -24,9 +25,11 @@ class HomeScreen extends Component {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <TouchableOpacity
           style={buttonStyle}
-          onPress={
-            () => this.props.navigation.navigate('Grocery')
-        }>
+          onPress={() => {
+            this.props.navigation.navigate('Grocery', {
+              otherParam: 'Groceries',
+            });
+          }}>
           <Text style={buttonTextStyle}> Groceries </Text>
         </TouchableOpacity>
 
@@ -45,6 +48,26 @@ class HomeScreen extends Component {
         }>
           <Text style={buttonTextStyle}> Settings </Text>
         </TouchableOpacity>
+
+
+        <TouchableOpacity
+          style={buttonStyle}
+          onPress={
+            () => {
+              firebase.auth().signOut()
+                .then(
+                  () => {
+                    // alert("Byeeeee!");
+                    this.props.navigation.navigate('Login');
+                  }
+                ).catch(
+                  (error) => alert(error.toString())
+                );
+            }
+        }>
+          <Text style={buttonTextStyle}> Sign out </Text>
+        </TouchableOpacity>
+
       </View>
     );
   }

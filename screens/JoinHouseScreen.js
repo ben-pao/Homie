@@ -36,8 +36,12 @@ class JoinHouseScreen extends Component {
             <TouchableOpacity
               style={buttonStyle}
               onPress={
-                () => this.joinHouse(this.state.houseID)
-              }>
+                () =>{
+                  this.joinHouse(this.state.houseID);
+                  this.props.navigation.navigate('App');
+                }
+              }
+            >
               <Text style={buttonTextStyle}>Submit</Text>
             </TouchableOpacity>
 
@@ -59,12 +63,26 @@ class JoinHouseScreen extends Component {
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;
-    var key = firebase.database().ref('/Houses').push().key;
-    firebase.database().ref('/Houses').child(key)
-      .set(
-        { HouseName: houseName,
-          Users: {uid: userName} }
+  //  var key = firebase.database().ref('/Houses').push().key;
+    var houseref = firebase.database().ref('/Houses').child(houseID);
+    // var usersDic = [];
+    // usersDic = houseref.child("Users");
+    // console.log(usersDic);
+    // usersDic.push({
+    //   key: uid,
+    //   value: userName,
+    // })
+    firebase.database().ref('/Houses').child(houseID).child("Users")
+      .update(
+        {
+          [uid]: userName,
+        }
       );
+    firebase.database().ref('/Users').child(uid).update(
+        {
+          houseid: houseID,
+        }
+    );
   }
 }
 

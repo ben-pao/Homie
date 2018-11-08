@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 // import DismissKeyboard from 'dismissKeyboard';
 import { Keyboard } from 'react-native'
 
-export default class Login extends Component {
+export default class LoginScreen extends Component {
   // static navigationOptions = {
   //   header: null,
   //   /* No more header config here! */

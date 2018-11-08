@@ -36,8 +36,12 @@ class CreateHouseScreen extends Component {
             <TouchableOpacity
               style={buttonStyle}
               onPress={
-                () => this.addHouse(this.state.houseName)
-              }>
+                () => {
+                  this.addHouse(this.state.houseName);
+                  this.props.navigation.navigate('App');
+                }
+              }
+            >
               <Text style={buttonTextStyle}>Submit</Text>
             </TouchableOpacity>
 
@@ -45,7 +49,8 @@ class CreateHouseScreen extends Component {
               style={buttonStyle}
               onPress={
                 () => goBack()
-            }>
+              }
+            >
               <Text style={buttonTextStyle}> Cancel </Text>
             </TouchableOpacity>
           </View>
@@ -63,8 +68,13 @@ class CreateHouseScreen extends Component {
     firebase.database().ref('/Houses').child(key)
       .set(
         { HouseName: houseName,
-          Users: {uid: userName} }
+          Users: {[uid]: userName} }
       );
+    firebase.database().ref('/Users').child(uid).update(
+        {
+          houseid: key,
+        }
+    );
   }
 }
 
