@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, createDrawerNavigator } from 'react-native';
-import { createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
+import { createStackNavigator, StackActions, NavigationActions, createBottomTabNavigator } from 'react-navigation';
 
 class HomeScreen extends Component {
   // static navigationOptions = {
@@ -21,14 +21,32 @@ class HomeScreen extends Component {
   }
 }
 
+class SettingsScreen extends React.Component{
+  render(){
+    return(
+      <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
+        <Text>Grocery!</Text>
+        <Button
+          title="Go to Grocery"
+          onPress={()=> this.props.navigation.navigate('Grocery')}
+        />
+      </View>
+      );
+  }
+}
 
-export default createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-  },
-}, 
-  {
-    initialRouteName: 'Home',
+// export default createStackNavigator({
+//   Home: {
+//     screen: HomeScreen,
+//   },
+// }, 
+//   {
+//     initialRouteName: 'Home',
+
+// });
+
+export default createBottomTabNavigator({
+  Home: HomeScreen,
+  Settings: SettingsScreen,
+  // Grocery: GroceryScreen,
 });
-
-// export default HomeScreen;
