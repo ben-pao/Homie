@@ -14,6 +14,12 @@ class HomeScreen extends Component {
   //   // ),
   // };
   render() {
+    const { containerStyle,
+            headerStyle,
+            buttonStyle,
+            buttonTextStyle
+    } = styles;
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <TouchableOpacity
