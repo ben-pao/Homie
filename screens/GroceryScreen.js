@@ -78,6 +78,7 @@ export default class Grocery extends React.Component {
 
   addRow(data){
     var key = firebase.database().ref('/Grocery').push().key
+    console.log(key)
     firebase.database().ref('/Grocery').child(key).set({item:data})
   }
 
@@ -138,9 +139,7 @@ export default class Grocery extends React.Component {
 
               leftOpenValue={-75}
               rightOpenValue={-75}
-
-            />
-
+          />
 
         </Content>
 

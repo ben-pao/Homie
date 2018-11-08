@@ -1,69 +1,48 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity,  KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as firebase from 'firebase';
+import { Keyboard } from 'react-native';
 
+class SettingsScreen extends Component {
 
-class WelcomeScreen extends Component {
-
-  // For testing if user.displayName was stored in signup
-  componentDidMount() {
-    this.printUser();
+  state = {
+    houseName: ''
   }
-
-  printUser() {
-    user = firebase.auth().currentUser;
-    console.log("\n\n\n\n\nIn welcome");
-    console.log(user);
-  }
-
 
   render() {
     const { containerStyle,
+            wrapperStyle,
             headerStyle,
+            textInputStyle,
             buttonStyle,
             buttonTextStyle
     } = styles;
 
     return (
-      <View style={containerStyle}>
-        <Text style={headerStyle}>
-          Welcome to Homie
-        </Text>
-
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <TouchableOpacity
           style={buttonStyle}
           onPress={
-            () => this.props.navigation.navigate('JoinHouse')
+            () => this.props.navigation.navigate('AddPeople')
         }>
-          <Text style={buttonTextStyle}> Join a House </Text>
+          <Text style={buttonTextStyle}> Add People </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={buttonStyle}
           onPress={
-            () => this.props.navigation.navigate('CreateHouse')
+            () => this.props.navigation.navigate('Profile')
         }>
-          <Text style={buttonTextStyle}> Create a House </Text>
+          <Text style={buttonTextStyle}> Profile </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={buttonStyle}
           onPress={
-            () => {
-              firebase.auth().signOut()
-                .then(
-                  () => {
-                    // alert("Byeeeee!");
-                    this.props.navigation.navigate('Login');
-                  }
-                ).catch(
-                  (error) => alert(error.toString())
-                )
-            }
+            () => this.props.navigation.navigate('About')
         }>
-          <Text style={buttonTextStyle}> Sign out </Text>
+          <Text style={buttonTextStyle}> About Homie </Text>
         </TouchableOpacity>
-
       </View>
     );
   }
@@ -79,12 +58,21 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
     paddingRight: 40,
   },
+  wrapperStyle: {
+    flex: 1,
+  },
   headerStyle: {
     fontSize:24,
     marginBottom:60,
     color: '#000',
     // color: '#fff',
     fontWeight: 'bold',
+  },
+  textInputStyle: {
+    alignSelf: 'stretch',
+    padding: 15,
+    marginBottom: 20,
+    backgroundColor: '#fff'
   },
   buttonStyle: {
     alignSelf: 'stretch',
@@ -101,4 +89,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default WelcomeScreen;
+export default SettingsScreen;

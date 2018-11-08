@@ -3,10 +3,10 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity,  KeyboardAvoidingV
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
-class CreateHouseScreen extends Component {
+class JoinHouseScreen extends Component {
 
   state = {
-    houseName: ''
+    houseID: ''
   }
 
   render() {
@@ -24,20 +24,20 @@ class CreateHouseScreen extends Component {
       <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
           <View style={containerStyle}>
-            <Text style={headerStyle}>CreateHouse</Text>
+            <Text style={headerStyle}>Join a House</Text>
             <TextInput
               style={textInputStyle}
-              placeholder='Enter a Name for Your House'
+              placeholder='Enter the ID for Your House'
               onChangeText={
-                (houseName) => this.setState({houseName})
+                (houseID) => this.setState({houseID})
               }
               underlineColorAndroid='transparent'
             />
             <TouchableOpacity
               style={buttonStyle}
               onPress={
-                () => {
-                  this.addHouse(this.state.houseName);
+                () =>{
+                  this.joinHouse(this.state.houseID);
                   this.props.navigation.navigate('App');
                 }
               }
@@ -49,8 +49,7 @@ class CreateHouseScreen extends Component {
               style={buttonStyle}
               onPress={
                 () => goBack()
-              }
-            >
+            }>
               <Text style={buttonTextStyle}> Cancel </Text>
             </TouchableOpacity>
           </View>
@@ -59,20 +58,29 @@ class CreateHouseScreen extends Component {
     );
   }
 
-  addHouse = (houseName) => {
+  joinHouse = (houseID) => {
     // console.log("IN addHouse!\n\n");
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;
-    var key = firebase.database().ref('/Houses').push().key;
-    firebase.database().ref('/Houses').child(key)
-      .set(
-        { HouseName: houseName,
-          Users: {[uid]: userName} }
+  //  var key = firebase.database().ref('/Houses').push().key;
+    var houseref = firebase.database().ref('/Houses').child(houseID);
+    // var usersDic = [];
+    // usersDic = houseref.child("Users");
+    // console.log(usersDic);
+    // usersDic.push({
+    //   key: uid,
+    //   value: userName,
+    // })
+    firebase.database().ref('/Houses').child(houseID).child("Users")
+      .update(
+        {
+          [uid]: userName,
+        }
       );
     firebase.database().ref('/Users').child(uid).update(
         {
-          houseid: key,
+          houseid: houseID,
         }
     );
   }
@@ -119,4 +127,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CreateHouseScreen;
+export default JoinHouseScreen;

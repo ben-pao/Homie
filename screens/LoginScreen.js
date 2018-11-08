@@ -3,9 +3,13 @@ import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpaci
 import { createStackNavigator, StackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 // import DismissKeyboard from 'dismissKeyboard';
-import {Keyboard} from 'react-native'
+import { Keyboard } from 'react-native'
 
 export default class Login extends Component {
+  // static navigationOptions = {
+  //   header: null,
+  //   /* No more header config here! */
+  // };
 
   state = {
     email: '',
@@ -19,9 +23,13 @@ export default class Login extends Component {
 
   _loadInitialState = async () => {
     var value = await AsyncStorage.getItem('user');
+    console.log(value);
     if(value !== null){
       //youre logged in so
-      this.props.navigation.navigate('App');
+      // if User has a House
+        // this.props.navigation.navigate('App');
+      // else
+        this.props.navigation.navigate('Welcome');
     }
   }
 
@@ -47,13 +55,13 @@ export default class Login extends Component {
                 (email) => this.setState({email})
               }
               underlineColorAndroid='transparent'
-              // onBlur={() => alert("blurred")}
-              // onEndEditing={this.clearFocus}
             />
 
             <TextInput
               style={textInput}
+              secureTextEntry={true}
               placeholder='Password'
+              value={this.state.password}
               onChangeText={
                 (password) => this.setState({password})
               }
@@ -63,11 +71,8 @@ export default class Login extends Component {
             <TouchableOpacity
               style={btn}
               onPress={
-                () => {
-                  this.login(this.state.email, this.state.password)
-                }
-
-            }>
+                () => this.login(this.state.email, this.state.password)
+              }>
               <Text style={btnText}> Log in </Text>
             </TouchableOpacity>
 
@@ -87,33 +92,28 @@ export default class Login extends Component {
   }
 
   login = (email, password) => {
-  //  alert(email);
-  const { navigate } = this.props.navigation;
-    try{
-      //console.log(email)
-      //console.log(password)
-
-
-      firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(
-        (user) => {
-          console.log(user);
-          navigate('Welcome');
-        }
-      ).catch(
-        (error) => {
-          alert(error.toString());
-        }
-      )
-      // var user = firebase.auth().currentUser;
-      // console.log(user);
-      // if (user) {
-      //   navigate('Welcome');
-      // }
-    }catch(error){
-      alert(error.toString());
-      console.log(error.toString());
-    }
+    // console.log("hi\n");
+    //  alert(email);
+    const { navigate } = this.props.navigation;
+      try {
+        //console.log(email)
+        //console.log(password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(
+          (user) => {
+            console.log(user);
+            this.setState( {password: ''} );
+            navigate('Welcome');
+          }
+        ).catch(
+          (error) => {
+            alert(error.toString());
+          }
+        )
+      } catch(error) {
+        alert(error.toString());
+        console.log(error.toString());
+      }
   }
 
 
