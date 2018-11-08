@@ -36,8 +36,12 @@ class JoinHouseScreen extends Component {
             <TouchableOpacity
               style={buttonStyle}
               onPress={
-                () => this.joinHouse(this.state.houseID)
-              }>
+                () =>{
+                  this.joinHouse(this.state.houseID);
+                  this.props.navigation.navigate('App');
+                }
+              }
+            >
               <Text style={buttonTextStyle}>Submit</Text>
             </TouchableOpacity>
 
