@@ -20,7 +20,29 @@ class SettingsScreen extends Component {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text> Settings </Text>
+        <TouchableOpacity
+          style={buttonStyle}
+          onPress={
+            () => this.props.navigation.navigate('AddPeople')
+        }>
+          <Text style={buttonTextStyle}> Add People </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={buttonStyle}
+          onPress={
+            () => this.props.navigation.navigate('Profile')
+        }>
+          <Text style={buttonTextStyle}> Profile </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={buttonStyle}
+          onPress={
+            () => this.props.navigation.navigate('About')
+        }>
+          <Text style={buttonTextStyle}> About Homie </Text>
+        </TouchableOpacity>
       </View>
     );
   }

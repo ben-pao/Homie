@@ -11,6 +11,7 @@ import SettingsScreen from './screens/SettingsScreen';
 import AddPeopleScreen from './screens/AddPeopleScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
+import AboutScreen from './screens/AboutScreen';
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
@@ -37,6 +38,7 @@ const LoginStack = createStackNavigator(
     initialRouteName: 'Login',
     navigationOptions: {
       header: null,
+      gesturesEnabled: false,
     },
   }
 );
@@ -49,12 +51,13 @@ const AppStack = createStackNavigator(
     // Payments: Payments,
     // Messages: Messages,
     // Invite: Invite,
-    // Settings: SettingsStack
+    Settings: SettingsScreen
   },
   {
     initialRouteName: 'Home',
     navigationOptions: {
       header: null,
+      gesturesEnabled: false,
     },
   }
 );
@@ -63,7 +66,8 @@ const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
     AddPeople: AddPeopleScreen,
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
+    About: AboutScreen
   }
 )
 
@@ -76,7 +80,8 @@ const StackNavigator = createStackNavigator(
     // initialRouteName: 'Login',
     initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
-      header: null
+      header: null,
+      gesturesEnabled: false,
     }
   }
 );
@@ -92,10 +97,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     // ...
   }
 });
-
-
-
-
 
 export default class App extends Component {
   render() {

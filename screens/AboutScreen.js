@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, createDrawerNavigator } from 'react-native';
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
-class HomeScreen extends Component {
+class AboutScreen extends Component {
   // static navigationOptions = {
   //   drawerLabel: 'Home',
   //   // drawerIcon: ({ tintColor }) => (
@@ -22,29 +22,7 @@ class HomeScreen extends Component {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={
-            () => this.props.navigation.navigate('Grocery')
-        }>
-          <Text style={buttonTextStyle}> Groceries </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={
-            () => this.props.navigation.navigate('Chores')
-        }>
-          <Text style={buttonTextStyle}> Chore Wheel </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={
-            () => this.props.navigation.navigate('Settings')
-        }>
-          <Text style={buttonTextStyle}> Settings </Text>
-        </TouchableOpacity>
+        <Text> About Homie </Text>
       </View>
     );
   }
@@ -82,4 +60,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen;
+export default AboutScreen;
