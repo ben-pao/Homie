@@ -51,7 +51,8 @@ const AppStack = createStackNavigator(
     // Payments: Payments,
     // Messages: Messages,
     // Invite: Invite,
-    Settings: SettingsScreen
+    Settings: SettingsScreen,
+    AddPeople: AddPeopleScreen
   },
   {
     initialRouteName: 'Home',
