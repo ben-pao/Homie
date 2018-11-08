@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, Text, View, Button, TouchableOpacity } from 'react-native';
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
+class LogoTitle extends React.Component {
+  render() {
+    return (
+      <Image
+        source={require('./homieIcon.png')}
+        style={{ width: 30, height: 30 }}
+      />
+    );
+  }
+}
+
 class HomeScreen extends Component {
-  // static navigationOptions = {
-  //
-  //   // drawerLabel: 'Home',
-  //   // drawerIcon: ({ tintColor }) => (
-  //   //   <Image
-  //   //     source={require('./chats-icon.png')}
-  //   //     style={[styles.icon, {tintColor: tintColor}]}
-  //   //   />
-  //   // ),
-  // };
+  static navigationOptions = {
+    headerTitle: <LogoTitle />,
+  };
   render() {
     const { containerStyle,
             headerStyle,
