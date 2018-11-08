@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Login from './screens/LoginScreen';
 import Signup from './screens/SignupScreen';
-import Grocery from './screens/GroceryScreen';
+import GroceryScreen from './screens/GroceryScreen';
 import Chores from './screens/ChoresScreen';
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
@@ -46,7 +46,7 @@ const LoginStack = createStackNavigator(
 const AppStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Grocery: Grocery,
+    Grocery: GroceryScreen,
     Chores: Chores,
     // Payments: Payments,
     // Messages: Messages,
