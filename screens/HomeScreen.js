@@ -62,7 +62,7 @@ class HomeScreen extends Component {
                   }
                 ).catch(
                   (error) => alert(error.toString())
-                )
+                );
             }
         }>
           <Text style={buttonTextStyle}> Sign out </Text>
