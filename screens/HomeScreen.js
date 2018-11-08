@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, createDrawerNavigator } from 'react-native';
+//import { Ionicons } from @expo/vector-icons;
 import { createStackNavigator, StackActions, NavigationActions, createBottomTabNavigator } from 'react-navigation';
 
 class HomeScreen extends Component {
@@ -50,25 +51,36 @@ class SettingsScreen extends React.Component{
           onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
         />
 
-
       </View>
       );
   }
 }
 
-// export default createStackNavigator({
-//   Home: {
-//     screen: HomeScreen,
-//   },
-// }, 
-//   {
-//     initialRouteName: 'Home',
+const HomeStack = createStackNavigator({
+  Home: HomeScreen,
+  Settings: SettingsScreen,
+});
 
-// });
+const GroceryStack = createStackNavigator({
+  Home: HomeScreen,
+  Grocerys: GroceryScreen,
+});
+
+const SettingStack = createStackNavigator({
+  Home: HomeScreen,
+  Settings: SettingsScreen,
+});
 
 export default createBottomTabNavigator({
   Home: HomeScreen,
-  Grocery: GroceryScreen,
+  Grocerys: GroceryScreen,
   Settings: SettingsScreen,
-  // Grocery: GroceryScreen,
-});
+},
+
+);
+
+
+
+
+
+

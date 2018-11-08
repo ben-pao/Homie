@@ -6,7 +6,7 @@ import Grocery from './screens/GroceryScreen';
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
-import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import { createStackNavigator, createDrawerNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
 
