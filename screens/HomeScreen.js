@@ -21,7 +21,7 @@ class HomeScreen extends Component {
   }
 }
 
-class SettingsScreen extends React.Component{
+class GroceryScreen extends React.Component{
   render(){
     return(
       <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
@@ -30,6 +30,27 @@ class SettingsScreen extends React.Component{
           title="Go to Grocery"
           onPress={()=> this.props.navigation.navigate('Grocery')}
         />
+      </View>
+      );
+  }
+}
+
+class SettingsScreen extends React.Component{
+  render(){
+    return(
+      <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
+        
+        <Button
+          title=" Log out (Go to Login Screen)"
+          onPress={()=> this.props.navigation.navigate('Login')}
+        />
+
+        <Button
+          title=" Create a new house"
+          onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
+        />
+
+
       </View>
       );
   }
@@ -47,6 +68,7 @@ class SettingsScreen extends React.Component{
 
 export default createBottomTabNavigator({
   Home: HomeScreen,
+  Grocery: GroceryScreen,
   Settings: SettingsScreen,
   // Grocery: GroceryScreen,
 });
