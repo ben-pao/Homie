@@ -57,7 +57,7 @@ const AppStack = createStackNavigator(
     initialRouteName: 'Home',
     navigationOptions: {
       headerStyle: {
-        backgroundColor: '#f4511e',
+        backgroundColor: '#000',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
