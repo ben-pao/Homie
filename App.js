@@ -12,7 +12,7 @@ import AddPeopleScreen from './screens/AddPeopleScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import AboutScreen from './screens/AboutScreen';
-import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import { createStackNavigator, createDrawerNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
 
@@ -114,6 +114,8 @@ export default class App extends Component {
 
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

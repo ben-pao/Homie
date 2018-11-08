@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView } from 'react-native';
-
+import { StyleSheet, Text, View, StatusBar, ListView,utton, createDrawerNavigator } from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
-
+import { createStackNavigator, StackActions, NavigationActions,createBottomTabNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 
 
-import { createStackNavigator } from 'react-navigation';
+var data = []
 
 //create bottom tab's
 class GroceryScreen extends React.Component{
@@ -43,7 +42,11 @@ class SettingsScreen extends React.Component{
   }
 }
 
-var data = []
+// createBottomTabNavigator({
+//   Home: HomeScreen,
+//   Grocerys: GroceryScreen,
+//   Settings: SettingsScreen,
+// });
 
 
 export default class GroceryScreen extends React.Component {
@@ -90,22 +93,26 @@ export default class GroceryScreen extends React.Component {
 
   render() {
     return(
-      <Container style={styles.container}>
-        <Header>
-          <Content>
-            <Item>
-              <Input
-                placeholder='add item'
-                style={styles.input}
-                onChangeText = {(newContact) => this.setState({newContact})}
 
-              />
-              <Button onPress={ () => this.addRow(this.state.newContact)}>
-                <Icon name='add'/>
-              </Button>
-            </Item>
-          </Content>
+      <Container style={styles.container}>
+
+        <Header>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text> Header </Text>
+          </View>
         </Header>
+
+        <Item>
+          <Input
+            placeholder='add item'
+            style={styles.input}
+            onChangeText = {(newContact) => this.setState({newContact})}
+
+          />
+          <Button onPress={ () => this.addRow(this.state.newContact)}>
+            <Icon name='add'/>
+          </Button>
+        </Item>
 
         <Content>
           <List
@@ -144,10 +151,12 @@ export default class GroceryScreen extends React.Component {
   }
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ff324f',
   },
   input:{
     backgroundColor: '#fff',

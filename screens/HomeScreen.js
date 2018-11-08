@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, createDrawerNavigator } from 'react-native';
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
+import { createStackNavigator, StackActions, NavigationActions, createBottomTabNavigator } from 'react-navigation';
 
 class HomeScreen extends Component {
   // static navigationOptions = {
@@ -160,4 +161,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen;
+// export default HomeScreen;
