@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './screens/LoginScreen';
-import Signup from './screens/SignupScreen';
-import Grocery from './screens/GroceryScreen';
-import Chores from './screens/ChoresScreen';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
+import GroceryScreen from './screens/GroceryScreen';
+import ChoresScreen from './screens/ChoresScreen';
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
 import JoinHouseScreen from './screens/JoinHouseScreen';
@@ -28,8 +28,8 @@ firebase.initializeApp(firebaseConfig);
 
 const LoginStack = createStackNavigator(
   {
-    Login: Login,
-    Signup: Signup,
+    Login: LoginScreen,
+    Signup: SignupScreen,
     Welcome: WelcomeScreen,
     CreateHouse: CreateHouseScreen,
     JoinHouse: JoinHouseScreen,
@@ -46,8 +46,8 @@ const LoginStack = createStackNavigator(
 const AppStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Grocery: Grocery,
-    Chores: Chores,
+    Grocery: GroceryScreen,
+    Chores: ChoresScreen,
     // Payments: Payments,
     // Messages: Messages,
     // Invite: Invite,
