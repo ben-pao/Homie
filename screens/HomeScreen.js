@@ -73,6 +73,61 @@ class HomeScreen extends Component {
   }
 }
 
+class GroceryScreen extends React.Component{
+  render(){
+    return(
+      <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
+        <Text>Grocery List!</Text>
+        <Button
+          title="Go to Groceries"
+          onPress={()=> this.props.navigation.navigate('Grocery')}
+        />
+      </View>
+      );
+  }
+}
+
+class SettingsScreen extends React.Component{
+  render(){
+    return(
+      <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
+
+        <Button
+          title=" Log out (Go to Login Screen)"
+          onPress={()=> this.props.navigation.navigate('Login')}
+        />
+
+        <Button
+          title=" Create a new house"
+          onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
+        />
+
+      </View>
+      );
+  }
+}
+
+const GroceryStack = createStackNavigator({
+  Home: HomeScreen,
+  Groceries: GroceryScreen,
+});
+
+const HomeStack = createStackNavigator({
+  Home: HomeScreen,
+  Settings: SettingsScreen,
+});
+
+const SettingStack = createStackNavigator({
+  Home: HomeScreen,
+  Settings: SettingsScreen,
+});
+
+export default createBottomTabNavigator({
+  Groceries: GroceryScreen,
+  Home: HomeScreen,
+  Settings: SettingsScreen,
+});
+
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
