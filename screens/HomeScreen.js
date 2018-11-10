@@ -3,17 +3,19 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, createDrawerNavigator
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 import { createStackNavigator, StackActions, NavigationActions, createBottomTabNavigator } from 'react-navigation';
+import Grocery from './GroceryScreen';
+import SettingsScreen from './SettingsScreen';
 
 class HomeScreen extends Component {
   // static navigationOptions = {
-  //
-  //   // drawerLabel: 'Home',
-  //   // drawerIcon: ({ tintColor }) => (
-  //   //   <Image
-  //   //     source={require('./chats-icon.png')}
-  //   //     style={[styles.icon, {tintColor: tintColor}]}
-  //   //   />
-  //   // ),
+  
+  //   drawerLabel: 'Home',
+  //   drawerIcon: ({ tintColor }) => (
+  //     <Image
+  //       source={require('./chats-icon.png')}
+  //       style={[styles.icon, {tintColor: tintColor}]}
+  //     />
+  //   ),
   // };
   render() {
     const { containerStyle,
@@ -21,7 +23,6 @@ class HomeScreen extends Component {
             buttonStyle,
             buttonTextStyle
     } = styles;
-
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <TouchableOpacity
@@ -88,40 +89,40 @@ class GroceryScreen extends React.Component{
   }
 }
 
-class SettingsScreen extends React.Component{
-  render(){
-    return(
-      <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
+// class SettingsScreen extends React.Component{
+//   render(){
+//     return(
+//       <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
         
-        <Button
-          title=" Log out (Go to Login Screen)"
-          onPress={()=> this.props.navigation.navigate('Login')}
-        />
+//         <Button
+//           title=" Log out (Go to Login Screen)"
+//           onPress={()=> this.props.navigation.navigate('Login')}
+//         />
 
-        <Button
-          title=" Create a new house"
-          onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
-        />
+//         <Button
+//           title=" Create a new house"
+//           onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
+//         />
 
-      </View>
-      );
-  }
-}
+//       </View>
+//       );
+//   }
+// }
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-  Settings: SettingsScreen,
-});
+// const HomeStack = createStackNavigator({
+//   Home: HomeScreen,
+//   Settings: SettingsScreen,
+// });
 
-const GroceryStack = createStackNavigator({
-  Home: HomeScreen,
-  Grocerys: GroceryScreen,
-});
+// const GroceryStack = createStackNavigator({
+//   Home: HomeScreen,
+//   Grocerys: GroceryScreen,
+// });
 
-const SettingStack = createStackNavigator({
-  Home: HomeScreen,
-  Settings: SettingsScreen,
-});
+// const SettingStack = createStackNavigator({
+//   Home: HomeScreen,
+//   Settings: SettingsScreen,
+// });
 
 export default createBottomTabNavigator({
   Home: HomeScreen,
@@ -163,4 +164,3 @@ const styles = StyleSheet.create({
   }
 });
 
-// export default HomeScreen;
