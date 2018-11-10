@@ -19,7 +19,7 @@ class SettingsScreen extends Component {
     } = styles;
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={containerStyle}>
         <TouchableOpacity
           style={buttonStyle}
           onPress={
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     // backgroundColor: '#2896d3',
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
@@ -76,16 +76,16 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     alignSelf: 'stretch',
-    // backgroundColor: '#01c853',
-    backgroundColor: '#000',
+    backgroundColor: 'hotpink',
     // color: '#fff',
     padding: 20,
     alignItems: 'center',
     margin: 8
   },
   buttonTextStyle: {
-    color: '#fff',
-    fontWeight: 'bold'
+    color: '#000',
+    fontWeight: 'bold',
+    fontFamily: 'Cochin',
   }
 });
 

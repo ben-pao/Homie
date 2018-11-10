@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './screens/LoginScreen';
-import Signup from './screens/SignupScreen';
-import GroceryScreen from './screens/GroceryScreen';
-import Chores from './screens/ChoresScreen';
-import HomeScreen from './screens/HomeScreen';
-import CreateHouseScreen from './screens/CreateHouseScreen';
-import JoinHouseScreen from './screens/JoinHouseScreen';
-import SettingsScreen from './screens/SettingsScreen';
-import AddPeopleScreen from './screens/AddPeopleScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import WelcomeScreen from './screens/WelcomeScreen';
-import AboutScreen from './screens/AboutScreen';
-import { createStackNavigator, createDrawerNavigator, createBottomTabNavigator } from 'react-navigation';
+import StackNavigator from './navigation/Navigation'
 
 import * as firebase from 'firebase';
 
@@ -25,84 +13,6 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
-const LoginStack = createStackNavigator(
-  {
-    Login: Login,
-    Signup: Signup,
-    Welcome: WelcomeScreen,
-    CreateHouse: CreateHouseScreen,
-    JoinHouse: JoinHouseScreen,
-  },
-  {
-    initialRouteName: 'HomeScreen',
-    navigationOptions: {
-      header: null,
-      gesturesEnabled: false,
-    },
-  }
-);
-
-const TabNavigator = createBottomTabNavigator(
-  {
-    Home: HomeScreen,
-    Grocerys: GroceryScreen,
-    Settings: SettingsScreen,
-  },
-);
-
-const AppStack = createStackNavigator(
-  {
-    Home: TabNavigator,
-    // Grocery: GroceryScreen,
-    // Chores: Chores,
-    // // Payments: Payments,
-    // // Messages: Messages,
-    // // Invite: Invite,
-    // Settings: SettingsScreen
-  },
-  {
-    initialRouteName: 'Home',
-    navigationOptions: {
-      title: 'Homie',
-      headerStyle: {
-        backgroundColor: '#fad',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      // header: null,
-      gesturesEnabled: false,
-    },
-  }
-);
-
-const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-    AddPeople: AddPeopleScreen,
-    Profile: ProfileScreen,
-    About: AboutScreen
-  }
-)
-
-const StackNavigator = createStackNavigator(
-  {
-    Login: LoginStack,
-    App: AppStack,
-  },
-  {
-    initialRouteName: 'Login',
-    // initialRouteName: 'App', // Skip Login page (for testing)
-    navigationOptions: {
-      header: null,
-      gesturesEnabled: false,
-    }
-  }
-);
-
-
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -121,7 +31,6 @@ export default class App extends Component {
     return(
         <StackNavigator />
         );
-
   }
 }
 

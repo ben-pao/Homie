@@ -92,12 +92,13 @@ export default class GroceryScreen extends React.Component {
     return(
       <Container style={styles.container}>
 
-{  /*      <Header>
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text> Header </Text>
-          </View>
-        </Header>
-    */  }
+{
+        // <Header>
+        //   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        //     <Text> Header </Text>
+        //   </View>
+        // </Header>
+}
 
         <Content>
           <List
@@ -139,9 +140,9 @@ export default class GroceryScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fad',
   },
   input:{
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
   }
 })

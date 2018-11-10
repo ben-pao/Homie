@@ -8,13 +8,7 @@ import SettingsScreen from './SettingsScreen';
 
 class HomeScreen extends Component {
   // static navigationOptions = {
-  //   drawerLabel: 'Home',
-  //   drawerIcon: ({ tintColor }) => (
-  //     <Image
-  //       source={require('./chats-icon.png')}
-  //       style={[styles.icon, {tintColor: tintColor}]}
-  //     />
-  //   ),
+  //   headerTitle: 'Heyy',
   // };
 
 // class LogoTitle extends React.Component {
@@ -40,7 +34,7 @@ class HomeScreen extends Component {
             buttonTextStyle
     } = styles;
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={containerStyle}>
         <TouchableOpacity
           style={buttonStyle}
           onPress={() => {
@@ -90,20 +84,11 @@ class HomeScreen extends Component {
   }
 }
 
-
-// export default createBottomTabNavigator({
-//   Home: HomeScreen,
-//   Grocerys: GroceryScreen,
-//   Settings: SettingsScreen,
-// },
-//
-// );
-
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     // backgroundColor: '#2896d3',
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
@@ -118,18 +103,17 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     alignSelf: 'stretch',
-    // backgroundColor: '#01c853',
-    backgroundColor: '#000',
+    backgroundColor: 'hotpink',
     // color: '#fff',
     padding: 20,
     alignItems: 'center',
     margin: 8
   },
   buttonTextStyle: {
-    color: '#fff',
-    fontWeight: 'bold'
+    color: '#000',
+    fontWeight: 'bold',
+    fontFamily: 'Cochin',
   }
 });
 
 export default HomeScreen;
-
