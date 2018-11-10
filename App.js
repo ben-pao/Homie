@@ -43,21 +43,30 @@ const LoginStack = createStackNavigator(
   }
 );
 
-const AppStack = createStackNavigator(
+const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Grocery: GroceryScreen,
-    Chores: Chores,
-    // Payments: Payments,
-    // Messages: Messages,
-    // Invite: Invite,
-    Settings: SettingsScreen
+    Grocerys: GroceryScreen,
+    Settings: SettingsScreen,
+  },
+);
+
+const AppStack = createStackNavigator(
+  {
+    Home: TabNavigator,
+    // Grocery: GroceryScreen,
+    // Chores: Chores,
+    // // Payments: Payments,
+    // // Messages: Messages,
+    // // Invite: Invite,
+    // Settings: SettingsScreen
   },
   {
     initialRouteName: 'Home',
     navigationOptions: {
+      title: 'Homie',
       headerStyle: {
-        backgroundColor: '#000',
+        backgroundColor: '#fad',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -92,6 +101,8 @@ const StackNavigator = createStackNavigator(
     }
   }
 );
+
+
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {

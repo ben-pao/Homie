@@ -96,11 +96,12 @@ export default class GroceryScreen extends React.Component {
 
       <Container style={styles.container}>
 
-        <Header>
+{  /*      <Header>
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text> Header </Text>
           </View>
         </Header>
+    */  }
 
         <Item>
           <Input
