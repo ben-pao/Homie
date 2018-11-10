@@ -13,7 +13,7 @@ import { createStackNavigator } from 'react-navigation';
 var data = []
 
 
-export default class Grocery extends React.Component {
+export default class GroceryScreen extends React.Component {
 
   constructor(props){
     super(props);

@@ -10,7 +10,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "node_modules/.bin/jest"
+    "test": "node_modules/.bin/jest",
+    "test-updated": "node_modules/.bin/jest -u"
   },
   "dependencies": {
     "expo": "^30.0.2",
@@ -21,6 +22,7 @@
     "react-navigation": "^2.18.2"
   },
   "devDependencies": {
+    "jest": "^23.6.0",
     "jest-expo": "^31.0.0"
   }
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './screens/LoginScreen';
-import Signup from './screens/SignupScreen';
-import Grocery from './screens/GroceryScreen';
-import Chores from './screens/ChoresScreen';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
+import GroceryScreen from './screens/GroceryScreen';
+import ChoresScreen from './screens/ChoresScreen';
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
 import JoinHouseScreen from './screens/JoinHouseScreen';
@@ -11,6 +11,7 @@ import SettingsScreen from './screens/SettingsScreen';
 import AddPeopleScreen from './screens/AddPeopleScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
+import AboutScreen from './screens/AboutScreen';
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
@@ -27,8 +28,8 @@ firebase.initializeApp(firebaseConfig);
 
 const LoginStack = createStackNavigator(
   {
-    Login: Login,
-    Signup: Signup,
+    Login: LoginScreen,
+    Signup: SignupScreen,
     Welcome: WelcomeScreen,
     CreateHouse: CreateHouseScreen,
     JoinHouse: JoinHouseScreen,
@@ -45,17 +46,24 @@ const LoginStack = createStackNavigator(
 const AppStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Grocery: Grocery,
-    Chores: Chores,
+    Grocery: GroceryScreen,
+    Chores: ChoresScreen,
     // Payments: Payments,
     // Messages: Messages,
     // Invite: Invite,
-    // Settings: SettingsStack
+    Settings: SettingsScreen
   },
   {
     initialRouteName: 'Home',
     navigationOptions: {
-      header: null,
+      headerStyle: {
+        backgroundColor: '#000',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      // header: null,
       gesturesEnabled: false,
     },
   }
@@ -65,7 +73,8 @@ const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
     AddPeople: AddPeopleScreen,
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
+    About: AboutScreen
   }
 )
 
@@ -75,8 +84,8 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    initialRouteName: 'Login',
-    // initialRouteName: 'App', // Skip Login page (for testing)
+    // initialRouteName: 'Login',
+    initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null,
       gesturesEnabled: false,

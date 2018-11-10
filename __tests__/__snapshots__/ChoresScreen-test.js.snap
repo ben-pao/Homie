@@ -15,7 +15,7 @@ exports[`renders correctly 1`] = `
     allowFontScaling={true}
     ellipsizeMode="tail"
   >
-     This is the home page! 
+     Chore Wheel 
   </Text>
 </View>
 `;

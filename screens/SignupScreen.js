@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TextInput, KeyboardAvoidingView, To
 import { createStackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 
-export default class Signup extends Component {
+export default class SignupScreen extends Component {
   state = {
     firstname: '',
     lastname: '',
@@ -41,7 +41,7 @@ export default class Signup extends Component {
             confirm_password
     } = this.state;
 
-    const { navigate, goBack } = this.props.navigation;
+    // const { navigate, goBack } = this.props.navigation;
 
     return (
       <KeyboardAvoidingView behavior='padding' style={wrapper} enabled>
@@ -96,7 +96,10 @@ export default class Signup extends Component {
             <TouchableOpacity
               style={btn}
               onPress={
-                () => goBack()
+                () => {
+                  // goBack();
+                  this.props.navigation.goBack();
+                }
             }>
               <Text style={btnText}> Cancel </Text>
             </TouchableOpacity>
@@ -130,7 +133,10 @@ export default class Signup extends Component {
           var username = first + ' ' + last;
           user.user.updateProfile( {displayName: username} )
           .then(
-            ()      => { navigate('Welcome'); }
+            ()      => {
+              // navigate('Welcome');
+              this.props.navigation.navigate('Welcome');
+            }
           ).catch(
             (error) => { alert(error.toString()); }
           );
@@ -147,7 +153,8 @@ export default class Signup extends Component {
               email: email,
             }
           );
-          navigate('Welcome');
+          // navigate('Welcome');
+          this.props.navigation.navigate('Welcome');
         }
       ).catch(
         (error) => {
