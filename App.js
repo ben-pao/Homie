@@ -4,6 +4,7 @@ import Login from './screens/LoginScreen';
 import Signup from './screens/SignupScreen';
 import GroceryScreen from './screens/GroceryScreen';
 import Chores from './screens/ChoresScreen';
+
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
 import JoinHouseScreen from './screens/JoinHouseScreen';
@@ -35,7 +36,7 @@ const LoginStack = createStackNavigator(
     JoinHouse: JoinHouseScreen,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'HomeScreen',
     navigationOptions: {
       header: null,
       gesturesEnabled: false,
@@ -93,8 +94,8 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    // initialRouteName: 'Login',
-    initialRouteName: 'App', // Skip Login page (for testing)
+    initialRouteName: 'Login',
+    // initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null,
       gesturesEnabled: false,
@@ -124,8 +125,6 @@ export default class App extends Component {
 
   }
 }
-
-
 
 const styles = StyleSheet.create({
   container: {

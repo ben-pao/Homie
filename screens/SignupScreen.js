@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TextInput, KeyboardAvoidingView, To
 import { createStackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 
-export default class Signup extends Component {
+export default class SignupScreen extends Component {
   state = {
     firstname: '',
     lastname: '',

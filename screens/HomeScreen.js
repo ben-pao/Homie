@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, createDrawerNavigator } from 'react-native';
+import { StyleSheet, Image, Text, View, Button, TouchableOpacity } from 'react-native';
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 import { createStackNavigator, StackActions, NavigationActions, createBottomTabNavigator } from 'react-navigation';
@@ -16,6 +16,23 @@ class HomeScreen extends Component {
   //     />
   //   ),
   // };
+
+// class LogoTitle extends React.Component {
+//   render() {
+//     return (
+//       <Image
+//         source={require('./homieIcon.png')}
+//         style={{ width: 30, height: 30 }}
+//       />
+//     );
+//   }
+// }
+
+// class HomeScreen extends Component {
+//   static navigationOptions = {
+//     headerTitle: <LogoTitle />,
+//   };
+
   render() {
     const { containerStyle,
             headerStyle,
@@ -63,7 +80,7 @@ class HomeScreen extends Component {
                   }
                 ).catch(
                   (error) => alert(error.toString())
-                )
+                );
             }
         }>
           <Text style={buttonTextStyle}> Sign out </Text>

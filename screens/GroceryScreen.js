@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView,utton, createDrawerNavigator } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, ListView } from 'react-native';
+
 import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
-import { createStackNavigator, StackActions, NavigationActions,createBottomTabNavigator } from 'react-navigation';
+
 import * as firebase from 'firebase';
 
 
-var data = []
+import { createStackNavigator } from 'react-navigation';
 
 //create bottom tab's
 // class GroceryScreen extends React.Component{
@@ -42,11 +43,7 @@ class SettingsScreen extends React.Component{
   }
 }
 
-// createBottomTabNavigator({
-//   Home: HomeScreen,
-//   Grocerys: GroceryScreen,
-//   Settings: SettingsScreen,
-// });
+var data = []
 
 
 export default class GroceryScreen extends React.Component {
@@ -93,7 +90,6 @@ export default class GroceryScreen extends React.Component {
 
   render() {
     return(
-
       <Container style={styles.container}>
 
 {  /*      <Header>
@@ -102,18 +98,6 @@ export default class GroceryScreen extends React.Component {
           </View>
         </Header>
     */  }
-
-        <Item>
-          <Input
-            placeholder='add item'
-            style={styles.input}
-            onChangeText = {(newContact) => this.setState({newContact})}
-
-          />
-          <Button onPress={ () => this.addRow(this.state.newContact)}>
-            <Icon name='add'/>
-          </Button>
-        </Item>
 
         <Content>
           <List
@@ -152,12 +136,10 @@ export default class GroceryScreen extends React.Component {
   }
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ff324f',
+    backgroundColor: '#fff',
   },
   input:{
     backgroundColor: '#fff',
