@@ -1,26 +1,44 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, Text, View, Button, TouchableOpacity } from 'react-native';
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
+import { createStackNavigator, StackActions, NavigationActions, createBottomTabNavigator } from 'react-navigation';
+import GroceryScreen from './GroceryScreen';
+import SettingsScreen from './SettingsScreen';
 
 class HomeScreen extends Component {
   // static navigationOptions = {
-  //
-  //   // drawerLabel: 'Home',
-  //   // drawerIcon: ({ tintColor }) => (
-  //   //   <Image
-  //   //     source={require('./chats-icon.png')}
-  //   //     style={[styles.icon, {tintColor: tintColor}]}
-  //   //   />
-  //   // ),
+  //   drawerLabel: 'Home',
+  //   drawerIcon: ({ tintColor }) => (
+  //     <Image
+  //       source={require('./chats-icon.png')}
+  //       style={[styles.icon, {tintColor: tintColor}]}
+  //     />
+  //   ),
   // };
+
+// class LogoTitle extends React.Component {
+//   render() {
+//     return (
+//       <Image
+//         source={require('./homieIcon.png')}
+//         style={{ width: 30, height: 30 }}
+//       />
+//     );
+//   }
+// }
+
+// class HomeScreen extends Component {
+//   static navigationOptions = {
+//     headerTitle: <LogoTitle />,
+//   };
+
   render() {
     const { containerStyle,
             headerStyle,
             buttonStyle,
             buttonTextStyle
     } = styles;
-
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <TouchableOpacity
@@ -72,6 +90,15 @@ class HomeScreen extends Component {
   }
 }
 
+
+// export default createBottomTabNavigator({
+//   Home: HomeScreen,
+//   Grocerys: GroceryScreen,
+//   Settings: SettingsScreen,
+// },
+//
+// );
+
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
@@ -105,3 +132,4 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
+

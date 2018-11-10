@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import LoginScreen from './screens/LoginScreen';
-import SignupScreen from './screens/SignupScreen';
+import Login from './screens/LoginScreen';
+import Signup from './screens/SignupScreen';
 import GroceryScreen from './screens/GroceryScreen';
-import ChoresScreen from './screens/ChoresScreen';
+import Chores from './screens/ChoresScreen';
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
 import JoinHouseScreen from './screens/JoinHouseScreen';
@@ -12,7 +12,7 @@ import AddPeopleScreen from './screens/AddPeopleScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import AboutScreen from './screens/AboutScreen';
-import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import { createStackNavigator, createDrawerNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import * as firebase from 'firebase';
 
@@ -28,14 +28,14 @@ firebase.initializeApp(firebaseConfig);
 
 const LoginStack = createStackNavigator(
   {
-    Login: LoginScreen,
-    Signup: SignupScreen,
+    Login: Login,
+    Signup: Signup,
     Welcome: WelcomeScreen,
     CreateHouse: CreateHouseScreen,
     JoinHouse: JoinHouseScreen,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'HomeScreen',
     navigationOptions: {
       header: null,
       gesturesEnabled: false,
@@ -43,21 +43,30 @@ const LoginStack = createStackNavigator(
   }
 );
 
-const AppStack = createStackNavigator(
+const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Grocery: GroceryScreen,
-    Chores: ChoresScreen,
-    // Payments: Payments,
-    // Messages: Messages,
-    // Invite: Invite,
-    Settings: SettingsScreen
+    Grocerys: GroceryScreen,
+    Settings: SettingsScreen,
+  },
+);
+
+const AppStack = createStackNavigator(
+  {
+    Home: TabNavigator,
+    // Grocery: GroceryScreen,
+    // Chores: Chores,
+    // // Payments: Payments,
+    // // Messages: Messages,
+    // // Invite: Invite,
+    // Settings: SettingsScreen
   },
   {
     initialRouteName: 'Home',
     navigationOptions: {
+      title: 'Homie',
       headerStyle: {
-        backgroundColor: '#000',
+        backgroundColor: '#fad',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -84,14 +93,16 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    // initialRouteName: 'Login',
-    initialRouteName: 'App', // Skip Login page (for testing)
+    initialRouteName: 'Login',
+    // initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null,
       gesturesEnabled: false,
     }
   }
 );
+
+
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
