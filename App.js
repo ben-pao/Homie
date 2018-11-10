@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Login from './screens/LoginScreen';
 import Signup from './screens/SignupScreen';
-import Grocery from './screens/GroceryScreen';
+import GroceryScreen from './screens/GroceryScreen';
 import Chores from './screens/ChoresScreen';
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
@@ -43,21 +43,30 @@ const LoginStack = createStackNavigator(
   }
 );
 
-const AppStack = createStackNavigator(
+const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Grocery: Grocery,
-    Chores: Chores,
-    // Payments: Payments,
-    // Messages: Messages,
-    // Invite: Invite,
-    Settings: SettingsScreen
+    Grocerys: GroceryScreen,
+    Settings: SettingsScreen,
+  },
+);
+
+const AppStack = createStackNavigator(
+  {
+    Home: TabNavigator,
+    // Grocery: GroceryScreen,
+    // Chores: Chores,
+    // // Payments: Payments,
+    // // Messages: Messages,
+    // // Invite: Invite,
+    // Settings: SettingsScreen
   },
   {
     initialRouteName: 'Home',
     navigationOptions: {
+      title: 'Homie',
       headerStyle: {
-        backgroundColor: '#000',
+        backgroundColor: '#fad',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -92,6 +101,8 @@ const StackNavigator = createStackNavigator(
     }
   }
 );
+
+
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {

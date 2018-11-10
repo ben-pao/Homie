@@ -3,12 +3,11 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, createDrawerNavigator
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 import { createStackNavigator, StackActions, NavigationActions, createBottomTabNavigator } from 'react-navigation';
-import Grocery from './GroceryScreen';
+import GroceryScreen from './GroceryScreen';
 import SettingsScreen from './SettingsScreen';
 
 class HomeScreen extends Component {
   // static navigationOptions = {
-  
   //   drawerLabel: 'Home',
   //   drawerIcon: ({ tintColor }) => (
   //     <Image
@@ -75,62 +74,14 @@ class HomeScreen extends Component {
   }
 }
 
-class GroceryScreen extends React.Component{
-  render(){
-    return(
-      <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
-        <Text>Grocery!</Text>
-        <Button
-          title="Go to Grocery"
-          onPress={()=> this.props.navigation.navigate('Grocery')}
-        />
-      </View>
-      );
-  }
-}
 
-// class SettingsScreen extends React.Component{
-//   render(){
-//     return(
-//       <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
-        
-//         <Button
-//           title=" Log out (Go to Login Screen)"
-//           onPress={()=> this.props.navigation.navigate('Login')}
-//         />
-
-//         <Button
-//           title=" Create a new house"
-//           onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
-//         />
-
-//       </View>
-//       );
-//   }
-// }
-
-// const HomeStack = createStackNavigator({
-//   Home: HomeScreen,
-//   Settings: SettingsScreen,
-// });
-
-// const GroceryStack = createStackNavigator({
+// export default createBottomTabNavigator({
 //   Home: HomeScreen,
 //   Grocerys: GroceryScreen,
-// });
-
-// const SettingStack = createStackNavigator({
-//   Home: HomeScreen,
 //   Settings: SettingsScreen,
-// });
-
-export default createBottomTabNavigator({
-  Home: HomeScreen,
-  Grocerys: GroceryScreen,
-  Settings: SettingsScreen,
-},
-
-);
+// },
+//
+// );
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -163,4 +114,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 });
+
+export default HomeScreen;
 

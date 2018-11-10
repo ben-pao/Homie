@@ -8,25 +8,25 @@ import * as firebase from 'firebase';
 var data = []
 
 //create bottom tab's
-class GroceryScreen extends React.Component{
-  render(){
-    return(
-      <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
-        <Text>Grocery!</Text>
-        <Button
-          title="Go to Grocery"
-          onPress={()=> this.props.navigation.navigate('Grocery')}
-        />
-      </View>
-      );
-  }
-}
+// class GroceryScreen extends React.Component{
+//   render(){
+//     return(
+//       <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
+//         <Text>Grocery!</Text>
+//         <Button
+//           title="Go to Grocery"
+//           onPress={()=> this.props.navigation.navigate('Grocery')}
+//         />
+//       </View>
+//       );
+//   }
+// }
 
 class SettingsScreen extends React.Component{
   render(){
     return(
       <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
-        
+
         <Button
           title=" Log out (Go to Login Screen)"
           onPress={()=> this.props.navigation.navigate('Login')}
@@ -49,7 +49,7 @@ class SettingsScreen extends React.Component{
 // });
 
 
-export default class Grocery extends React.Component {
+export default class GroceryScreen extends React.Component {
 
   constructor(props){
     super(props);
@@ -96,11 +96,12 @@ export default class Grocery extends React.Component {
 
       <Container style={styles.container}>
 
-        <Header>
+{  /*      <Header>
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text> Header </Text>
           </View>
         </Header>
+    */  }
 
         <Item>
           <Input
