@@ -4,7 +4,6 @@ import Login from './screens/LoginScreen';
 import Signup from './screens/SignupScreen';
 import GroceryScreen from './screens/GroceryScreen';
 import Chores from './screens/ChoresScreen';
-
 import HomeScreen from './screens/HomeScreen';
 import CreateHouseScreen from './screens/CreateHouseScreen';
 import JoinHouseScreen from './screens/JoinHouseScreen';
