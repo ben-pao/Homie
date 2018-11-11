@@ -59,32 +59,43 @@ class JoinHouseScreen extends Component {
 
   joinHouse = (houseID) => {
     // console.log("IN joinHouse!\n\n");
+    const { navigate } = this.props.navigation;
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;
-    var houseref = firebase.database().ref('/Houses').child(houseID).once("value")
+    var houseref = firebase.database().ref("/Houses");
+    // Check if house exists
+    houseref.child(houseID).once("value")
       .then(function(snapshot) {
         console.log(snapshot);
-        if(snapshot.exists()) {
+        if (snapshot.exists()) { // House exists
           console.log("House exists");
+          // Add user info to the house
+          houseref.child(houseID).child("Users")
+          .update({
+            [uid]: userName
+          })
+          .then(() => {
+            console.log("userid and userName added to db");
+            // Add house info to user
+            firebase.database().ref("/Users").child(uid)
+              .update({
+                HouseID: houseID,
+                HouseName: snapshot.child("HouseName").val()
+              })
+              .then(() => {
+                console.log("House info added to user");
+                navigate('App');
+              });
+          });
         }
         else {
           alert("House with ID " + houseID + " doesn't exists");
         }
+      })
+      .catch( (error) => {
+        alert(error.toString());
       });
-
-    // firebase.database().ref('/Houses').child(houseID).child("Users")
-    //   .update(
-    //     {
-    //       [uid]: userName,
-    //     }
-    //   );
-    // firebase.database().ref('/Users').child(uid).update(
-    //     {
-    //       houseid: houseID,
-    //     }
-    // );
-    // this.props.navigation.navigate('App');
   }
 }
 

@@ -105,9 +105,10 @@ export default class LoginScreen extends Component {
             this.setState( {password: ''} );
             var uid = user.user.uid;
             var user = firebase.database().ref("/Users").child(uid);
+            // Check if current user has a house
             user.once("value")
               .then(function(snapshot) {
-                var hasHouse = snapshot.child("HouseId").exists();
+                var hasHouse = snapshot.child("HouseID").exists();
                 // console.log("In Login(): hasHouse = " + hasHouse);
                 if (hasHouse) navigate("App");
                 else navigate("Welcome");
