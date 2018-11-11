@@ -104,12 +104,11 @@ export default class LoginScreen extends Component {
             // console.log(user);
             this.setState( {password: ''} );
             var uid = user.user.uid;
-            user = firebase.database().ref("/Users").child(uid);
+            var user = firebase.database().ref("/Users").child(uid);
             user.once("value")
               .then(function(snapshot) {
-                hasHouse = snapshot.child("HouseId").exists();
-                console.log("In Login(): hasHouse = " + hasHouse);
-
+                var hasHouse = snapshot.child("HouseId").exists();
+                // console.log("In Login(): hasHouse = " + hasHouse);
                 if (hasHouse) navigate("App");
                 else navigate("Welcome");
               }
