@@ -36,9 +36,8 @@ class JoinHouseScreen extends Component {
             <TouchableOpacity
               style={buttonStyle}
               onPress={
-                () =>{
+                () => {
                   this.joinHouse(this.state.houseID);
-                  this.props.navigation.navigate('App');
                 }
               }
             >
@@ -63,26 +62,29 @@ class JoinHouseScreen extends Component {
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;
-  //  var key = firebase.database().ref('/Houses').push().key;
-    var houseref = firebase.database().ref('/Houses').child(houseID);
-    // var usersDic = [];
-    // usersDic = houseref.child("Users");
-    // console.log(usersDic);
-    // usersDic.push({
-    //   key: uid,
-    //   value: userName,
-    // })
-    firebase.database().ref('/Houses').child(houseID).child("Users")
-      .update(
-        {
-          [uid]: userName,
+    var houseref = firebase.database().ref('/Houses').child(houseID).once("value")
+      .then(function(snapshot) {
+        console.log(snapshot);
+        if(snapshot.exists()) {
+          console.log("House exists");
         }
-      );
-    firebase.database().ref('/Users').child(uid).update(
-        {
-          houseid: houseID,
+        else {
+          alert("House with ID " + houseID + " doesn't exists");
         }
-    );
+      });
+
+    // firebase.database().ref('/Houses').child(houseID).child("Users")
+    //   .update(
+    //     {
+    //       [uid]: userName,
+    //     }
+    //   );
+    // firebase.database().ref('/Users').child(uid).update(
+    //     {
+    //       houseid: houseID,
+    //     }
+    // );
+    // this.props.navigation.navigate('App');
   }
 }
 

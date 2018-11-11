@@ -12,8 +12,8 @@ class WelcomeScreen extends Component {
 
   printUser() {
     user = firebase.auth().currentUser;
-    console.log("\n\n\n\n\nIn welcome");
-    console.log(user);
+    // console.log("\n\n\n\n\nIn welcome");
+    // console.log(user);
   }
 
 
