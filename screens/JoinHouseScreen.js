@@ -95,23 +95,7 @@ class JoinHouseScreen extends Component {
     }
   }
 
-  // // Find house id by email of a user in the house
-  // findHouseIDByEmail = new Promise(
-  //   function(email) {
-  //     houseID = "";
-  //     if (houseID) {
-  //       resolve(houseID);
-  //     }
-  //     else {
-  //       reject(houseID);
-  //     }
-  //   }
-  // )
-
   joinByEmail(email) {
-    // alert("Join by email!!!");
-    // email = "1";
-    // Get user with Email = email
     var ref = firebase.database().ref("/Users");
     var uid = "";
     ref.orderByChild("Email").equalTo(email).limitToFirst(1)
