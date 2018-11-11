@@ -74,7 +74,8 @@ class CreateHouseScreen extends Component {
       );
     firebase.database().ref('/Users').child(uid).update(
         {
-          houseid: key,
+          HouseId: key,
+          HouseName: houseName
         }
     );
   }

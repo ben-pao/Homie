@@ -109,23 +109,33 @@ export default class SignupScreen extends Component {
     );
   }
 
-  signmeup = (first, last, email, password, comfirm_password) => {
-    const { navigate } = this.props.navigation;
-    //alert('testing');
+  nameIsNull(first, last) {
     // check if firstname/lastname are filled out
     if (!first || first.length === 0 ) {
       alert("Please enter your first name");
-      return;
+      return true;
     }
     if (!last || last.length === 0 ) {
       alert("Please enter your last name");
-      return;
+      return true;
     }
-    // check if comfirm password = password
-    if (comfirm_password != password) {
+    return false;
+  }
+
+  passwordDontMatch(password, confirm_password) {
+    if (password != confirm_password) {
       alert("Passwords don't match");
-      return;
+      return true;
     }
+    return false;
+  }
+
+  signmeup = (first, last, email, password, confirm_password) => {
+    const { navigate } = this.props.navigation;
+    //alert('testing');
+    if (this.nameIsNull(first, last) ||
+        this.passwordDontMatch(password, confirm_password))
+      return;
 
     try {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(
@@ -148,9 +158,9 @@ export default class SignupScreen extends Component {
           // Store user's information in Users table
           firebase.database().ref('/Users').child(userid).set(
             {
-              first: first,
-              last: last,
-              email: email,
+              FirstName: first,
+              LastName: last,
+              Email: email,
             }
           );
           // navigate('Welcome');

@@ -59,7 +59,7 @@ class JoinHouseScreen extends Component {
   }
 
   joinHouse = (houseID) => {
-    // console.log("IN addHouse!\n\n");
+    // console.log("IN joinHouse!\n\n");
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;
