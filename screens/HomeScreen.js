@@ -27,6 +27,7 @@ class HomeScreen extends Component {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        // <Text> House Name </Text>
         <TouchableOpacity
           style={buttonStyle}
           onPress={() => {
