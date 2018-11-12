@@ -6,7 +6,8 @@ import { Keyboard } from 'react-native';
 class JoinHouseScreen extends Component {
 
   state = {
-    houseID: ''
+    houseID: "",
+    housemateEmail: "",
   }
 
   render() {
@@ -27,18 +28,26 @@ class JoinHouseScreen extends Component {
             <Text style={headerStyle}>Join a House</Text>
             <TextInput
               style={textInputStyle}
-              placeholder='Enter the ID for Your House'
+              placeholder='Enter the ID of your house'
               onChangeText={
                 (houseID) => this.setState({houseID})
+              }
+              underlineColorAndroid='transparent'
+            />
+            <TextInput
+              style={textInputStyle}
+              placeholder="Enter your housemate's email"
+              onChangeText={
+                (housemateEmail) => this.setState({housemateEmail})
               }
               underlineColorAndroid='transparent'
             />
             <TouchableOpacity
               style={buttonStyle}
               onPress={
-                () =>{
-                  this.joinHouse(this.state.houseID);
-                  this.props.navigation.navigate('App');
+                () => {
+                  // this.joinHouse(this.state.houseID);
+                  this.submitJoinInput(this.state);
                 }
               }
             >
@@ -58,31 +67,99 @@ class JoinHouseScreen extends Component {
     );
   }
 
-  joinHouse = (houseID) => {
-    // console.log("IN addHouse!\n\n");
+  submitJoinInput(state) {
+    if (this.badInput(state)) {
+      return;
+    }
+    if (state.houseID.length > 0) {
+      this.joinHouse(state.houseID);
+    } else {
+      this.joinByEmail(state.housemateEmail);
+    }
+  }
+
+  // check inputs aren't both null or both filled
+  badInput(state) {
+    var houseID = state.houseID;
+    var email = state.housemateEmail;
+
+    if ( (!houseID || houseID.length === 0) &&
+         (!email || email.length === 0) ) {
+      alert("Please enter either a house ID or an email");
+      return true;
+    } else if (houseID.length > 0 && email.length > 0) {
+      alert("Please only fill out one field");
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  joinByEmail(email) {
+    var ref = firebase.database().ref("/Users");
+    var uid = "";
+    ref.orderByChild("Email").equalTo(email).limitToFirst(1)
+      .once("value", snapshot => {
+        // console.log(snapshot);
+        // console.log(snapshot.key);
+
+        if (snapshot.numChildren() === 0) {
+          alert("User not found");
+          return;
+        } else {
+          snapshot.forEach( user => {
+            // console.log(user.key);
+            if (user.child("HouseID").val()) {
+              this.joinHouse(user.child("HouseID").val());
+            } else {
+              alert("User with email " + email + " does not have a house with us");
+            }
+          });
+        }
+      });
+
+    return;
+  }
+
+  joinHouse(houseID) {
+    // console.log("IN joinHouse!\n\n");
+    const { navigate } = this.props.navigation;
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;
-  //  var key = firebase.database().ref('/Houses').push().key;
-    var houseref = firebase.database().ref('/Houses').child(houseID);
-    // var usersDic = [];
-    // usersDic = houseref.child("Users");
-    // console.log(usersDic);
-    // usersDic.push({
-    //   key: uid,
-    //   value: userName,
-    // })
-    firebase.database().ref('/Houses').child(houseID).child("Users")
-      .update(
-        {
-          [uid]: userName,
+    var houseref = firebase.database().ref("/Houses");
+    // Check if house exists
+    houseref.child(houseID).once("value")
+      .then(function(snapshot) {
+        console.log(snapshot);
+        if (snapshot.exists()) { // House exists
+          console.log("House exists");
+          // Add user info to the house
+          houseref.child(houseID).child("Users")
+          .update({
+            [uid]: userName
+          })
+          .then(() => {
+            console.log("userid and userName added to db");
+            // Add house info to user
+            firebase.database().ref("/Users").child(uid)
+              .update({
+                HouseID: houseID,
+                HouseName: snapshot.child("HouseName").val()
+              })
+              .then(() => {
+                console.log("House info added to user");
+                navigate('App');
+              });
+          });
         }
-      );
-    firebase.database().ref('/Users').child(uid).update(
-        {
-          houseid: houseID,
+        else {
+          alert("House with ID " + houseID + " doesn't exists");
         }
-    );
+      })
+      .catch( (error) => {
+        alert(error.toString());
+      });
   }
 }
 

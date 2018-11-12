@@ -18,7 +18,7 @@ class CreateHouseScreen extends Component {
             buttonTextStyle
     } = styles;
 
-    const { navigate, goBack } = this.props.navigation;
+    // const { navigate, goBack } = this.props.navigation;
 
     return (
       <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
@@ -48,7 +48,9 @@ class CreateHouseScreen extends Component {
             <TouchableOpacity
               style={buttonStyle}
               onPress={
-                () => goBack()
+                () => {
+                  this.props.navigation.goBack();
+                }
               }
             >
               <Text style={buttonTextStyle}> Cancel </Text>
@@ -72,7 +74,8 @@ class CreateHouseScreen extends Component {
       );
     firebase.database().ref('/Users').child(uid).update(
         {
-          houseid: key,
+          HouseID: key,
+          HouseName: houseName
         }
     );
   }

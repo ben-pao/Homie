@@ -2,32 +2,39 @@ import React, { Component } from 'react';
 import { StyleSheet, Image, Text, View, Button, TouchableOpacity } from 'react-native';
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
-
-class LogoTitle extends React.Component {
-  render() {
-    return (
-      <Image
-        source={require('./homieIcon.png')}
-        style={{ width: 30, height: 30 }}
-      />
-    );
-  }
-}
+import { createStackNavigator, StackActions, NavigationActions, createBottomTabNavigator } from 'react-navigation';
+import GroceryScreen from './GroceryScreen';
+import SettingsScreen from './SettingsScreen';
 
 class HomeScreen extends Component {
-  static navigationOptions = {
-    headerTitle: <LogoTitle />,
-  };
+  // static navigationOptions = {
+  //   headerTitle: 'Heyy',
+  // };
+
+// class LogoTitle extends React.Component {
+//   render() {
+//     return (
+//       <Image
+//         source={require('./homieIcon.png')}
+//         style={{ width: 30, height: 30 }}
+//       />
+//     );
+//   }
+// }
+
+// class HomeScreen extends Component {
+//   static navigationOptions = {
+//     headerTitle: <LogoTitle />,
+//   };
+
   render() {
     const { containerStyle,
             headerStyle,
             buttonStyle,
             buttonTextStyle
     } = styles;
-
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        // <Text> House Name </Text>
+      <View style={containerStyle}>
         <TouchableOpacity
           style={buttonStyle}
           onPress={() => {
@@ -72,7 +79,6 @@ class HomeScreen extends Component {
         }>
           <Text style={buttonTextStyle}> Sign out </Text>
         </TouchableOpacity>
-
       </View>
     );
   }
@@ -82,7 +88,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     // backgroundColor: '#2896d3',
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
@@ -97,16 +103,16 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     alignSelf: 'stretch',
-    // backgroundColor: '#01c853',
-    backgroundColor: '#000',
+    backgroundColor: 'hotpink',
     // color: '#fff',
     padding: 20,
     alignItems: 'center',
     margin: 8
   },
   buttonTextStyle: {
-    color: '#fff',
-    fontWeight: 'bold'
+    color: '#000',
+    fontWeight: 'bold',
+    fontFamily: 'Cochin',
   }
 });
 

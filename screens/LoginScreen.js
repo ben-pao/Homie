@@ -23,7 +23,7 @@ export default class LoginScreen extends Component {
 
   _loadInitialState = async () => {
     var value = await AsyncStorage.getItem('user');
-    console.log(value);
+    console.log('User: ' + value);
     if(value !== null){
       //youre logged in so
       // if User has a House
@@ -101,9 +101,19 @@ export default class LoginScreen extends Component {
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(
           (user) => {
-            console.log(user);
+            // console.log(user);
             this.setState( {password: ''} );
-            navigate('Welcome');
+            var uid = user.user.uid;
+            var user = firebase.database().ref("/Users").child(uid);
+            // Check if current user has a house
+            user.once("value")
+              .then(function(snapshot) {
+                var hasHouse = snapshot.child("HouseID").exists();
+                // console.log("In Login(): hasHouse = " + hasHouse);
+                if (hasHouse) navigate("App");
+                else navigate("Welcome");
+              }
+            );
           }
         ).catch(
           (error) => {

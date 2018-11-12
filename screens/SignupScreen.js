@@ -41,7 +41,7 @@ export default class SignupScreen extends Component {
             confirm_password
     } = this.state;
 
-    const { navigate, goBack } = this.props.navigation;
+    // const { navigate, goBack } = this.props.navigation;
 
     return (
       <KeyboardAvoidingView behavior='padding' style={wrapper} enabled>
@@ -96,7 +96,10 @@ export default class SignupScreen extends Component {
             <TouchableOpacity
               style={btn}
               onPress={
-                () => goBack()
+                () => {
+                  // goBack();
+                  this.props.navigation.goBack();
+                }
             }>
               <Text style={btnText}> Cancel </Text>
             </TouchableOpacity>
@@ -106,23 +109,33 @@ export default class SignupScreen extends Component {
     );
   }
 
-  signmeup = (first, last, email, password, comfirm_password) => {
-    const { navigate } = this.props.navigation;
-    //alert('testing');
+  nameIsNull(first, last) {
     // check if firstname/lastname are filled out
     if (!first || first.length === 0 ) {
       alert("Please enter your first name");
-      return;
+      return true;
     }
     if (!last || last.length === 0 ) {
       alert("Please enter your last name");
-      return;
+      return true;
     }
-    // check if comfirm password = password
-    if (comfirm_password != password) {
+    return false;
+  }
+
+  passwordDontMatch(password, confirm_password) {
+    if (password != confirm_password) {
       alert("Passwords don't match");
-      return;
+      return true;
     }
+    return false;
+  }
+
+  signmeup = (first, last, email, password, confirm_password) => {
+    const { navigate } = this.props.navigation;
+    //alert('testing');
+    if (this.nameIsNull(first, last) ||
+        this.passwordDontMatch(password, confirm_password))
+      return;
 
     try {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(
@@ -130,7 +143,10 @@ export default class SignupScreen extends Component {
           var username = first + ' ' + last;
           user.user.updateProfile( {displayName: username} )
           .then(
-            ()      => { navigate('Welcome'); }
+            ()      => {
+              // navigate('Welcome');
+              this.props.navigation.navigate('Welcome');
+            }
           ).catch(
             (error) => { alert(error.toString()); }
           );
@@ -142,12 +158,13 @@ export default class SignupScreen extends Component {
           // Store user's information in Users table
           firebase.database().ref('/Users').child(userid).set(
             {
-              first: first,
-              last: last,
-              email: email,
+              FirstName: first,
+              LastName: last,
+              Email: email,
             }
           );
-          navigate('Welcome');
+          // navigate('Welcome');
+          this.props.navigation.navigate('Welcome');
         }
       ).catch(
         (error) => {
