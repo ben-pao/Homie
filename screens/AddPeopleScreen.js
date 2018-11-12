@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, createDrawerNavigator } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, createDrawerNavigator } from 'react-native';
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
@@ -24,32 +24,7 @@ class AddPeopleScreen extends Component {
 
   }
 
-   GetHouseID (){
-   var user = firebase.auth().currentUser;
-   if(user == null){
-     return;
-   }
-   var userName = user.providerData[0].displayName;
-   var uid = user.uid;
-   //var key = firebase.database().ref('/Users').push().key;
-   var userDBref = firebase.database().ref('/Users').child(uid)
-   var userData = "";
 
-   userDBref.once('value').then(function(snapshot){
-     userData = (snapshot.val() && snapshot.val().username);
-     console.log(userData);
-   });
-
-
-
-   // firebase.database().ref('/Users').child(uid).update(
-   //     {
-   //       houseid: ,
-   //     }
-   // );
-
-
-  }
 
   render() {
     const { containerStyle,
@@ -61,11 +36,55 @@ class AddPeopleScreen extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text> You can add people to your house here! </Text>
-        {this.GetHouseID()}
+        <TouchableOpacity
+          style={buttonStyle}
+          onPress={
+            () => {
+              // this.joinHouse(this.state.houseID);
+              this.GetHouseID();
+            }
+          }
+        >
+          <Text style={buttonTextStyle}>get houseid</Text>
+        </TouchableOpacity>
       </View>
     );
   }
+
+  GetHouseID (){
+  var user = firebase.auth().currentUser;
+  if(user == null){
+    return;
+  }
+  var userName = user.providerData[0].displayName;
+  var uid = user.uid;
+  //alert(uid);
+  //var key = firebase.database().ref('/Users').push().key;
+  var userDBref = firebase.database().ref('/Users').child(uid)
+  var userData = "";
+  userDBref.on('value', function(snapshot){
+    userData = snapshot.val();
+    console.log(userData.HouseID);
+    var userHouseref = firebase.database().ref('/Houses').child(userData.HouseID)
+    var housedata = "";
+    userHouseref.on('value', function(snapshot){
+      housedata = snapshot.val();
+      console.log(housedata);
+      alert(housedata.HouseName);
+        }, function (error) {
+          console.log("Error: " + error.code);
+    });
+  //  alert(housedata.HouseName);
+  } , function (error) {
+   console.log("Error: " + error.code);
+  });
+  console.log(userData);  //userdata is only local insidee that userDBref
+
 }
+
+
+}
+
 
 const styles = StyleSheet.create({
   containerStyle: {

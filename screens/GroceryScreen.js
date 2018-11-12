@@ -55,7 +55,8 @@ export default class GroceryScreen extends React.Component {
 
     this.state = {
       listViewData: data,
-      newContact: ""
+      newContact: "",
+      houseID: "",
     }
   }
 
@@ -63,9 +64,11 @@ export default class GroceryScreen extends React.Component {
   componentDidMount(){
 
     var that = this
-
-    firebase.database().ref('/Grocery').on('child_added', function(data){
-
+    that.getHouseID();
+  //  var houseid = this.getHouseID();
+  //  var groceryhouseRef = firebase.database().ref('/Grocery').child(houseid);
+   var groceryhouseRef = firebase.database().ref('/Grocery')
+    groceryhouseRef.on('child_added', function(data){
       var newData = [... that.state.listViewData]
       newData.push(data)
       that.setState({listViewData : newData})
@@ -74,14 +77,41 @@ export default class GroceryScreen extends React.Component {
   }
 
   addRow(data){
-    var key = firebase.database().ref('/Grocery').push().key
+    var houseid = this.getHouseID();
+    console.log(houseid);
+    //var key = firebase.database().ref('/Grocery').push().key
+
+    var groceryhouseRef = firebase.database().ref('/Grocery').child(houseid);
+    var key = groceryhouseRef.push().key
     console.log(key)
-    firebase.database().ref('/Grocery').child(key).set({item:data})
+    groceryhouseRef.child(key).set({item:data})
+  }
+
+  getHouseID(){
+    var that = this
+    var user = firebase.auth().currentUser;
+    if(user == null){
+      return;
+    }
+    var uid = user.uid;
+    //alert(uid);
+    //var key = firebase.database().ref('/Users').push().key;
+    var userData = "";
+    var userDBref = firebase.database().ref('/Users').child(uid)
+    userDBref.on('value', function(snapshot){
+      userData = snapshot.val();
+      console.log(userData.HouseID);
+      that.setState({houseID : userData.HouseID})
+
+    } , function (error) {
+     console.log("Error: " + error.code);
+    });
   }
 
   deleteRow(){
+      var user = firebase.auth().currentUser;
 
-
+      alert(this.state.houseID);
   }
 
   showInformation() {
@@ -118,7 +148,7 @@ export default class GroceryScreen extends React.Component {
                 }
 
             renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-              <Button full danger  onPress={ () => this.deleteRow(secId,rowId,rowMap,data)}>
+              <Button full danger  onPress={ () => this.deleteRow()}>
                 <Icon name='trash'/>
               </Button>
                 }
