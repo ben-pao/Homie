@@ -48,11 +48,8 @@ const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
     Groceries: GroceryScreen,
-<<<<<<< HEAD
-=======
     'Chore Wheel': ChoresScreen,
     Bills: BillsScreen,
->>>>>>> MoBamba
     Settings: SettingsStack,
   },
   {
