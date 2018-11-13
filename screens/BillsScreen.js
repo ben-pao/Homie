@@ -27,7 +27,7 @@ class SettingsScreen extends React.Component{
 var data = []
 
 
-export default class GroceryScreen extends React.Component {
+export default class BillsScreen extends React.Component {
 
   constructor(props){
     super(props);
@@ -45,7 +45,7 @@ export default class GroceryScreen extends React.Component {
 
     var that = this
 
-    firebase.database().ref('/Grocery').on('child_added', function(data){
+    firebase.database().ref('/Bills').on('child_added', function(data){
 
       var newData = [... that.state.listViewData]
       newData.push(data)
