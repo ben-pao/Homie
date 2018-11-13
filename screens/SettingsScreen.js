@@ -63,6 +63,8 @@ class SettingsScreen extends Component {
         </TouchableOpacity>
       </View>
     );
+
+
   }
 }
 

@@ -59,7 +59,6 @@ export default class GroceryScreen extends React.Component {
     }
   }
 
-
   componentDidMount(){
 
     var that = this
@@ -129,8 +128,6 @@ export default class GroceryScreen extends React.Component {
               </Button>
                 }
 
-            
-
               leftOpenValue={-75}
               rightOpenValue={-75}
           />
@@ -149,8 +146,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fad',
+    backgroundColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   input:{
     backgroundColor: '#000',
-  }
-})
+  },
+
+});
