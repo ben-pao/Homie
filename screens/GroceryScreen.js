@@ -1,47 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, ListView } from 'react-native';
-
 import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
 
 import * as firebase from 'firebase';
 
-
 import { createStackNavigator } from 'react-navigation';
-
-//create bottom tab's
-// class GroceryScreen extends React.Component{
-//   render(){
-//     return(
-//       <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
-//         <Text>Grocery!</Text>
-//         <Button
-//           title="Go to Grocery"
-//           onPress={()=> this.props.navigation.navigate('Grocery')}
-//         />
-//       </View>
-//       );
-//   }
-// }
-
-// class SettingsScreen extends React.Component{
-//   render(){
-//     return(
-//       <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
-
-//         <Button
-//           title=" Log out (Go to Login Screen)"
-//           onPress={()=> this.props.navigation.navigate('Login')}
-//         />
-
-//         <Button
-//           title=" Create a new house"
-//           onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
-//         />
-
-//       </View>
-//       );
-//   }
-// }
 
 var data = []
 
@@ -51,18 +14,19 @@ export default class GroceryScreen extends React.Component {
   constructor(props){
     super(props);
 
+    // frontend display of list from react native
     this.ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 != r2})
 
     this.state = {
       listViewData: data,
-      newContact: ""
+      newContact: "" // the grocery item being added
     }
   }
 
 
   componentDidMount(){
 
-    var that = this
+    var that = this;
 
     firebase.database().ref('/Grocery').on('child_added', function(data){
 
@@ -106,7 +70,7 @@ export default class GroceryScreen extends React.Component {
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
 
             // render={data=>
-            //   <Button> 
+            //   <Button>
             //     <Text> Add </Text>
             //   </Button>
             // }
@@ -129,7 +93,7 @@ export default class GroceryScreen extends React.Component {
               </Button>
                 }
 
-            
+
 
               leftOpenValue={-75}
               rightOpenValue={-75}
