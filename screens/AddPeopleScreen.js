@@ -35,6 +35,7 @@ class AddPeopleScreen extends Component {
               onPress={
                 () => {
                   this.addUserByEmail(this.state.email);
+                  // this.getHouseIDToAdd(this.state.email);
                 }
               }
             >
@@ -54,43 +55,105 @@ class AddPeopleScreen extends Component {
     );
   }
 
+  emailNotNull(email) {
+    if (email && email.length > 0) return true;
+    else return false;
+  }
+
   addUserByEmail(email) {
+    if (this.emailNotNull(email))
+      this.getHouseIDToAdd(email);
+    else
+      alert("Please enter your housemate's email");
+  }
+
+  getHouseIDToAdd(email) {
     var ref = firebase.database().ref("/Users");
-    var houseref = firebase.database().ref("/Houses");
     var uid = firebase.auth().currentUser.uid;
     // var thisUser = ref.child(uid);
-    ref.child(uid).child("HouseID").once("value")
+
+    ref.child(uid).child("HouseID").once("value") // Get house id
       .then( snapshot => {
-        console.log(snapshot);
+        console.log(snapshot.val());
+        if (!snapshot.exists()) {
+          alert("You do not have a house yet!");
+          return;
+        }
+        this.getUIDToAdd(email, snapshot.val());
       })
       .catch( error => {
         alert(error);
       });
-
-    // console.log("In Add() thisUser: " + thisUser);
-
-    // ref.orderByChild("Email").equalTo(email).limitToFirst(1)
-    //   .once("value", snapshot => {
-    //     // console.log(snapshot);
-    //     // console.log(snapshot.key);
-    //
-    //     if (snapshot.numChildren() === 0) {
-    //       alert("User not found");
-    //       return;
-    //     } else {
-    //       snapshot.forEach( user => {
-    //         // console.log(user.key);
-    //         if (user.child("HouseID").val()) {
-    //           this.joinHouse(user.child("HouseID").val());
-    //         } else {
-    //           alert("User with email " + email + " does not have a house with us");
-    //         }
-    //       });
-    //     }
-    //   });
-
-    return;
   }
+
+  getUIDToAdd(email, houseID) {
+    var ref = firebase.database().ref("/Users");
+
+    ref.orderByChild("Email").equalTo(email).limitToFirst(1)
+      .once("value", snapshot => {
+        // console.log(snapshot);
+        // console.log(snapshot.key);
+
+        if (snapshot.numChildren() === 0) {
+          alert("User not found");
+          return;
+        } else {
+          snapshot.forEach( user => {
+            // console.log(user.key);
+            if (user.child("HouseID").val()) {
+              alert("User with email " + email + " already has a house with us!");
+            } else {
+              var userName = user.child("FirstName").val() + " " + user.child("LastName").val();
+              console.log(userName);
+              this.joinHouseWithUIDHouseID(user.key, userName, houseID);
+            }
+          });
+        }
+      }, error => {
+        alert(error);
+      });
+  }
+
+  joinHouseWithUIDHouseID(uid, userName, houseID) {
+    // console.log("IN joinHouse!\n\n");
+    const { navigate } = this.props.navigation;
+
+    var houseref = firebase.database().ref("/Houses");
+    // Check if house exists
+    houseref.child(houseID).once("value")
+      .then( snapshot => {
+        // console.log(snapshot);
+        if (snapshot.exists()) { // House exists
+          console.log("House exists");
+          // Add user info to the house
+          houseref.child(houseID).child("Users")
+          .update({
+            [uid]: userName
+          })
+          .then(() => {
+            console.log("userid and userName added to db");
+            // Add house info to user
+            firebase.database().ref("/Users").child(uid)
+              .update({
+                HouseID: houseID,
+                HouseName: snapshot.child("HouseName").val()
+              })
+              .then(() => {
+                console.log("House info added to user");
+                // navigate('App');
+                this.props.navigation.goBack();
+              });
+          });
+        }
+        else {
+          alert("House with ID " + houseID + " doesn't exists");
+        }
+      })
+      .catch( (error) => {
+        alert(error.toString());
+      });
+  }
+
 
   GetHouseID (){
     var user = firebase.auth().currentUser;
