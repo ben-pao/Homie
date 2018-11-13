@@ -75,7 +75,7 @@ const AppStack = createStackNavigator(
       title: 'Homie',
       headerStyle: {
         // backgroundColor: '#FF69B4',
-        backgroundColor: '#000',
+        backgroundColor: 'hotpink',
         borderBottomWidth: 0,
       },
       headerTintColor: '#fff',
