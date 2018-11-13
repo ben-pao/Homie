@@ -38,8 +38,8 @@ const SettingsStack = createStackNavigator(
     About: AboutScreen
   },
   {
-    navigationOptions: {
-      header: null,
+      navigationOptions: {
+        header: null,
     }
   }
 );
@@ -70,12 +70,12 @@ const TabNavigator = createBottomTabNavigator(
 
 const AppStack = createStackNavigator(
   {
-    TabNavigator
+    TabNav: TabNavigator,
+    Settings: SettingsStack,
   },
   {
-    initialRouteName: 'TabNavigator',
+    // initialRouteName: 'TabNavigator',
     navigationOptions: {
-      title: 'Homie',
       headerStyle: {
         // backgroundColor: '#FF69B4',
         backgroundColor: '#000',
@@ -98,7 +98,7 @@ TabNavigator.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index];
 
   // You can do whatever you like here to pick the title based on the route name
-  const headerTitle = 'Homie';
+  const headerTitle = 'HOMIE';
 
   return {
     headerTitle,
