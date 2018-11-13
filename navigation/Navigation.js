@@ -11,6 +11,7 @@ import AddPeopleScreen from '../screens/AddPeopleScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AboutScreen from '../screens/AboutScreen';
+import BillsScreen from '../screens/BillsScreen';
 
 const LoginStack = createStackNavigator(
   {
@@ -47,6 +48,8 @@ const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
     Groceries: GroceryScreen,
+    'Chore Wheel': ChoresScreen,
+    Bills: BillsScreen,
     Settings: SettingsStack,
   },
   {
@@ -108,8 +111,8 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    initialRouteName: 'Login',
-    // initialRouteName: 'App', // Skip Login page (for testing)
+    // initialRouteName: 'Login',
+    initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null,
       gesturesEnabled: false,
