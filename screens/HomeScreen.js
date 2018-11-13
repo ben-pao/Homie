@@ -35,6 +35,7 @@ class HomeScreen extends Component {
     } = styles;
     return (
       <View style={containerStyle}>
+<<<<<<< HEAD
 
         <TouchableOpacity
           style={buttonStyle}
@@ -44,6 +45,11 @@ class HomeScreen extends Component {
           <Text style={buttonTextStyle}> Chore Wheel </Text>
         </TouchableOpacity>
 
+=======
+        <TouchableOpacity style={buttonStyle}>
+          <Text style={buttonTextStyle}> A dashboard for notifications and housemate updates if we have time! </Text>
+        </TouchableOpacity>
+>>>>>>> MoBamba
       </View>
     );
   }

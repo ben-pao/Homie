@@ -11,6 +11,7 @@ import AddPeopleScreen from '../screens/AddPeopleScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AboutScreen from '../screens/AboutScreen';
+import BillsScreen from '../screens/BillsScreen';
 
 const LoginStack = createStackNavigator(
   {
@@ -47,6 +48,11 @@ const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
     Groceries: GroceryScreen,
+<<<<<<< HEAD
+=======
+    'Chore Wheel': ChoresScreen,
+    Bills: BillsScreen,
+>>>>>>> MoBamba
     Settings: SettingsStack,
   },
   {
@@ -95,7 +101,7 @@ TabNavigator.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index];
 
   // You can do whatever you like here to pick the title based on the route name
-  const headerTitle = routeName;
+  const headerTitle = 'Homie';
 
   return {
     headerTitle,
@@ -108,8 +114,13 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
+<<<<<<< HEAD
     initialRouteName: 'App',
     // initialRouteName: 'App', // Skip Login page (for testing)
+=======
+    // initialRouteName: 'Login',
+    initialRouteName: 'App', // Skip Login page (for testing)
+>>>>>>> MoBamba
     navigationOptions: {
       header: null,
       gesturesEnabled: false,
