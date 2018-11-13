@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, ListView, TextInput, TouchableOpacity } from 'react-native';
 
 import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
 
@@ -8,40 +8,6 @@ import * as firebase from 'firebase';
 
 import { createStackNavigator } from 'react-navigation';
 
-//create bottom tab's
-// class GroceryScreen extends React.Component{
-//   render(){
-//     return(
-//       <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
-//         <Text>Grocery!</Text>
-//         <Button
-//           title="Go to Grocery"
-//           onPress={()=> this.props.navigation.navigate('Grocery')}
-//         />
-//       </View>
-//       );
-//   }
-// }
-
-class SettingsScreen extends React.Component{
-  render(){
-    return(
-      <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
-
-        <Button
-          title=" Log out (Go to Login Screen)"
-          onPress={()=> this.props.navigation.navigate('Login')}
-        />
-
-        <Button
-          title=" Create a new house"
-          onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
-        />
-
-      </View>
-      );
-  }
-}
 
 var data = []
 
@@ -55,8 +21,10 @@ export default class GroceryScreen extends React.Component {
 
     this.state = {
       listViewData: data,
-      newContact: "",
+      groceryItem: "",
       houseID: "",
+      userID: "",
+      userName: "",
     }
   }
 
@@ -64,27 +32,51 @@ export default class GroceryScreen extends React.Component {
   componentDidMount(){
 
     var that = this
-    that.getHouseID();
+    var houseID = that.getHouseID();
+    console.log(houseID);
   //  var houseid = this.getHouseID();
-  //  var groceryhouseRef = firebase.database().ref('/Grocery').child(houseid);
-   var groceryhouseRef = firebase.database().ref('/Grocery')
-    groceryhouseRef.on('child_added', function(data){
-      var newData = [... that.state.listViewData]
-      newData.push(data)
-      that.setState({listViewData : newData})
-    })
+//  console.log(that.state.houseID)
+    that.getPreviousItems();
+//     var groceryhouseRef = firebase.database().ref('/Grocery')
+// //   var groceryhouseRef = firebase.database().ref('/Grocery').child(that.state.houseID)
+//     groceryhouseRef.on('child_added', function(data){
+//       var newData = [... that.state.listViewData]
+//       newData.push(data)
+//       that.setState({listViewData : newData})
+//     })
 
   }
 
-  addRow(data){
-    var houseid = this.getHouseID();
-    console.log(houseid);
-    //var key = firebase.database().ref('/Grocery').push().key
+  getPreviousItems(){
+      var that = this
+    var groceryhouseRef = firebase.database().ref('/Grocery').child(that.state.houseID)
+       groceryhouseRef.on('child_added', function(data){
+         var newData = [... that.state.listViewData]
+         newData.push(data)
+         that.setState({listViewData : newData})
+       });
+  }
 
-    var groceryhouseRef = firebase.database().ref('/Grocery').child(houseid);
+  addRow(data){
+  //  var houseid = this.getHouseID();
+  //  console.log(houseid);
+    //var key = firebase.database().ref('/Grocery').push().key
+    var that = this
+    var user = firebase.auth().currentUser;
+    if(user == null){
+      return;
+    }
+    var uid = user.uid;
+
+    var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
     var key = groceryhouseRef.push().key
     console.log(key)
-    groceryhouseRef.child(key).set({item:data})
+    groceryhouseRef.child(key).set({
+      Item: data,
+      UID: uid,
+      UserName: that.state.houseID
+
+    })
   }
 
   getHouseID(){
@@ -101,8 +93,13 @@ export default class GroceryScreen extends React.Component {
     userDBref.on('value', function(snapshot){
       userData = snapshot.val();
       console.log(userData.HouseID);
-      that.setState({houseID : userData.HouseID})
-
+      that.setState({
+        houseID: userData.HouseID,
+        userID: uid,
+        userName: userData.FirstName
+      });
+      console.log(that.state.houseID);
+      return userData.HouseID;
     } , function (error) {
      console.log("Error: " + error.code);
     });
@@ -119,6 +116,13 @@ export default class GroceryScreen extends React.Component {
   }
 
   render() {
+    const { container,
+            wrapper,
+            header,
+            textInput,
+            btn,
+            btnText
+    } = styles;
     return(
       <Container style={styles.container}>
 
@@ -131,6 +135,21 @@ export default class GroceryScreen extends React.Component {
 }
 
         <Content>
+        <TextInput
+          style={textInput}
+          placeholder='Email'
+          onChangeText={
+            (groceryItem) => this.setState({groceryItem})
+          }
+          underlineColorAndroid='transparent'
+        />
+        <TouchableOpacity
+          style={btn}
+          onPress={
+            () => this.addRow(this.state.groceryItem)
+        }>
+          <Text style={btnText}> ADD ITEM </Text>
+        </TouchableOpacity>
           <List
           enableEmptySections
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
@@ -168,11 +187,45 @@ export default class GroceryScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fad',
-  },
-  input:{
-    backgroundColor: '#000',
-  }
+    input:{
+      backgroundColor: '#000',
+    },
+    container: {
+      flex: 1,
+      // backgroundColor: '#2896d3',
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingLeft: 40,
+      paddingRight: 40,
+    },
+    wrapper: {
+      flex: 1,
+    },
+    header: {
+      fontSize:24,
+      marginBottom:60,
+      color: '#000',
+      // color: '#fff',
+      fontWeight: 'bold',
+    },
+    textInput: {
+      alignSelf: 'stretch',
+      padding: 15,
+      marginBottom: 20,
+      backgroundColor: '#fff'
+    },
+    btn: {
+      alignSelf: 'stretch',
+      // backgroundColor: '#01c853',
+      backgroundColor: '#000',
+      // color: '#fff',
+      padding: 20,
+      alignItems: 'center',
+      margin: 8
+    },
+    btnText: {
+      color: '#fff',
+      fontWeight: 'bold'
+    }
 })
