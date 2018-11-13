@@ -46,7 +46,7 @@ const SettingsStack = createStackNavigator(
 const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Grocerys: GroceryScreen,
+    Groceries: GroceryScreen,
     Settings: SettingsStack,
   },
   {
