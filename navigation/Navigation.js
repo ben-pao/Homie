@@ -114,13 +114,8 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-<<<<<<< HEAD
-    initialRouteName: 'App',
-    // initialRouteName: 'App', // Skip Login page (for testing)
-=======
     // initialRouteName: 'Login',
     initialRouteName: 'App', // Skip Login page (for testing)
->>>>>>> MoBamba
     navigationOptions: {
       header: null,
       gesturesEnabled: false,
