@@ -23,25 +23,25 @@ import { createStackNavigator } from 'react-navigation';
 //   }
 // }
 
-class SettingsScreen extends React.Component{
-  render(){
-    return(
-      <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
+// class SettingsScreen extends React.Component{
+//   render(){
+//     return(
+//       <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
 
-        <Button
-          title=" Log out (Go to Login Screen)"
-          onPress={()=> this.props.navigation.navigate('Login')}
-        />
+//         <Button
+//           title=" Log out (Go to Login Screen)"
+//           onPress={()=> this.props.navigation.navigate('Login')}
+//         />
 
-        <Button
-          title=" Create a new house"
-          onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
-        />
+//         <Button
+//           title=" Create a new house"
+//           onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
+//         />
 
-      </View>
-      );
-  }
-}
+//       </View>
+//       );
+//   }
+// }
 
 var data = []
 
@@ -105,6 +105,12 @@ export default class GroceryScreen extends React.Component {
           enableEmptySections
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
 
+            // render={data=>
+            //   <Button> 
+            //     <Text> Add </Text>
+            //   </Button>
+            // }
+
             renderRow={ data =>
               <ListItem>
                 <Text>{data.val().item}</Text>
@@ -122,6 +128,8 @@ export default class GroceryScreen extends React.Component {
                 <Icon name='trash'/>
               </Button>
                 }
+
+            
 
               leftOpenValue={-75}
               rightOpenValue={-75}

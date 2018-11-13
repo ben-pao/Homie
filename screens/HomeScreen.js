@@ -35,15 +35,6 @@ class HomeScreen extends Component {
     } = styles;
     return (
       <View style={containerStyle}>
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={() => {
-            this.props.navigation.navigate('Grocery', {
-              otherParam: 'Groceries',
-            });
-          }}>
-          <Text style={buttonTextStyle}> Groceries </Text>
-        </TouchableOpacity>
 
         <TouchableOpacity
           style={buttonStyle}
@@ -53,32 +44,6 @@ class HomeScreen extends Component {
           <Text style={buttonTextStyle}> Chore Wheel </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={
-            () => this.props.navigation.navigate('Settings')
-        }>
-          <Text style={buttonTextStyle}> Settings </Text>
-        </TouchableOpacity>
-
-
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={
-            () => {
-              firebase.auth().signOut()
-                .then(
-                  () => {
-                    // alert("Byeeeee!");
-                    this.props.navigation.navigate('Login');
-                  }
-                ).catch(
-                  (error) => alert(error.toString())
-                );
-            }
-        }>
-          <Text style={buttonTextStyle}> Sign out </Text>
-        </TouchableOpacity>
       </View>
     );
   }
