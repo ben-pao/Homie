@@ -11,6 +11,7 @@ import AddPeopleScreen from '../screens/AddPeopleScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AboutScreen from '../screens/AboutScreen';
+import BillsScreen from '../screens/BillsScreen';
 
 const LoginStack = createStackNavigator(
   {
@@ -37,8 +38,8 @@ const SettingsStack = createStackNavigator(
     About: AboutScreen
   },
   {
-    navigationOptions: {
-      header: null,
+      navigationOptions: {
+        header: null,
     }
   }
 );
@@ -46,7 +47,9 @@ const SettingsStack = createStackNavigator(
 const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Grocerys: GroceryScreen,
+    Groceries: GroceryScreen,
+    'Chore Wheel': ChoresScreen,
+    Bills: BillsScreen,
     Settings: SettingsStack,
   },
   {
@@ -67,12 +70,12 @@ const TabNavigator = createBottomTabNavigator(
 
 const AppStack = createStackNavigator(
   {
-    TabNavigator
+    TabNav: TabNavigator,
+    Settings: SettingsStack,
   },
   {
-    initialRouteName: 'TabNavigator',
+    // initialRouteName: 'TabNavigator',
     navigationOptions: {
-      title: 'Homie',
       headerStyle: {
         // backgroundColor: '#FF69B4',
         backgroundColor: '#000',
@@ -95,7 +98,7 @@ TabNavigator.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index];
 
   // You can do whatever you like here to pick the title based on the route name
-  const headerTitle = routeName;
+  const headerTitle = 'HOMIE';
 
   return {
     headerTitle,
@@ -108,8 +111,8 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    initialRouteName: 'Login',
-    // initialRouteName: 'App', // Skip Login page (for testing)
+    // initialRouteName: 'Login',
+    initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null,
       gesturesEnabled: false,

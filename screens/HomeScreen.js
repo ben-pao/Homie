@@ -7,21 +7,17 @@ import GroceryScreen from './GroceryScreen';
 import SettingsScreen from './SettingsScreen';
 
 class HomeScreen extends Component {
-  // static navigationOptions = {
-  //   headerTitle: 'Heyy',
-  // };
-
 // class LogoTitle extends React.Component {
 //   render() {
 //     return (
 //       <Image
-//         source={require('./homieIcon.png')}
+//         source={require('../assets/homieIcon.png')}
 //         style={{ width: 30, height: 30 }}
 //       />
 //     );
 //   }
 // }
-
+//
 // class HomeScreen extends Component {
 //   static navigationOptions = {
 //     headerTitle: <LogoTitle />,
@@ -35,49 +31,8 @@ class HomeScreen extends Component {
     } = styles;
     return (
       <View style={containerStyle}>
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={() => {
-            this.props.navigation.navigate('Grocery', {
-              otherParam: 'Groceries',
-            });
-          }}>
-          <Text style={buttonTextStyle}> Groceries </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={
-            () => this.props.navigation.navigate('Chores')
-        }>
-          <Text style={buttonTextStyle}> Chore Wheel </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={
-            () => this.props.navigation.navigate('Settings')
-        }>
-          <Text style={buttonTextStyle}> Settings </Text>
-        </TouchableOpacity>
-
-
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={
-            () => {
-              firebase.auth().signOut()
-                .then(
-                  () => {
-                    // alert("Byeeeee!");
-                    this.props.navigation.navigate('Login');
-                  }
-                ).catch(
-                  (error) => alert(error.toString())
-                );
-            }
-        }>
-          <Text style={buttonTextStyle}> Sign out </Text>
+        <TouchableOpacity style={buttonStyle}>
+          <Text style={buttonTextStyle}> A dashboard for notifications and housemate updates if we have time! </Text>
         </TouchableOpacity>
       </View>
     );
