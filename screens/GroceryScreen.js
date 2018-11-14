@@ -32,11 +32,11 @@ export default class GroceryScreen extends React.Component {
   componentDidMount(){
 
     var that = this
-    var houseID = that.getHouseID();
-    console.log(houseID);
+    that.getHouseID();
+  //  console.log(houseID);
   //  var houseid = this.getHouseID();
 //  console.log(that.state.houseID)
-    that.getPreviousItems();
+//    that.getPreviousItems();
 //     var groceryhouseRef = firebase.database().ref('/Grocery')
 // //   var groceryhouseRef = firebase.database().ref('/Grocery').child(that.state.houseID)
 //     groceryhouseRef.on('child_added', function(data){
@@ -98,8 +98,17 @@ export default class GroceryScreen extends React.Component {
         userID: uid,
         userName: userData.FirstName
       });
+      //setting data with data in database
+      var groceryhouseRef = firebase.database().ref('/Grocery').child(userData.HouseID)
+         groceryhouseRef.on('child_added', function(data){
+           console.log("inchild_added")
+           console.log(data)
+           var newData = [... that.state.listViewData]
+           newData.push(data)
+           that.setState({listViewData : newData})
+         });
       console.log(that.state.houseID);
-      return userData.HouseID;
+    //  return userData.HouseID;
     } , function (error) {
      console.log("Error: " + error.code);
     });
@@ -156,7 +165,7 @@ export default class GroceryScreen extends React.Component {
 
             renderRow={ data =>
               <ListItem>
-                <Text>{data.val().item}</Text>
+                <Text>{data.val().Item}</Text>
               </ListItem>
             }
 
