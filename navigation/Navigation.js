@@ -12,6 +12,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AboutScreen from '../screens/AboutScreen';
 import BillsScreen from '../screens/BillsScreen';
+import GroceriesScreen from '../screens/GroceriesScreen';
 
 const LoginStack = createStackNavigator(
   {
@@ -47,7 +48,8 @@ const SettingsStack = createStackNavigator(
 const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Groceries: GroceryScreen,
+//    Groceries: GroceryScreen,
+    Groceries: GroceriesScreen,
     'Chore Wheel': ChoresScreen,
     Bills: BillsScreen,
     Settings: SettingsStack,
