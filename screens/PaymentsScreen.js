@@ -4,30 +4,9 @@ import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, Lis
 import * as firebase from 'firebase';
 import { createStackNavigator } from 'react-navigation';
 
-class SettingsScreen extends React.Component{
-  render(){
-    return(
-      <View style= {{ flex: 1, justifyContent:'center', alignItems: 'center'}}>
-
-        <Button
-          title=" Log out (Go to Login Screen)"
-          onPress={()=> this.props.navigation.navigate('Login')}
-        />
-
-        <Button
-          title=" Create a new house"
-          onPress={()=> this.props.navigation.navigate('CreateHouseScreen')}
-        />
-
-      </View>
-      );
-  }
-}
-
 var data = []
 
-
-export default class BillsScreen extends React.Component {
+export default class PaymentsScreen extends React.Component {
 
   constructor(props){
     super(props);
