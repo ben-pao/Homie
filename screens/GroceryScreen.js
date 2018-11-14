@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, ListView } from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
-
+import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-cards';
 import * as firebase from 'firebase';
 
 import { createStackNavigator } from 'react-navigation';
