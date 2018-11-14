@@ -1,20 +1,12 @@
 import React from 'react';
-<<<<<<< HEAD
 import { StyleSheet, Text, View, StatusBar, ListView, TextInput, TouchableOpacity } from 'react-native';
 
-=======
-import { StyleSheet, Text, View, StatusBar, ListView } from 'react-native';
->>>>>>> master
 import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
 
 import * as firebase from 'firebase';
 
 import { createStackNavigator } from 'react-navigation';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 var data = []
 
 
@@ -28,21 +20,16 @@ export default class GroceryScreen extends React.Component {
 
     this.state = {
       listViewData: data,
-<<<<<<< HEAD
       groceryItem: "",
       houseID: "",
       userID: "",
       userName: "",
-=======
-      newContact: "" // the grocery item being added
->>>>>>> master
     }
   }
 
 
   componentDidMount(){
 
-<<<<<<< HEAD
     var that = this
     that.getHouseID();
   //  console.log(houseID);
@@ -56,9 +43,6 @@ export default class GroceryScreen extends React.Component {
 //       newData.push(data)
 //       that.setState({listViewData : newData})
 //     })
-=======
-    var that = this;
->>>>>>> master
 
   }
 

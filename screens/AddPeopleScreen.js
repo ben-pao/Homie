@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import { StyleSheet, Text, View, Button, TouchableOpacity, createDrawerNavigator } from 'react-native';
-=======
 import { StyleSheet, Text, TextInput, View, TouchableOpacity,  KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
->>>>>>> master
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
