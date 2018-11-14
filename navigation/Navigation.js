@@ -12,6 +12,9 @@ import ProfileScreen from '../screens/ProfileScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AboutScreen from '../screens/AboutScreen';
 import PaymentsScreen from '../screens/PaymentsScreen';
+import {Ionicons} from '@expo/vector-icons';
+import React from 'react';
+
 
 const LoginStack = createStackNavigator(
   {
@@ -64,7 +67,38 @@ const TabNavigator = createBottomTabNavigator(
       labelStyle: {
         fontFamily: 'Cochin',
       },
-    }
+      // showLabel: false,
+    },
+    // https://expo.github.io/vector-icons/
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+          iconName = 'ios-home';
+        }
+        else if (routeName === 'Groceries'){
+          // iconName = 'ios-basket';
+          iconName = 'ios-cart';
+        }
+        else if (routeName === 'Chores'){
+          // iconName = 'ios-list';
+          iconName = `ios-list${focused ? '-box' : ''}`;
+        }
+        else if (routeName === 'Payments') {
+          iconName = 'ios-card';
+        }
+        else if (routeName === 'Settings') {
+          iconName = `ios-options${focused ? '' : '-outline'}`;
+          // iconName = 'ios-settings';
+        }
+
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
+      },
+    }),
   }
 );
 
@@ -89,21 +123,22 @@ const AppStack = createStackNavigator(
         fontFamily: 'Cochin',
       },
       gesturesEnabled: false,
+      headerTitle: "HOMIE"
     },
   }
 );
 
-// From https://reactnavigation.org/docs/en/navigation-options-resolution.html
-TabNavigator.navigationOptions = ({ navigation }) => {
-  const { routeName } = navigation.state.routes[navigation.state.index];
-
-  // You can do whatever you like here to pick the title based on the route name
-  const headerTitle = 'HOMIE';
-
-  return {
-    headerTitle,
-  };
-};
+// // From https://reactnavigation.org/docs/en/navigation-options-resolution.html
+// TabNavigator.navigationOptions = ({ navigation }) => {
+//   const { routeName } = navigation.state.routes[navigation.state.index];
+//
+//   // You can do whatever you like here to pick the title based on the route name
+//   const headerTitle = 'HOMIE';
+//
+//   return {
+//     headerTitle,
+//   };
+// };
 
 const StackNavigator = createStackNavigator(
   {

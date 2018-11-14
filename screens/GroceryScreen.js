@@ -104,7 +104,7 @@ export default class GroceryScreen extends React.Component {
       </Container>
 
 
-        );
+    );
 
   }
 }
