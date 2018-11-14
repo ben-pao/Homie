@@ -14,7 +14,7 @@ import AboutScreen from '../screens/AboutScreen';
 import PaymentsScreen from '../screens/PaymentsScreen';
 import {Ionicons} from '@expo/vector-icons';
 import React from 'react';
-
+import GroceriesScreen from '../screens/GroceriesScreen';
 
 const LoginStack = createStackNavigator(
   {
@@ -67,7 +67,7 @@ const TabNavigator = createBottomTabNavigator(
       labelStyle: {
         fontFamily: 'Cochin',
       },
-      // showLabel: false,
+      showLabel: false,
     },
     // https://expo.github.io/vector-icons/
     navigationOptions: ({ navigation }) => ({
