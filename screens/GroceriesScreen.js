@@ -8,7 +8,7 @@ import { createStackNavigator } from 'react-navigation';
 var data = []
 
 
-export default class GroceryScreen extends React.Component {
+export default class GroceriesScreen extends React.Component {
 
   constructor(props){
     super(props);
@@ -44,7 +44,6 @@ export default class GroceryScreen extends React.Component {
 
   deleteRow(){
 
-
   }
 
   showInformation() {
@@ -55,47 +54,14 @@ export default class GroceryScreen extends React.Component {
     return(
       <Container style={styles.container}>
         <Content>
-          <List
-          enableEmptySections
-            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-
-            // render={data=>
-            //   <Button>
-            //     <Text> Add </Text>
-            //   </Button>
-            // }
-
-            renderRow={ data =>
-              <ListItem>
-                <Text>{data.val().item}</Text>
-              </ListItem>
-            }
-
-            renderLeftHiddenRow={data =>
-              <Button full  onPress={ () => this.addRow(data)}>
-                <Icon name='information-circle'/>
-              </Button>
-                }
-
-            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-              <Button full danger  onPress={ () => this.deleteRow(secId,rowId,rowMap,data)}>
-                <Icon name='trash'/>
-              </Button>
-                }
-
-
-
-              leftOpenValue={-75}
-              rightOpenValue={-75}
-          />
-
+          <Card>
+              <CardItem>
+                <Text>milk</Text>
+            </CardItem>
+          </Card>
         </Content>
-
       </Container>
-
-
-        );
-
+    );
   }
 }
 
