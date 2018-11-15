@@ -72,9 +72,10 @@ export default class GroceryScreen extends React.Component {
     groceryhouseRef.child(key).set({
       Item: data,
       UID: uid,
-      UserName: that.state.houseID
+      UserName: that.state.userName,
+      ItemKey: key
 
-    })
+    });
   }
 
   getHouseID(){
@@ -99,6 +100,7 @@ export default class GroceryScreen extends React.Component {
       //setting data with data in database
       var groceryhouseRef = firebase.database().ref('/Grocery').child(userData.HouseID)
          groceryhouseRef.on('child_added', function(data){
+      //  groceryhouseRef.on('child_changed', function(data){
            console.log("inchild_added")
            console.log(data)
            var newData = [... that.state.listViewData]
@@ -112,8 +114,20 @@ export default class GroceryScreen extends React.Component {
     });
   }
 
-  deleteRow(){
+  deleteRow(data){
       var user = firebase.auth().currentUser;
+      console.log("in deleteRow")
+      console.log(data);
+      console.log(this.state.houseID)
+      var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
+      console.log(data.val().ItemKey);
+      groceryhouseRef.child(data.val().ItemKey).remove();
+      groceryhouseRef.on("child_changed", function(snapshot){
+        var newData = snapshot.val();
+        console.log("in child changed")
+        console.log(newData);
+      });
+
 
       alert(this.state.houseID);
   }
@@ -179,8 +193,8 @@ export default class GroceryScreen extends React.Component {
               </Button>
                 }
 
-            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-              <Button full danger  onPress={ () => this.deleteRow()}>
+            renderRightHiddenRow={data =>
+              <Button full danger  onPress={ () => this.deleteRow(data)}>
                 <Icon name='trash'/>
               </Button>
                 }
