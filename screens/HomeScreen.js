@@ -23,6 +23,13 @@ class HomeScreen extends Component {
 //   static navigationOptions = {
 //     headerTitle: <LogoTitle />,
 //   };
+  state = {
+    token: ""
+  }
+
+  componentDidMount() {
+    this.getMyToken().done();
+  }
 
   render() {
     const { containerStyle,
@@ -32,12 +39,70 @@ class HomeScreen extends Component {
     } = styles;
     return (
       <View style={containerStyle}>
-        <NotificationContainer/>
+        {//<TouchableOpacity style={buttonStyle}>
+        }
+          <NotificationContainer/>
+        {//</TouchableOpacity>
+        }
+        <TouchableOpacity
+          style={buttonStyle}
+          onPress={
+            () => {
+              this.sendPushNotification('0', 'Hi', 'HIIIII');
+            }
+          }>
+          <Text style={buttonTextStyle}> Send a test notification </Text>
+        </TouchableOpacity>
         <TouchableOpacity style={buttonStyle}>
           <Text style={buttonTextStyle}> A dashboard for notifications and housemate updates if we have time! </Text>
         </TouchableOpacity>
       </View>
     );
+  }
+
+  sendPushNotification(token, title, body) {
+    // token = this.getMyToken().done();
+    token = this.state.token;
+    if (token) {
+      return fetch('https://exp.host/--/api/v2/push/send',
+      {
+        body: JSON.stringify({
+          to: token,
+          title: title,
+          body: body,
+          data: { message: `${title} - ${body}` },
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      });
+    } else {
+      alert("Some error occured when sending notification");
+      return;
+    }
+  }
+
+  getMyToken = async () => {
+    var user = firebase.auth().currentUser;
+    var userName = user.providerData[0].displayName;
+    var uid = user.uid;
+    firebase.database().ref("/Users").child(uid).child("Token")
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          console.log("token:" + snapshot.val());
+          this.setState( {token: snapshot.val()} );
+          return snapshot.val();
+        } else {
+          alert("Notification token not found!");
+          return;
+        }
+      })
+      .catch( error => {
+        alert(error.toString());
+        return;
+      });
   }
 }
 
