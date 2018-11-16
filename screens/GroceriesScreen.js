@@ -57,6 +57,7 @@ export default class GroceriesScreen extends React.Component {
           <List
           enableEmptySections
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+            style={styles.blackColor}
 
             // render={data=>
             //   <Button>
@@ -65,13 +66,13 @@ export default class GroceriesScreen extends React.Component {
             // }
 
             renderRow={ data =>
-              <ListItem>
+
                 <Card>
                   <CardItem>
                     <Text>{data.val().item}</Text>
                   </CardItem>
                 </Card>
-              </ListItem>
+
             }
 
             renderLeftHiddenRow={data =>
@@ -101,6 +102,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fad',
+  },
+  blackColor: {
+    backgroundColor: '#fff',
   },
   input:{
     backgroundColor: '#000',
