@@ -67,6 +67,8 @@ class HomeScreen extends Component {
       return fetch('https://exp.host/--/api/v2/push/send',
       {
         body: JSON.stringify({
+          sound: "default",
+          badge: 1,
           to: token,
           title: title,
           body: body,
