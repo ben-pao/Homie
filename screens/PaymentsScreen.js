@@ -24,7 +24,7 @@ export default class PaymentsScreen extends React.Component {
 
     var that = this
 
-    firebase.database().ref('/Bills').on('child_added', function(data){
+    firebase.database().ref('/Payments').on('child_added', function(data){
 
       var newData = [... that.state.listViewData]
       newData.push(data)
@@ -34,9 +34,9 @@ export default class PaymentsScreen extends React.Component {
   }
 
   addRow(data){
-    var key = firebase.database().ref('/Grocery').push().key
+    var key = firebase.database().ref('/Payments').push().key
     console.log(key)
-    firebase.database().ref('/Grocery').child(key).set({item:data})
+    firebase.database().ref('/Payments').child(key).set({item:data})
   }
 
   deleteRow(){
