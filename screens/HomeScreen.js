@@ -5,6 +5,7 @@ import { Keyboard } from 'react-native';
 import { createStackNavigator, StackActions, NavigationActions, createBottomTabNavigator } from 'react-navigation';
 import GroceryScreen from './GroceryScreen';
 import SettingsScreen from './SettingsScreen';
+import NotificationContainer from '../components/NotificationContainer';
 
 class HomeScreen extends Component {
 // class LogoTitle extends React.Component {
@@ -31,6 +32,7 @@ class HomeScreen extends Component {
     } = styles;
     return (
       <View style={containerStyle}>
+        <NotificationContainer/>
         <TouchableOpacity style={buttonStyle}>
           <Text style={buttonTextStyle}> A dashboard for notifications and housemate updates if we have time! </Text>
         </TouchableOpacity>
@@ -43,7 +45,8 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     // backgroundColor: '#2896d3',
-    backgroundColor: '#000',
+    // backgroundColor: '#000',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,

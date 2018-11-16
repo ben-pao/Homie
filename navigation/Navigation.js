@@ -146,8 +146,8 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    // initialRouteName: 'Login',
-    initialRouteName: 'App', // Skip Login page (for testing)
+    initialRouteName: 'Login',
+    // initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null,
       gesturesEnabled: false,
