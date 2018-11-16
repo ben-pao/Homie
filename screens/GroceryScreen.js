@@ -23,14 +23,14 @@ export default class GroceryScreen extends React.Component {
       houseID: "",
       userID: "",
       userName: "",
-      newContact: "" // the grocery item being added
     }
   }
 
 
   componentDidMount(){
     var that = this
-    that.getHouseID();
+    console.log("in componenet did mount")
+    that.setStates();
   //  console.log(houseID);
   //  var houseid = this.getHouseID();
 //  console.log(that.state.houseID)
@@ -78,10 +78,11 @@ export default class GroceryScreen extends React.Component {
     });
   }
 
-  getHouseID(){
-    var that = this
+  setStates(){
+    var that = this;
     var user = firebase.auth().currentUser;
     if(user == null){
+      alert("not logged in");
       return;
     }
     var uid = user.uid;
@@ -89,6 +90,8 @@ export default class GroceryScreen extends React.Component {
     //var key = firebase.database().ref('/Users').push().key;
     var userData = "";
     var userDBref = firebase.database().ref('/Users').child(uid)
+
+    //set the states with info in users table
     userDBref.on('value', function(snapshot){
       userData = snapshot.val();
       console.log(userData.HouseID);
@@ -97,6 +100,7 @@ export default class GroceryScreen extends React.Component {
         userID: uid,
         userName: userData.FirstName
       });
+
       //setting data with data in database
       var groceryhouseRef = firebase.database().ref('/Grocery').child(userData.HouseID)
          groceryhouseRef.on('child_added', function(data){
@@ -119,17 +123,27 @@ export default class GroceryScreen extends React.Component {
       console.log("in deleteRow")
       console.log(data);
       console.log(this.state.houseID)
+      //
       var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
       console.log(data.val().ItemKey);
+      //remove the item
       groceryhouseRef.child(data.val().ItemKey).remove();
       groceryhouseRef.on("child_changed", function(snapshot){
         var newData = snapshot.val();
         console.log("in child changed")
         console.log(newData);
       });
+      var array = [... this.state.listViewData]; // make a separate copy of the array
+    //  var index = array.indexOf(data.target.value);
+      var index = array.indexOf(data);
+      if (index !== -1) {
+          array.splice(index, 1);
+          this.setState({listViewData : array});
+          console.log(this.state.listViewData);
+      }
 
 
-      alert(this.state.houseID);
+      //alert(this.state.houseID);
   }
 
   showInformation() {
