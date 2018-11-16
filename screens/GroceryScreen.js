@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, ListView, TextInput, TouchableOpacity } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
+import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
 
 import * as firebase from 'firebase';
 
@@ -147,23 +147,8 @@ export default class GroceryScreen extends React.Component {
     return(
       <Container style={styles.container}>
         <Content>
-        <TextInput
-          style={textInput}
-          placeholder='Email'
-          onChangeText={
-            (groceryItem) => this.setState({groceryItem})
-          }
-          underlineColorAndroid='transparent'
-        />
-        <TouchableOpacity
-          style={btn}
-          onPress={
-            () => this.addRow(this.state.groceryItem)
-        }>
-          <Text style={btnText}> ADD ITEM </Text>
-        </TouchableOpacity>
           <List
-          enableEmptySections
+            enableEmptySections
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
 
             // render={data=>
@@ -173,9 +158,11 @@ export default class GroceryScreen extends React.Component {
             // }
 
             renderRow={ data =>
-              <ListItem>
-                <Text>{data.val().Item}</Text>
-              </ListItem>
+              <Card>
+                <CardItem>
+                  <Text>{data.val().Item}</Text>
+                </CardItem>
+              </Card>
             }
 
             renderLeftHiddenRow={data =>
@@ -190,12 +177,24 @@ export default class GroceryScreen extends React.Component {
               </Button>
                 }
 
-
-
               leftOpenValue={-75}
               rightOpenValue={-75}
           />
-
+          <TextInput
+            style={textInput}
+            placeholder='Item'
+            onChangeText={
+              (groceryItem) => this.setState({groceryItem})
+            }
+            underlineColorAndroid='transparent'
+          />
+          <TouchableOpacity
+            style={btn}
+            onPress={
+              () => this.addRow(this.state.groceryItem)
+          }>
+            <Text style={btnText}> ADD ITEM </Text>
+          </TouchableOpacity>
         </Content>
 
       </Container>
@@ -207,33 +206,43 @@ export default class GroceryScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    input:{
-      backgroundColor: '#000',
-    },
+    // input:{
+    //   backgroundColor: '#000',
+    // },
+    // container: {
+    //   flex: 1,
+    //   // backgroundColor: '#2896d3',
+    //   backgroundColor: '#fff',
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
+    //   paddingLeft: 40,
+    //   paddingRight: 40,
+    // },
+    // wrapper: {
+    //   flex: 1,
+    // },
+    // header: {
+    //   fontSize:24,
+    //   marginBottom:60,
+    //   color: '#000',
+    //   // color: '#fff',
+    //   fontWeight: 'bold',
+    // },
+    // textInput: {
+    //   alignSelf: 'stretch',
+    //   padding: 15,
+    //   marginBottom: 20,
+    //   backgroundColor: '#fff'
+    // },
     container: {
       flex: 1,
-      // backgroundColor: '#2896d3',
       backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingLeft: 40,
-      paddingRight: 40,
     },
-    wrapper: {
-      flex: 1,
+    blackColor: {
+      backgroundColor: '#fff',
     },
-    header: {
-      fontSize:24,
-      marginBottom:60,
-      color: '#000',
-      // color: '#fff',
-      fontWeight: 'bold',
-    },
-    textInput: {
-      alignSelf: 'stretch',
-      padding: 15,
-      marginBottom: 20,
-      backgroundColor: '#fff'
+    input:{
+      backgroundColor: '#000',
     },
     btn: {
       alignSelf: 'stretch',

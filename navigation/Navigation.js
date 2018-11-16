@@ -51,8 +51,8 @@ const SettingsStack = createStackNavigator(
 const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Groceries: GroceriesScreen,
-    // Groceries: GroceryScreen,
+    // Groceries: GroceriesScreen,
+    Groceries: GroceryScreen,
     Chores: ChoresScreen,
     Payments: PaymentsScreen,
     Settings: SettingsStack,
@@ -148,8 +148,8 @@ const StackNavigator = createStackNavigator(
     App: AppStack,
   },
   {
-    // initialRouteName: 'Login',
-    initialRouteName: 'App', // Skip Login page (for testing)
+    initialRouteName: 'Login',
+    // initialRouteName: 'App', // Skip Login page (for testing)
     navigationOptions: {
       header: null,
       gesturesEnabled: false,
