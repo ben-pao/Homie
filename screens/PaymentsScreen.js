@@ -1,108 +1,140 @@
-import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
+import React, { Component } from 'react';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity,  KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as firebase from 'firebase';
-import { createStackNavigator } from 'react-navigation';
+import { Keyboard } from 'react-native';
 
-var data = []
+class PaymentsScreen extends Component {
 
-export default class PaymentsScreen extends React.Component {
-
-  constructor(props){
-    super(props);
-
-    this.ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 != r2})
-
-    this.state = {
-      listViewData: data,
-      newContact: ""
-    }
-  }
-
-
-  componentDidMount(){
-
-    var that = this
-
-    firebase.database().ref('/Payments').on('child_added', function(data){
-
-      var newData = [... that.state.listViewData]
-      newData.push(data)
-      that.setState({listViewData : newData})
-    })
-
-  }
-
-  addRow(data){
-    var key = firebase.database().ref('/Payments').push().key
-    console.log(key)
-    firebase.database().ref('/Payments').child(key).set({item:data})
-  }
-
-  deleteRow(){
-
-
-  }
-
-  showInformation() {
-
+  state = {
+    paymentName: ''
   }
 
   render() {
-    return(
-      <Container style={styles.container}>
+    const { containerStyle,
+            wrapperStyle,
+            headerStyle,
+            textInputStyle,
+            buttonStyle,
+            buttonTextStyle
+    } = styles;
 
-{
-        // <Header>
-        //   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        //     <Text> Header </Text>
-        //   </View>
-        // </Header>
-}
+    // const { navigate, goBack } = this.props.navigation;
 
-        <Content>
-          <List
-          enableEmptySections
-            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-
-            renderRow={ data =>
-              <ListItem>
-                <Text>{data.val().item}</Text>
-              </ListItem>
-            }
-
-            renderLeftHiddenRow={data =>
-              <Button full  onPress={ () => this.addRow(data)}>
-                <Icon name='information-circle'/>
-              </Button>
+    return (
+      <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+          <View style={containerStyle}>
+            <Text style={headerStyle}>Add a Payment</Text>
+            <TextInput
+              style={textInputStyle}
+              placeholder='Enter a Payment'
+              onChangeText={
+                (paymentName) => this.setState({paymentName})
+              }
+              underlineColorAndroid='transparent'
+            />
+            <TextInput
+              style={textInputStyle}
+              placeholder='Enter the Payment Quantity'
+              onChangeText={
+                (paymentQuantity) => this.setState({paymentQuantity})
+              }
+              underlineColorAndroid='transparent'
+            />
+            <TextInput
+              style={textInputStyle}
+              placeholder='Enter the Housemate to Charge'
+              onChangeText={
+                (userCharge) => this.setState({userCharged})
+              }
+              underlineColorAndroid='transparent'
+            />
+            <TouchableOpacity
+              style={buttonStyle}
+              onPress={
+                () => {
+                  this.addPayment(this.state.paymentName);
                 }
+              }
+            >
+              <Text style={buttonTextStyle}>Submit</Text>
+            </TouchableOpacity>
 
-            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-              <Button full danger  onPress={ () => this.deleteRow(secId,rowId,rowMap,data)}>
-                <Icon name='trash'/>
-              </Button>
+            <TouchableOpacity
+              style={buttonStyle}
+              onPress={
+                () => {
+                  this.props.navigation.goBack();
                 }
+              }
+            >
+              <Text style={buttonTextStyle}> Cancel </Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    );
+  }
 
-              leftOpenValue={-75}
-              rightOpenValue={-75}
-          />
-
-        </Content>
-
-      </Container>
-
-
-        );
-
+  addPayment = (paymentName) => {
+    // console.log("IN addPayment!\n\n");
+    var user = firebase.auth().currentUser;
+    var userName = user.providerData[0].displayName;
+    var uid = user.uid;
+    var key = firebase.database().ref('/Payments').push().key;
+    firebase.database().ref('/Payments').child(key)
+      .set(
+        { PaymentName: paymentName,
+          Users: {[uid]: userName} }
+      );
+    firebase.database().ref('/Users').child(uid).update(
+        {
+          PaymentID: key,
+          PaymentName: paymentName
+        }
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerStyle: {
     flex: 1,
-    backgroundColor: '#fad',
-  },
-  input:{
+    // backgroundColor: '#2896d3',
     backgroundColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 40,
+    paddingRight: 40,
+  },
+  wrapperStyle: {
+    flex: 1,
+  },
+  headerStyle: {
+    fontSize:24,
+    marginBottom:60,
+    color: '#fff',
+    // color: '#fff',
+    fontWeight: 'bold',
+  },
+  textInputStyle: {
+    alignSelf: 'stretch',
+    padding: 15,
+    marginBottom: 20,
+    backgroundColor: '#fff'
+  },
+  buttonStyle: {
+    alignSelf: 'stretch',
+    // backgroundColor: '#01c853',
+    backgroundColor: 'hotpink',
+    // color: '#fff',
+    padding: 20,
+    alignItems: 'center',
+    margin: 8
+  },
+  buttonTextStyle: {
+    color: '#fff',
+    fontWeight: 'bold'
   }
-})
+});
+
+export default PaymentsScreen;
