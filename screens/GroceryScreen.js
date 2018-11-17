@@ -111,6 +111,31 @@ export default class GroceryScreen extends React.Component {
            newData.push(data)
            that.setState({listViewData : newData})
          });
+         groceryhouseRef.on('child_removed', function(data){
+      //  groceryhouseRef.on('child_changed', function(data){
+           console.log("child_removed")
+           console.log(data)
+           console.log(data.val().ItemKey)
+           var newData = [... that.state.listViewData]
+
+          // newData.push(data)
+          //var index = newData.indexOf(data.target);
+          //var index = newData.findIndex(x => x.ItemKey === data.ItemKey);
+          for(var i = newData.length - 1; i >= 0; i--){
+            console.log(i);
+            console.log(newData)
+            if(newData[i].val().ItemKey == data.val().ItemKey){
+              console.log(newData[i].val().ItemKey)
+              console.log("hit at index")
+              console.log(i);
+              newData.splice(i, 1);
+              break;
+            }
+          }
+        //  console.log(index);
+        //  newData.splice(index, 1);
+           that.setState({listViewData : newData})
+         });
       console.log(that.state.houseID);
     //  return userData.HouseID;
     } , function (error) {
@@ -128,22 +153,26 @@ export default class GroceryScreen extends React.Component {
       console.log(data.val().ItemKey);
       //remove the item
       groceryhouseRef.child(data.val().ItemKey).remove();
-      groceryhouseRef.on("child_changed", function(snapshot){
+      groceryhouseRef.on('child_changed', function(snapshot){
         var newData = snapshot.val();
         console.log("in child changed")
         console.log(newData);
       });
-      var array = [... this.state.listViewData]; // make a separate copy of the array
+    //  var array = [... this.state.listViewData]; // make a separate copy of the array
     //  var index = array.indexOf(data.target.value);
-      var index = array.indexOf(data);
-      if (index !== -1) {
-          array.splice(index, 1);
-          this.setState({listViewData : array});
-          console.log(this.state.listViewData);
-      }
+    //  var index = array.indexOf(data);
+    //  if (index !== -1) {
+    //      array.splice(index, 1);
+    //      this.setState({listViewData : array});
+  //        console.log(this.state.listViewData);
+    //  }
 
 
       //alert(this.state.houseID);
+  }
+
+  iEnumerate(data){
+
   }
 
   showInformation() {
