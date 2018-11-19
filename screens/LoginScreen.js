@@ -3,28 +3,30 @@ import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpaci
 import { createStackNavigator, StackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 // import DismissKeyboard from 'dismissKeyboard';
-import { Keyboard } from 'react-native'
+import { Keyboard } from 'react-native';
+import { Permissions, Notifications } from 'expo';
+import registerForPushNotificationsAsync from '../components/registerForPushNotificationsAsync';
+import registerForPushNotification from '../components/registerForPushNotificationsAsync';
 
 export default class LoginScreen extends Component {
-  // static navigationOptions = {
-  //   header: null,
-  //   /* No more header config here! */
-  // };
 
   state = {
     email: '',
-    password: ''
+    password: '',
+    // token: ''
   }
 
 //checks if logged in before
-  componentDidMount() {
-    this._loadInitialState().done();
-  }
+  // componentDidMount() {
+  //   this._loadInitialState().done();
+  //   // Get token for notif
+  //   // this.registerForPushNotificationsAsync().done();
+  // }
 
   _loadInitialState = async () => {
     var value = await AsyncStorage.getItem('user');
     console.log('User: ' + value);
-    if(value !== null){
+    if (value !== null) {
       //youre logged in so
       // if User has a House
         // this.props.navigation.navigate('App');
@@ -32,6 +34,39 @@ export default class LoginScreen extends Component {
         this.props.navigation.navigate('Welcome');
     }
   }
+
+  // registerForPushNotificationsAsync = async () => {
+  //   const { status: existingStatus } = await Permissions.getAsync(
+  //     Permissions.NOTIFICATIONS
+  //   );
+  //   let finalStatus = existingStatus;
+  //
+  //   // only ask if permissions have not already been determined, because
+  //   // iOS won't necessarily prompt the user a second time.
+  //   if (existingStatus !== 'granted') {
+  //     // Android remote notification permissions are granted during the app
+  //     // install, so this will only ask on iOS
+  //     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+  //     finalStatus = status;
+  //   }
+  //
+  //   console.log("finalStatus");
+  //   console.log(finalStatus);
+  //
+  //   // Stop here if the user did not grant permissions
+  //   if (finalStatus !== 'granted') {
+  //     return;
+  //   }
+  //
+  //   // Get the token that uniquely identifies this device
+  //   let token = await Notifications.getExpoPushTokenAsync();
+  //
+  //   console.log("push notification token");
+  //   console.log(token);
+  //   // POST the token to your backend server from where you can retrieve it to send push notifications.
+  //   this.setState({token});
+  //   return;
+  // }
 
   render() {
     const { container,
@@ -71,7 +106,11 @@ export default class LoginScreen extends Component {
             <TouchableOpacity
               style={btn}
               onPress={
-                () => this.login(this.state.email, this.state.password)
+                () => {
+                  // registerForPushNotificationsAsync();
+                  // registerForPushNotification();
+                  this.login(this.state.email, this.state.password)
+                }
               }>
               <Text style={btnText}> Log in </Text>
             </TouchableOpacity>

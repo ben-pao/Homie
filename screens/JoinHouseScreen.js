@@ -14,6 +14,7 @@ class JoinHouseScreen extends Component {
     const { containerStyle,
             wrapperStyle,
             headerStyle,
+            textStyle,
             textInputStyle,
             buttonStyle,
             buttonTextStyle
@@ -34,6 +35,7 @@ class JoinHouseScreen extends Component {
               }
               underlineColorAndroid='transparent'
             />
+            <Text style={textStyle}> OR </Text>
             <TextInput
               style={textInputStyle}
               placeholder="Enter your housemate's email"
@@ -182,6 +184,10 @@ const styles = StyleSheet.create({
     color: '#000',
     // color: '#fff',
     fontWeight: 'bold',
+  },
+  textStyle: {
+    color: '#000',
+    fontWeight: 'bold'
   },
   textInputStyle: {
     alignSelf: 'stretch',

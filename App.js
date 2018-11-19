@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import StackNavigator from './navigation/Navigation'
+import StackNavigator from './navigation/Navigation';
+import { Permissions, Notifications } from 'expo';
 
 import * as firebase from 'firebase';
 
@@ -17,16 +18,21 @@ firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
-    StackNavigator.initialRouteName = 'App'
+    // If user doesn't have a house yet
+    StackNavigator.initialRouteName = 'App';
+    // If user has a House
+    // StackNavigator.initialRouteName = 'App';
 
     // ...
   } else {
     // User is signed out.
     // ...
+    StackNavigator.initialRouteName = 'Login'
   }
 });
 
 export default class App extends Component {
+
   render() {
     return(
         <StackNavigator />
