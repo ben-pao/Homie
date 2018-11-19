@@ -203,11 +203,14 @@ export default class GroceryScreen extends React.Component {
             // }
 
             renderRow={ data =>
-              <Card>
-                <CardItem>
-                  <Text>{data.val().Item}</Text>
-                </CardItem>
-              </Card>
+              // <Card>
+              //   <CardItem>
+              //     <Text>{data.val().Item}</Text>
+              //   </CardItem>
+              // </Card>
+              <ListItem>
+                 <Text>{data.val().Item}</Text>
+             </ListItem>
             }
 
             renderLeftHiddenRow={data =>
