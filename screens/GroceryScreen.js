@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, ListView, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
-
+import { Keyboard } from 'react-native';
 import * as firebase from 'firebase';
 
 import { createStackNavigator } from 'react-navigation';
@@ -188,6 +188,8 @@ export default class GroceryScreen extends React.Component {
             btnText
     } = styles;
     return(
+      <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
       <Container style={styles.container}>
         <Content>
           <List
@@ -241,6 +243,8 @@ export default class GroceryScreen extends React.Component {
         </Content>
 
       </Container>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
 
 
     );
@@ -299,5 +303,8 @@ const styles = StyleSheet.create({
     btnText: {
       color: '#fff',
       fontWeight: 'bold'
+    },
+    wrapperStyle: {
+      flex: 1,
     }
 })

@@ -1,13 +1,119 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity,  KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 
-class PaymentsScreen extends Component {
+var data = []
 
-  state = {
-    paymentName: ''
+export default class PaymentsScreen extends React.Component {
+
+  constructor(props){
+    super(props);
+    // frontend display of list from react native
+  //  this.ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 != r2})
+    this.state = {
+      houseID: '',
+      userID: '',
+      userName: '',
+      listViewData: data,
+      paymentName: '',
+      paymentQuantity: '',
+      johns: ''
+    }
   }
+  componentDidMount(){
+    var that = this
+    console.log("in componenet did mount")
+    that.setStates();
+
+
+  }
+
+  // setStates(){
+  //   var that = this;
+  //   var user = firebase.auth().currentUser;
+  //   if(user == null){
+  //     alert("not logged in");
+  //     return;
+  //   }
+  //   var uid = user.uid;
+  //   //alert(uid);
+  //   //var key = firebase.database().ref('/Users').push().key;
+  //   var userData = "";
+  //   var userDBref = firebase.database().ref('/Users').child(uid)
+  //
+  //   //set the states with info in users table
+  //   userDBref.on('value', function(snapshot){
+  //     userData = snapshot.val();
+  //     console.log(userData.HouseID);
+  //     that.setState({
+  //       houseID: userData.HouseID,
+  //       userID: uid,
+  //       userName: userData.FirstName
+  //     });
+  //
+  //   }
+  setStates(){
+    var that = this;
+    var user = firebase.auth().currentUser;
+    if(user == null){
+      alert("not logged in");
+      return;
+    }
+    var uid = user.uid;
+    //alert(uid);
+    //var key = firebase.database().ref('/Users').push().key;
+    var userData = "";
+    var userDBref = firebase.database().ref('/Users').child(uid)
+
+    //set the states with info in users table
+    userDBref.on('value', function(snapshot){
+      userData = snapshot.val();
+      console.log(userData.HouseID);
+      that.setState({
+        houseID: userData.HouseID,
+        userID: uid,
+        userName: userData.FirstName
+      });
+      console.log(that.state.houseID);
+    //  return userData.HouseID;
+    } , function (error) {
+     console.log("Error: " + error.code);
+    });
+  }
+
+
+  addPayment(paymentName, paymentQuantity, johns) {
+     console.log("IN addPayment!");
+    var user = firebase.auth().currentUser;
+    var userName = user.providerData[0].displayName;
+    var uid = user.uid;
+  //  var key = firebase.database().ref('/Payments').push().key;
+    var paymentHouseJohnsRef = firebase.database().ref('/Payments').child(this.state.houseID).child(johns)
+    var paymentHousePimpRef = firebase.database().ref('/Payments').child(this.state.houseID).child(uid)
+    var requestedRef = paymentHouseJohnsRef.child('/Requested');
+    var pendingRef = paymentHousePimpRef.child('/Pending');
+    var key = requestedRef.push().key;
+    requestedRef.child(key)
+      .set(
+        { PaymentName: paymentName,
+          Pimp: uid, //person whose charging
+          PaymentAmount: paymentQuantity,
+          PaymentID: key
+      });
+    pendingRef.child(key)
+      .set(
+        {
+          PaymentName: paymentName,
+          Johns: johns, //whose being charged //Maybe make it a list for utilities
+          PaymentAmount: paymentQuantity,
+          PaymentID: key
+        }
+      );
+
+  }
+
 
   render() {
     const { containerStyle,
@@ -45,15 +151,15 @@ class PaymentsScreen extends Component {
               style={textInputStyle}
               placeholder='Enter the Housemate to Charge'
               onChangeText={
-                (userCharge) => this.setState({userCharged})
+                (johns) => this.setState({johns})
               }
               underlineColorAndroid='transparent'
             />
             <TouchableOpacity
               style={buttonStyle}
               onPress={
-                () => {
-                  this.addPayment(this.state.paymentName);
+                () => {//
+                  this.addPayment(this.state.paymentName,this.state.paymentQuantity, this.state.johns);
                 }
               }
             >
@@ -76,24 +182,6 @@ class PaymentsScreen extends Component {
     );
   }
 
-  addPayment = (paymentName) => {
-    // console.log("IN addPayment!\n\n");
-    var user = firebase.auth().currentUser;
-    var userName = user.providerData[0].displayName;
-    var uid = user.uid;
-    var key = firebase.database().ref('/Payments').push().key;
-    firebase.database().ref('/Payments').child(key)
-      .set(
-        { PaymentName: paymentName,
-          Users: {[uid]: userName} }
-      );
-    firebase.database().ref('/Users').child(uid).update(
-        {
-          PaymentID: key,
-          PaymentName: paymentName
-        }
-    );
-  }
 }
 
 const styles = StyleSheet.create({
@@ -137,4 +225,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PaymentsScreen;
+//export default PaymentsScreen;
