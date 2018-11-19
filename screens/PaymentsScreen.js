@@ -92,21 +92,21 @@ export default class PaymentsScreen extends React.Component {
   //  var key = firebase.database().ref('/Payments').push().key;
     var paymentHouseJohnsRef = firebase.database().ref('/Payments').child(this.state.houseID).child(johns)
     var paymentHousePimpRef = firebase.database().ref('/Payments').child(this.state.houseID).child(uid)
-    var requestedRef = paymentHouseJohnsRef.child('/Requested');
-    var pendingRef = paymentHousePimpRef.child('/Pending');
+    var requestedRef = paymentHousePimpRef.child('/Requested');
+    var paymentsRef = paymentHouseJohnsRef.child('/Payment');
     var key = requestedRef.push().key;
     requestedRef.child(key)
       .set(
         { PaymentName: paymentName,
-          Pimp: uid, //person whose charging
+          Johns: johns, //person whose charging
           PaymentAmount: paymentQuantity,
           PaymentID: key
       });
-    pendingRef.child(key)
+    paymentsRef.child(key)
       .set(
         {
           PaymentName: paymentName,
-          Johns: johns, //whose being charged //Maybe make it a list for utilities
+          Pimp: uid, //whose being charged //Maybe make it a list for utilities
           PaymentAmount: paymentQuantity,
           PaymentID: key
         }
