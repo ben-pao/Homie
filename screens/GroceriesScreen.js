@@ -54,11 +54,44 @@ export default class GroceriesScreen extends React.Component {
     return(
       <Container style={styles.container}>
         <Content>
-          <Card>
-              <CardItem>
-                <Text>milk</Text>
-            </CardItem>
-          </Card>
+          <List
+          enableEmptySections
+            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+            style={styles.blackColor}
+
+            // render={data=>
+            //   <Button>
+            //     <Text> Add </Text>
+            //   </Button>
+            // }
+
+            renderRow={ data =>
+
+                <Card>
+                  <CardItem>
+                    <Text>{data.val().item}</Text>
+                  </CardItem>
+                </Card>
+
+            }
+
+            renderLeftHiddenRow={data =>
+              <Button full  onPress={ () => this.addRow(data)}>
+                <Icon name='information-circle'/>
+              </Button>
+                }
+
+            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
+              <Button full danger  onPress={ () => this.deleteRow(secId,rowId,rowMap,data)}>
+                <Icon name='trash'/>
+              </Button>
+                }
+
+
+
+              leftOpenValue={-75}
+              rightOpenValue={-75}
+          />
         </Content>
       </Container>
     );
@@ -69,6 +102,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fad',
+  },
+  blackColor: {
+    backgroundColor: '#fff',
   },
   input:{
     backgroundColor: '#000',
