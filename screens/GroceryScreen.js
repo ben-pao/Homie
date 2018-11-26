@@ -177,7 +177,7 @@ export default class GroceryScreen extends React.Component {
               style={btn}
               onPress={
                 () => this.addRow(this.state.groceryItem)
-            }>
+              }
               <Text style={btnText}> ADD ITEM </Text>
             </TouchableOpacity>
           );
@@ -213,18 +213,18 @@ const styles = StyleSheet.create({
     //   // color: '#fff',
     //   fontWeight: 'bold',
     // },
-    // textInput: {
-    //   alignSelf: 'stretch',
-    //   padding: 15,
-    //   marginBottom: 20,
-    //   backgroundColor: '#fff'
-    // },
     container: {
       flex: 1,
       backgroundColor: '#fff',
     },
     blackColor: {
       backgroundColor: '#fff',
+    },
+    textInput: {
+      alignSelf: 'stretch',
+      padding: 15,
+      marginBottom: 20,
+      backgroundColor: '#fff'
     },
     input:{
       backgroundColor: '#000',
