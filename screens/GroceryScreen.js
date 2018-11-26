@@ -145,63 +145,48 @@ export default class GroceryScreen extends React.Component {
             btnText
     } = styles;
     return(
+      <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
       <Container style={styles.container}>
         <Content>
-          <List
-            enableEmptySections
-            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-
-            // render={data=>
-            //   <Button>
-            //     <Text> Add </Text>
-            //   </Button>
-            // }
-
-            renderRow={ data =>
-              <Card>
-                <CardItem>
-                  <Text>{data.val().Item}</Text>
-                </CardItem>
-              </Card>
-            }
-
-            renderLeftHiddenRow={data =>
-              <Button full  onPress={ () => this.addRow(data)}>
-                <Icon name='information-circle'/>
-              </Button>
-                }
-
-            renderRightHiddenRow={data =>
-              <Button full danger  onPress={ () => this.deleteRow(data)}>
-                <Icon name='trash'/>
-              </Button>
-                }
-
-              leftOpenValue={-75}
-              rightOpenValue={-75}
-          />
-          <TextInput
-            style={textInput}
-            placeholder='Item'
-            onChangeText={
-              (groceryItem) => this.setState({groceryItem})
-            }
-            underlineColorAndroid='transparent'
-          />
-          <TouchableOpacity
-            style={btn}
-            onPress={
-              () => this.addRow(this.state.groceryItem)
-          }>
-            <Text style={btnText}> ADD ITEM </Text>
-          </TouchableOpacity>
+        {this.state.listViewData.map((item, index) => {
+          return(
+            <Card key={index}>
+              <CardItem>
+                <Left>
+                  <Body>
+                    <Text>{item.title}</Text>
+                  </Body>
+                </Left>
+                <Right>
+                  <Button full danger  onPress={ () => this.deleteRow(data)}>
+                    <Icon name='trash'/>
+                  </Button>
+                </Right>
+              </CardItem>
+            </Card>
+            <TextInput
+              style={textInput}
+              placeholder='Item'
+              onChangeText={
+                (groceryItem) => this.setState({groceryItem})
+              }
+              underlineColorAndroid='transparent'
+            />
+            <TouchableOpacity
+              style={btn}
+              onPress={
+                () => this.addRow(this.state.groceryItem)
+            }>
+              <Text style={btnText}> ADD ITEM </Text>
+            </TouchableOpacity>
+          );
+        })}
         </Content>
-
       </Container>
-
-
+      </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
-
   }
 }
 
@@ -256,5 +241,8 @@ const styles = StyleSheet.create({
     btnText: {
       color: '#fff',
       fontWeight: 'bold'
+    },
+    wrapperStyle: {
+      flex: 1,
     }
 })
