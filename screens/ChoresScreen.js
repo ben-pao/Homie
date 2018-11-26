@@ -79,6 +79,7 @@ class ChoresScreen extends Component {
         <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
             <View style={containerStyle}>
+              <Text style={headerStyle}>Add a Chore</Text>
               <TextInput
                 style={textInputStyle}
                 placeholder="Chore"
@@ -172,9 +173,6 @@ class ChoresScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  wrapperStyle: {
-    flex: 1,
-  },
   containerStyle: {
     flex: 1,
     // backgroundColor: '#2896d3',
@@ -184,10 +182,13 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
     paddingRight: 40,
   },
+  wrapperStyle: {
+    flex: 1,
+  },
   headerStyle: {
     fontSize:24,
     marginBottom:60,
-    color: '#000',
+    color: '#fff',
     // color: '#fff',
     fontWeight: 'bold',
   },
@@ -200,7 +201,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     alignSelf: 'stretch',
     // backgroundColor: '#01c853',
-    backgroundColor: '#000',
+    backgroundColor: 'hotpink',
     // color: '#fff',
     padding: 20,
     alignItems: 'center',
