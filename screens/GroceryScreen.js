@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView, TextInput, TouchableOpacity } from 'react-native';
-import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
+import { StyleSheet, Text, View, StatusBar, ListView, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView} from 'react-native';
+import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem, Left, Right } from 'native-base';
 
 import * as firebase from 'firebase';
 
@@ -146,43 +146,43 @@ export default class GroceryScreen extends React.Component {
     } = styles;
     return(
       <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-      <Container style={styles.container}>
-        <Content>
-        {this.state.listViewData.map((item, index) => {
-          return(
-            <Card key={index}>
-              <CardItem>
-                <Left>
-                  <Text>{item.title}</Text>
-                </Left>
-                <Right>
-                  <Button full danger  onPress={ () => this.deleteRow(data)}>
-                    <Icon name='trash'/>
-                  </Button>
-                </Right>
-              </CardItem>
-            </Card>
-          );
-        })}
-        <TextInput
-          style={textInput}
-          placeholder='Item'
-          onChangeText={
-            (groceryItem) => this.setState({groceryItem})
-          }
-          underlineColorAndroid='transparent'
-        />
-        <TouchableOpacity
-          style={btn}
-          onPress={
-            () => this.addRow(this.state.groceryItem)
-          }>
-          <Text style={btnText}> ADD ITEM </Text>
-        </TouchableOpacity>
-        </Content>
-      </Container>
-      </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+        <Container style={styles.container}>
+          <Content>
+          {this.state.listViewData.map((item, index) => {
+            return(
+              <Card key={index}>
+                <CardItem>
+                  <Left>
+                    <Text>{item.title}</Text>
+                  </Left>
+                  <Right>
+                    <Button full danger  onPress={ () => this.deleteRow(data)}>
+                      <Icon name='trash'/>
+                    </Button>
+                  </Right>
+                </CardItem>
+              </Card>
+            );
+          })}
+          <TextInput
+            style={textInput}
+            placeholder='Item'
+            onChangeText={
+              (groceryItem) => this.setState({groceryItem})
+            }
+            underlineColorAndroid='transparent'
+          />
+          <TouchableOpacity
+            style={btn}
+            onPress={
+              () => this.addRow(this.state.groceryItem)
+            }>
+            <Text style={btnText}> ADD ITEM </Text>
+          </TouchableOpacity>
+          </Content>
+        </Container>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     );
   }
