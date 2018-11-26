@@ -154,9 +154,7 @@ export default class GroceryScreen extends React.Component {
             <Card key={index}>
               <CardItem>
                 <Left>
-                  <Body>
-                    <Text>{item.title}</Text>
-                  </Body>
+                  <Text>{item.title}</Text>
                 </Left>
                 <Right>
                   <Button full danger  onPress={ () => this.deleteRow(data)}>
@@ -165,23 +163,23 @@ export default class GroceryScreen extends React.Component {
                 </Right>
               </CardItem>
             </Card>
-            <TextInput
-              style={textInput}
-              placeholder='Item'
-              onChangeText={
-                (groceryItem) => this.setState({groceryItem})
-              }
-              underlineColorAndroid='transparent'
-            />
-            <TouchableOpacity
-              style={btn}
-              onPress={
-                () => this.addRow(this.state.groceryItem)
-              }
-              <Text style={btnText}> ADD ITEM </Text>
-            </TouchableOpacity>
           );
         })}
+        <TextInput
+          style={textInput}
+          placeholder='Item'
+          onChangeText={
+            (groceryItem) => this.setState({groceryItem})
+          }
+          underlineColorAndroid='transparent'
+        />
+        <TouchableOpacity
+          style={btn}
+          onPress={
+            () => this.addRow(this.state.groceryItem)
+          }>
+          <Text style={btnText}> ADD ITEM </Text>
+        </TouchableOpacity>
         </Content>
       </Container>
       </TouchableWithoutFeedback>
