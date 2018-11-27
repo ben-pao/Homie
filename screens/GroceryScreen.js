@@ -197,7 +197,7 @@ export default class GroceryScreen extends React.Component {
               <Card key={index}>
                 <CardItem>
                   <Left>
-                    <Text>{item.title}</Text>
+                    <Text>{item.item}</Text>
                   </Left>
                   <Right>
                     <Button full danger  onPress={ () => this.deleteRow(data)}>
