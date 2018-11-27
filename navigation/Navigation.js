@@ -51,7 +51,6 @@ const SettingsStack = createStackNavigator(
 const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    // Groceries: GroceriesScreen,
     Groceries: GroceryScreen,
     Chores: ChoresScreen,
     Payments: PaymentsScreen,
