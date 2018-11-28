@@ -1,6 +1,7 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/Entypo';
 import { StyleSheet, Text, View, StatusBar, ListView, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView} from 'react-native';
-import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem, Left, Body, Right } from 'native-base';
+import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem, Left, Body, Right } from 'native-base';
 
 import * as firebase from 'firebase';
 
@@ -148,7 +149,7 @@ export default class GroceryScreen extends React.Component {
     console.log("in deleteRow")
     console.log(data);
     console.log(this.state.houseID)
-    //
+
     var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
     console.log(data.val().ItemKey);
     //remove the item
@@ -219,7 +220,7 @@ export default class GroceryScreen extends React.Component {
                     <Left>
                       <TextInput
                         style={styles.textInput}
-                        placeholder='Item'
+                        placeholder='Add Item'
                         onChangeText={
                           (groceryItem) => this.setState({groceryItem})
                         }
@@ -227,8 +228,8 @@ export default class GroceryScreen extends React.Component {
                       />
                     </Left>
                     <Right>
-                      <Button add danger onPress={ () => this.addRow(this.state.groceryItem)}>
-                        <Icon name='add'/>
+                      <Button style={styles.btn} add danger onPress={ () => this.addRow(this.state.groceryItem)}>
+                        <Icon name='plus'/>
                       </Button>
                     </Right>
                   </CardItem>
@@ -274,7 +275,8 @@ const styles = StyleSheet.create({
     },
     btn: {
       alignSelf: 'flex-end',
-      right: 0
+      right: 0,
+      backgroundColor: 'transparent'
     },
     btnText: {
       color: '#fff',
