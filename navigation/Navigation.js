@@ -14,6 +14,9 @@ import ProfileScreen from '../screens/ProfileScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AboutScreen from '../screens/AboutScreen';
 import PaymentsScreen from '../screens/PaymentsScreen';
+import ChargesPaymentsScreen from '../screens/ChargesPaymentsScreen';
+import RequestPaymentsScreen from '../screens/RequestPaymentsScreen';
+import CreatePaymentsScreen from '../screens/CreatePaymentsScreen';
 
 import React from 'react';
 
@@ -40,6 +43,20 @@ const SettingsStack = createStackNavigator(
     AddPeople: AddPeopleScreen,
     Profile: ProfileScreen,
     About: AboutScreen
+  },
+  {
+      navigationOptions: {
+        header: null,
+    }
+  }
+);
+
+const PaymentsStack = createStackNavigator(
+  {
+    Payments: PaymentsScreen,
+    Charges: ChargesPaymentsScreen,
+    Requests: RequestPaymentsScreen,
+    CreatePayments: CreatePaymentsScreen
   },
   {
       navigationOptions: {
@@ -108,6 +125,7 @@ const AppStack = createStackNavigator(
   {
     TabNav: TabNavigator,
     Settings: SettingsStack,
+    Payment: PaymentsStack,
   },
   {
     // initialRouteName: 'TabNavigator',
