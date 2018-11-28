@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Entypo';
-import { StyleSheet, Text, View, StatusBar, ListView, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, ListView, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem, Left, Body, Right } from 'native-base';
 
 import * as firebase from 'firebase';
@@ -181,8 +181,8 @@ export default class GroceryScreen extends React.Component {
     var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
 
     //remove all the items
-    while (groceryhouseRef.hasChildNodes()) {
-      groceryhouseRef.child(data.val().ItemKey).remove();
+    while (groceryhouseRef.firstChild) {
+      groceryhouseRef.removeChild(groceryhouseRef.firstChild);
     }
   }
 
@@ -240,8 +240,10 @@ export default class GroceryScreen extends React.Component {
                     </Right>
                   </CardItem>
                 </Card>
-                <Button clear danger onPress={ () => this.deleteAll(data)}>
-                  <Text> Clear List </Text>
+                <Button style={styles.clearBtn} clear danger onPress={ () => this.deleteAll(data)}>
+                  <Body>
+                    <Text style={styles.clearTxt}> Clear List </Text>
+                  </Body>
                 </Button>
               </Content>
             </Container>
@@ -276,7 +278,6 @@ const styles = StyleSheet.create({
     },
     textInput: {
       alignSelf: 'stretch',
-      padding: 15,
       backgroundColor: '#fff'
     },
     input:{
@@ -290,6 +291,14 @@ const styles = StyleSheet.create({
     btnText: {
       color: '#fff',
       fontWeight: 'bold'
+    },
+    clearBtn: {
+      alignSelf: 'stretch',
+      backgroundColor: '#000'
+    },
+    clearTxt:{
+      alignSelf: 'center',
+      color: '#fff'
     },
     wrapperStyle: {
       flex: 1
