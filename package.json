@@ -7,14 +7,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "jest",
-    "testu": "node_modules/.bin/jest -u"
+    "test": "node_modules/.bin/jest"
   },
   "jest": {
-    "preset": "jest-expo",
-    "transformIgnorePatterns": [
-      "node_modules/(?!react-native|expo|react-navigation|native-base-shoutem-theme|@shoutem/theme|@shoutem/animation|@shoutem/ui|tcomb-form-native)"
-    ]
+    "preset": "jest-expo"
   },
   "dependencies": {
     "expo": "^30.0.2",
@@ -25,7 +21,6 @@
     "react-navigation": "^2.18.2"
   },
   "devDependencies": {
-    "jest": "^23.6.0",
     "jest-expo": "^31.0.0"
   }
 }
