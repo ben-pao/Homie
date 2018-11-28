@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, ListView, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView} from 'react-native';
-import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem, Left, Right } from 'native-base';
+import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem, Left, Body, Right } from 'native-base';
 
 import * as firebase from 'firebase';
 
@@ -198,10 +198,15 @@ export default class GroceryScreen extends React.Component {
                     <Card key={index}>
                       <CardItem>
                         <Left>
-                          <Text>{data.val().Item}</Text>
+                          <Text style={styles.text}>
+                            {data.val().Item}
+                          </Text>
+                          <Text style={styles.cardUser}>
+                            {"\n"}{"\n"}{"\n"}-{data.val().UserName}
+                          </Text>
                         </Left>
                         <Right>
-                          <Button full danger onPress={ () => this.deleteRow(data)}>
+                          <Button style={styles.btn} full danger onPress={ () => this.deleteRow(data)}>
                             <Icon name='trash'/>
                           </Button>
                         </Right>
@@ -213,7 +218,7 @@ export default class GroceryScreen extends React.Component {
                   <CardItem>
                     <Left>
                       <TextInput
-                        style={textInput}
+                        style={styles.textInput}
                         placeholder='Item'
                         onChangeText={
                           (groceryItem) => this.setState({groceryItem})
@@ -250,6 +255,15 @@ const styles = StyleSheet.create({
     blackColor: {
       backgroundColor: '#fff'
     },
+    cardUser: {
+      alignSelf: 'center',
+      fontSize: 10,
+      color: 'grey'
+    },
+    text: {
+      alignSelf: 'center',
+      fontWeight: 'bold'
+    },
     textInput: {
       alignSelf: 'stretch',
       padding: 15,
@@ -259,13 +273,8 @@ const styles = StyleSheet.create({
       backgroundColor: '#000'
     },
     btn: {
-      alignSelf: 'stretch',
-      // backgroundColor: '#01c853',
-      backgroundColor: '#000',
-      // color: '#fff',
-      padding: 20,
-      alignItems: 'center',
-      margin: 8
+      alignSelf: 'flex-end',
+      right: 0
     },
     btnText: {
       color: '#fff',
