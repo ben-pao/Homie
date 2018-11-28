@@ -172,18 +172,20 @@ export default class GroceryScreen extends React.Component {
     //alert(this.state.houseID);
   }
 
-  deleteAll(data){
+  deleteAll(){
     var user = firebase.auth().currentUser;
     console.log("in deleteAll")
     console.log(data);
     console.log(this.state.houseID)
 
     var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
-
+    groceryhouseRef.remove();
+    var emptyArray = [];
+    this.setState({listViewData : emptyArray});
     //remove all the items
-    while (groceryhouseRef.firstChild) {
-      groceryhouseRef.removeChild(groceryhouseRef.firstChild);
-    }
+    // while (groceryhouseRef.firstChild) {
+    //   groceryhouseRef.removeChild(groceryhouseRef.firstChild);
+    // }
   }
 
   render() {
@@ -240,7 +242,7 @@ export default class GroceryScreen extends React.Component {
                     </Right>
                   </CardItem>
                 </Card>
-                <Button style={styles.clearBtn} clear danger onPress={ () => this.deleteAll(data)}>
+                <Button style={styles.clearBtn} clear danger onPress={ () => this.deleteAll()}>
                   <Body>
                     <Text style={styles.clearTxt}> Clear List </Text>
                   </Body>
