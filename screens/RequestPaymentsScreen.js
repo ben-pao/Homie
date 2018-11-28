@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView } from 'react-native';
-import { Card, CardItem, Body, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
+import { StyleSheet, Text, View, StatusBar, ListView, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
+import { Keyboard } from 'react-native';
 import * as firebase from 'firebase';
 
 import { createStackNavigator } from 'react-navigation';
@@ -8,7 +9,7 @@ import { createStackNavigator } from 'react-navigation';
 var data = []
 
 
-export default class GroceriesScreen extends React.Component {
+export default class RequestPaymentsScreen extends React.Component {
 
   constructor(props){
     super(props);
@@ -18,46 +19,144 @@ export default class GroceriesScreen extends React.Component {
 
     this.state = {
       listViewData: data,
-      newContact: "" // the grocery item being added
+      groceryItem: "",
+      houseID: "",
+      userID: "",
+      userName: "",
     }
   }
 
 
   componentDidMount(){
+    var that = this
+    console.log("in componenet did mount")
+    that.setStates();
+  //  console.log(houseID);
+  //  var houseid = this.getHouseID();
+//  console.log(that.state.houseID)
+//    that.getPreviousItems();
+//     var groceryhouseRef = firebase.database().ref('/Grocery')
+// //   var groceryhouseRef = firebase.database().ref('/Grocery').child(that.state.houseID)
+//     groceryhouseRef.on('child_added', function(data){
+//       var newData = [... that.state.listViewData]
+//       newData.push(data)
+//       that.setState({listViewData : newData})
+//     })
 
+  }
+
+
+  setStates(){
     var that = this;
+    var user = firebase.auth().currentUser;
+    if(user == null){
+      alert("not logged in");
+      return;
+    }
+    var uid = user.uid;
+    //alert(uid);
+    //var key = firebase.database().ref('/Users').push().key;
+    var userData = "";
+    var userDBref = firebase.database().ref('/Users').child(uid)
 
-    firebase.database().ref('/Grocery').on('child_added', function(data){
+    //set the states with info in users table
+    userDBref.on('value', function(snapshot){
+      userData = snapshot.val();
+      console.log(userData.HouseID);
+      that.setState({
+        houseID: userData.HouseID,
+        userID: uid,
+        userName: userData.FirstName
+      });
 
-      var newData = [... that.state.listViewData]
-      newData.push(data)
-      that.setState({listViewData : newData})
-    })
+      //setting data with data in database
+      var requestpaymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
+      var userRequestPaymentsRef = requestpaymentsRef.child(uid).child('Requested');
+         userRequestPaymentsRef.on('child_added', function(data){
+      //  groceryhouseRef.on('child_changed', function(data){
+           console.log("inchild_added")
+           console.log(data)
+           var newData = [... that.state.listViewData]
+           newData.push(data)
+           that.setState({listViewData : newData})
+         });
+         userRequestPaymentsRef.on('child_removed', function(data){
+      //  groceryhouseRef.on('child_changed', function(data){
+           console.log("child_removed")
+           console.log(data)
+           //console.log(data.val().ItemKey)
+           var newData = [... that.state.listViewData]
 
+          // newData.push(data)
+          //var index = newData.indexOf(data.target);
+          //var index = newData.findIndex(x => x.ItemKey === data.ItemKey);
+          for(var i = newData.length - 1; i >= 0; i--){
+            console.log(i);
+            console.log(newData)
+            if(newData[i].val().PaymentID == data.val().PaymentID){
+              console.log(newData[i].val().PaymentID)
+              console.log("hit at index")
+              console.log(i);
+              newData.splice(i, 1);
+              break;
+            }
+          }
+        //  console.log(index);
+        //  newData.splice(index, 1);
+           that.setState({listViewData : newData})
+         });
+      console.log(that.state.houseID);
+    //  return userData.HouseID;
+    } , function (error) {
+     console.log("Error: " + error.code);
+    });
   }
 
-  addRow(data){
-    var key = firebase.database().ref('/Grocery').push().key
-    console.log(key)
-    firebase.database().ref('/Grocery').child(key).set({item:data})
+  deleteRow(data){
+      var user = firebase.auth().currentUser;
+      console.log("in deleteRow")
+      console.log(data);
+      console.log(this.state.houseID)
+      //
+      var requestpaymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
+      var userRequestPaymentsRef = requestpaymentsRef.child(uid).child('Requested');
+      //remove the item
+      userRequestPaymentsRef.child(data.val().PaymentID).remove();
+      // userRequestPaymentsRef.on('child_changed', function(snapshot){
+      //   var newData = snapshot.val();
+      //   console.log("in child changed")
+      //   console.log(newData);
+      // });
+    //  var array = [... this.state.listViewData]; // make a separate copy of the array
+    //  var index = array.indexOf(data.target.value);
+    //  var index = array.indexOf(data);
+    //  if (index !== -1) {
+    //      array.splice(index, 1);
+    //      this.setState({listViewData : array});
+  //        console.log(this.state.listViewData);
+    //  }
+
+
+      //alert(this.state.houseID);
   }
 
-  deleteRow(){
-
-  }
-
-  showInformation() {
-
-  }
 
   render() {
+    const { container,
+            wrapper,
+            header,
+            textInput,
+            btn,
+            btnText
+    } = styles;
     return(
+      <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
       <Container style={styles.container}>
         <Content>
           <List
-          enableEmptySections
+            enableEmptySections
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-            style={styles.blackColor}
 
             // render={data=>
             //   <Button>
@@ -66,47 +165,93 @@ export default class GroceriesScreen extends React.Component {
             // }
 
             renderRow={ data =>
-
-                <Card>
-                  <CardItem>
-                    <Text>{data.val().item}</Text>
-                  </CardItem>
-                </Card>
-
+              // <Card>
+              //   <CardItem>
+              //     <Text>{data.val().Item}</Text>
+              //   </CardItem>
+              // </Card>
+              <ListItem>
+                 <Text>{data.val().PaymentAmount}</Text>
+             </ListItem>
             }
 
-            renderLeftHiddenRow={data =>
-              <Button full  onPress={ () => this.addRow(data)}>
-                <Icon name='information-circle'/>
-              </Button>
-                }
 
-            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-              <Button full danger  onPress={ () => this.deleteRow(secId,rowId,rowMap,data)}>
+
+            renderRightHiddenRow={data =>
+              <Button full danger  onPress={ () => this.deleteRow(data)}>
                 <Icon name='trash'/>
               </Button>
                 }
 
-
-
               leftOpenValue={-75}
               rightOpenValue={-75}
           />
+
         </Content>
+
       </Container>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+
+
     );
+
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fad',
-  },
-  blackColor: {
-    backgroundColor: '#fff',
-  },
-  input:{
-    backgroundColor: '#000',
-  }
+    // input:{
+    //   backgroundColor: '#000',
+    // },
+    // container: {
+    //   flex: 1,
+    //   // backgroundColor: '#2896d3',
+    //   backgroundColor: '#fff',
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
+    //   paddingLeft: 40,
+    //   paddingRight: 40,
+    // },
+    // wrapper: {
+    //   flex: 1,
+    // },
+    // header: {
+    //   fontSize:24,
+    //   marginBottom:60,
+    //   color: '#000',
+    //   // color: '#fff',
+    //   fontWeight: 'bold',
+    // },
+    // textInput: {
+    //   alignSelf: 'stretch',
+    //   padding: 15,
+    //   marginBottom: 20,
+    //   backgroundColor: '#fff'
+    // },
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+    },
+    blackColor: {
+      backgroundColor: '#fff',
+    },
+    input:{
+      backgroundColor: '#000',
+    },
+    btn: {
+      alignSelf: 'stretch',
+      // backgroundColor: '#01c853',
+      backgroundColor: '#000',
+      // color: '#fff',
+      padding: 20,
+      alignItems: 'center',
+      margin: 8
+    },
+    btnText: {
+      color: '#fff',
+      fontWeight: 'bold'
+    },
+    wrapperStyle: {
+      flex: 1,
+    }
 })
