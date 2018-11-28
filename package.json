@@ -1,17 +1,20 @@
 {
-  "name": "empty-project-template",
+  "name": "Homie",
   "main": "node_modules/expo/AppEntry.js",
-  "jest": {
-    "preset": "react-native"
-  },
   "private": true,
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "node_modules/.bin/jest",
-    "test-updated": "node_modules/.bin/jest -u"
+    "test": "jest",
+    "testu": "node_modules/.bin/jest -u"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!react|@expo|expo)"
+    ]
   },
   "dependencies": {
     "expo": "^30.0.2",
