@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  all_tests:
+  build:
     branches:
       only:
         - dev-ben
