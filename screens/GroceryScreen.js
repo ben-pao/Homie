@@ -165,19 +165,25 @@ export default class GroceryScreen extends React.Component {
   //  if (index !== -1) {
   //      array.splice(index, 1);
   //      this.setState({listViewData : array});
-//        console.log(this.state.listViewData);
+  //      console.log(this.state.listViewData);
   //  }
 
 
     //alert(this.state.houseID);
   }
 
-  iEnumerate(data){
+  deleteAll(data){
+    var user = firebase.auth().currentUser;
+    console.log("in deleteAll")
+    console.log(data);
+    console.log(this.state.houseID)
 
-  }
+    var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
 
-  showInformation() {
-
+    //remove all the items
+    while (groceryhouseRef.hasChildNodes()) {
+      groceryhouseRef.child(data.val().ItemKey).remove();
+    }
   }
 
   render() {
@@ -234,6 +240,9 @@ export default class GroceryScreen extends React.Component {
                     </Right>
                   </CardItem>
                 </Card>
+                <Button clear danger onPress={ () => this.deleteAll(data)}>
+                  <Text> Clear List </Text>
+                </Button>
               </Content>
             </Container>
           </TouchableWithoutFeedback>
