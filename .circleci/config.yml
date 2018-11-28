@@ -5,6 +5,10 @@
 version: 2
 jobs:
   all_tests:
+    branches:
+      only:
+        - dev-ben
+
     docker:
       # specify the version you desire here
       - image: circleci/node:7.10
@@ -35,12 +39,3 @@ jobs:
 
       # run tests!
       - run: yarn test
-
-workflows:
-  version: 2
-  run_all_tests:
-    jobs:
-      all_tests:
-        branches:
-          only:
-            - dev-ben
