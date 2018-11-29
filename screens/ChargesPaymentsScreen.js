@@ -9,7 +9,7 @@ import { createStackNavigator } from 'react-navigation';
 var data = []
 
 
-export default class ChargesPaymentsScreen extends React.Component {
+export default class RequestPaymentsScreen extends React.Component {
 
   constructor(props){
     super(props);
@@ -31,52 +31,10 @@ export default class ChargesPaymentsScreen extends React.Component {
     var that = this
     console.log("in componenet did mount")
     that.setStates();
-  //  console.log(houseID);
-  //  var houseid = this.getHouseID();
-//  console.log(that.state.houseID)
-//    that.getPreviousItems();
-//     var groceryhouseRef = firebase.database().ref('/Grocery')
-// //   var groceryhouseRef = firebase.database().ref('/Grocery').child(that.state.houseID)
-//     groceryhouseRef.on('child_added', function(data){
-//       var newData = [... that.state.listViewData]
-//       newData.push(data)
-//       that.setState({listViewData : newData})
-//     })
+
 
   }
 
-  getPreviousItems(){
-      var that = this
-    var groceryhouseRef = firebase.database().ref('/Grocery').child(that.state.houseID)
-       groceryhouseRef.on('child_added', function(data){
-         var newData = [... that.state.listViewData]
-         newData.push(data)
-         that.setState({listViewData : newData})
-       });
-  }
-
-  addRow(data){
-  //  var houseid = this.getHouseID();
-  //  console.log(houseid);
-    //var key = firebase.database().ref('/Grocery').push().key
-    var that = this
-    var user = firebase.auth().currentUser;
-    if(user == null){
-      return;
-    }
-    var uid = user.uid;
-
-    var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
-    var key = groceryhouseRef.push().key
-    console.log(key)
-    groceryhouseRef.child(key).set({
-      Item: data,
-      UID: uid,
-      UserName: that.state.userName,
-      ItemKey: key
-
-    });
-  }
 
   setStates(){
     var that = this;
@@ -102,8 +60,9 @@ export default class ChargesPaymentsScreen extends React.Component {
       });
 
       //setting data with data in database
-      var groceryhouseRef = firebase.database().ref('/Grocery').child(userData.HouseID)
-         groceryhouseRef.on('child_added', function(data){
+      var paymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
+      var userPaymentsRef = requestpaymentsRef.child(uid).child('Payment');
+         userPaymentsRef.on('child_added', function(data){
       //  groceryhouseRef.on('child_changed', function(data){
            console.log("inchild_added")
            console.log(data)
@@ -111,11 +70,11 @@ export default class ChargesPaymentsScreen extends React.Component {
            newData.push(data)
            that.setState({listViewData : newData})
          });
-         groceryhouseRef.on('child_removed', function(data){
+         userPaymentsRef.on('child_removed', function(data){
       //  groceryhouseRef.on('child_changed', function(data){
            console.log("child_removed")
            console.log(data)
-           console.log(data.val().ItemKey)
+           //console.log(data.val().ItemKey)
            var newData = [... that.state.listViewData]
 
           // newData.push(data)
@@ -124,8 +83,8 @@ export default class ChargesPaymentsScreen extends React.Component {
           for(var i = newData.length - 1; i >= 0; i--){
             console.log(i);
             console.log(newData)
-            if(newData[i].val().ItemKey == data.val().ItemKey){
-              console.log(newData[i].val().ItemKey)
+            if(newData[i].val().PaymentID == data.val().PaymentID){
+              console.log(newData[i].val().PaymentID)
               console.log("hit at index")
               console.log(i);
               newData.splice(i, 1);
@@ -149,15 +108,15 @@ export default class ChargesPaymentsScreen extends React.Component {
       console.log(data);
       console.log(this.state.houseID)
       //
-      var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
-      console.log(data.val().ItemKey);
+      var requestpaymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
+      var userRequestPaymentsRef = requestpaymentsRef.child(uid).child('Requested');
       //remove the item
-      groceryhouseRef.child(data.val().ItemKey).remove();
-      groceryhouseRef.on('child_changed', function(snapshot){
-        var newData = snapshot.val();
-        console.log("in child changed")
-        console.log(newData);
-      });
+      userRequestPaymentsRef.child(data.val().PaymentID).remove();
+      // userRequestPaymentsRef.on('child_changed', function(snapshot){
+      //   var newData = snapshot.val();
+      //   console.log("in child changed")
+      //   console.log(newData);
+      // });
     //  var array = [... this.state.listViewData]; // make a separate copy of the array
     //  var index = array.indexOf(data.target.value);
     //  var index = array.indexOf(data);
@@ -171,13 +130,6 @@ export default class ChargesPaymentsScreen extends React.Component {
       //alert(this.state.houseID);
   }
 
-  iEnumerate(data){
-
-  }
-
-  showInformation() {
-
-  }
 
   render() {
     const { container,
@@ -191,6 +143,7 @@ export default class ChargesPaymentsScreen extends React.Component {
       <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
       <Container style={styles.container}>
+        <Text>YOURE BEING CHARGED</Text>
         <Content>
           <List
             enableEmptySections
@@ -209,15 +162,11 @@ export default class ChargesPaymentsScreen extends React.Component {
               //   </CardItem>
               // </Card>
               <ListItem>
-                 <Text>{data.val().Item}</Text>
+                 <Text>{data.val().PaymentAmount}</Text>
              </ListItem>
             }
 
-            renderLeftHiddenRow={data =>
-              <Button full  onPress={ () => this.addRow(data)}>
-                <Icon name='information-circle'/>
-              </Button>
-                }
+
 
             renderRightHiddenRow={data =>
               <Button full danger  onPress={ () => this.deleteRow(data)}>
@@ -228,21 +177,7 @@ export default class ChargesPaymentsScreen extends React.Component {
               leftOpenValue={-75}
               rightOpenValue={-75}
           />
-          <TextInput
-            style={textInput}
-            placeholder='Item'
-            onChangeText={
-              (groceryItem) => this.setState({groceryItem})
-            }
-            underlineColorAndroid='transparent'
-          />
-          <TouchableOpacity
-            style={btn}
-            onPress={
-              () => this.addRow(this.state.groceryItem)
-          }>
-            <Text style={btnText}> ADD ITEM </Text>
-          </TouchableOpacity>
+
         </Content>
 
       </Container>
