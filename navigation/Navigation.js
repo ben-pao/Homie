@@ -3,7 +3,6 @@ import {Ionicons} from '@expo/vector-icons';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import GroceryScreen from '../screens/GroceryScreen';
-import GroceriesScreen from '../screens/GroceriesScreen';
 import ChoresScreen from '../screens/ChoresScreen';
 import HomeScreen from '../screens/HomeScreen';
 import CreateHouseScreen from '../screens/CreateHouseScreen';
@@ -68,7 +67,6 @@ const PaymentsStack = createStackNavigator(
 const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    // Groceries: GroceriesScreen,
     Groceries: GroceryScreen,
     Chores: ChoresScreen,
     Payments: PaymentsScreen,
