@@ -2,10 +2,7 @@
   "name": "Homie",
   "main": "node_modules/expo/AppEntry.js",
   "jest": {
-    "preset": "react-native",
-    "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|@expo|expo|native-base-shoutem-theme|native-base|react-native-easy-grid|react-native-drawer|expo-constants|expo-react-native-adapter)/)"
-    ]
+    "preset": "jest-expo"
   },
   "private": true,
   "scripts": {
