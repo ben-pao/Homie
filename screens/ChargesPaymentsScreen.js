@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
-import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
-import { Keyboard } from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
+import { StyleSheet, Text, View, StatusBar, ListView, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem, Left, Body, Right } from 'native-base';
 import * as firebase from 'firebase';
 
 import { createStackNavigator } from 'react-navigation';
@@ -9,7 +9,7 @@ import { createStackNavigator } from 'react-navigation';
 var data = []
 
 
-export default class RequestPaymentsScreen extends React.Component {
+export default class ChargesPaymentsScreen extends React.Component {
 
   constructor(props){
     super(props);
@@ -61,7 +61,7 @@ export default class RequestPaymentsScreen extends React.Component {
 
       //setting data with data in database
       var paymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
-      var userPaymentsRef = requestpaymentsRef.child(uid).child('Payment');
+      var userPaymentsRef = paymentsRef.child(uid).child('Payment');
          userPaymentsRef.on('child_added', function(data){
       //  groceryhouseRef.on('child_changed', function(data){
            console.log("inchild_added")
@@ -108,10 +108,10 @@ export default class RequestPaymentsScreen extends React.Component {
       console.log(data);
       console.log(this.state.houseID)
       //
-      var requestpaymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
-      var userRequestPaymentsRef = requestpaymentsRef.child(uid).child('Requested');
+      var paymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
+      var userPaymentsRef = paymentsRef.child(uid).child('Payment');
       //remove the item
-      userRequestPaymentsRef.child(data.val().PaymentID).remove();
+      userPaymentsRef.child(data.val().PaymentID).remove();
       // userRequestPaymentsRef.on('child_changed', function(snapshot){
       //   var newData = snapshot.val();
       //   console.log("in child changed")
@@ -145,38 +145,31 @@ export default class RequestPaymentsScreen extends React.Component {
       <Container style={styles.container}>
         <Text>YOURE BEING CHARGED</Text>
         <Content>
-          <List
-            enableEmptySections
-            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-
-            // render={data=>
-            //   <Button>
-            //     <Text> Add </Text>
-            //   </Button>
-            // }
-
-            renderRow={ data =>
-              // <Card>
-              //   <CardItem>
-              //     <Text>{data.val().Item}</Text>
-              //   </CardItem>
-              // </Card>
-              <ListItem>
-                 <Text>{data.val().PaymentAmount}</Text>
-             </ListItem>
-            }
-
-
-
-            renderRightHiddenRow={data =>
-              <Button full danger  onPress={ () => this.deleteRow(data)}>
-                <Icon name='trash'/>
-              </Button>
-                }
-
-              leftOpenValue={-75}
-              rightOpenValue={-75}
-          />
+        {this.state.listViewData.map((data, index) => {
+          return(
+            <Card key={index}>
+              <CardItem>
+                <Left>
+                  <Text style={styles.text}>
+                    Payment Name:
+                    {/*data.val().*/}
+                  </Text>
+                  <Text style={styles.text}>
+                    Charger:
+                    {data.val().Pimp}
+                  </Text>
+                  <Text style={styles.cardUser}>
+                  Amount :
+                    {"\n"}{"\n"}{"\n"}-{data.val().PaymentAmount}
+                  </Text>
+                </Left>
+                <Right>
+                  
+                </Right>
+              </CardItem>
+            </Card>
+          );
+        })}
 
         </Content>
 
@@ -222,6 +215,15 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
+    },
+    cardUser: {
+      alignSelf: 'center',
+      fontSize: 10,
+      color: 'grey'
+    },
+    text: {
+      alignSelf: 'center',
+      fontWeight: 'bold'
     },
     blackColor: {
       backgroundColor: '#fff',

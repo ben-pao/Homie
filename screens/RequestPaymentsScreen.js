@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
-import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
-import { Keyboard } from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
+import { StyleSheet, Text, View, StatusBar, ListView, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem, Left, Body, Right } from 'native-base';
+
 import * as firebase from 'firebase';
 
 import { createStackNavigator } from 'react-navigation';
@@ -152,44 +153,38 @@ export default class RequestPaymentsScreen extends React.Component {
     return(
       <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-      <Container style={styles.container}>
-        <Content>
-          <List
-            enableEmptySections
-            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+          <Container style={styles.container}>
+            <Content>
+            {this.state.listViewData.map((data, index) => {
+              return(
+                <Card key={index}>
+                  <CardItem>
+                    <Left>
+                      <Text style={styles.text}>
+                        Payment Name:
+                        {data.val().PaymentName}
+                      </Text>
+                      <Text style={styles.text}>
+                        Charged:
+                        {data.val().Johns}
+                      </Text>
 
-            // render={data=>
-            //   <Button>
-            //     <Text> Add </Text>
-            //   </Button>
-            // }
+                      <Text style={styles.cardUser}>
+                      Amount :
+                        {"\n"}{"\n"}{"\n"}-{data.val().PaymentAmount}
+                      </Text>
+                    </Left>
+                    <Right>
 
-            renderRow={ data =>
-              // <Card>
-              //   <CardItem>
-              //     <Text>{data.val().Item}</Text>
-              //   </CardItem>
-              // </Card>
-              <ListItem>
-                 <Text>{data.val().PaymentAmount}</Text>
-             </ListItem>
-            }
+                    </Right>
+                  </CardItem>
+                </Card>
+              );
+            })}
 
+            </Content>
 
-
-            renderRightHiddenRow={data =>
-              <Button full danger  onPress={ () => this.deleteRow(data)}>
-                <Icon name='trash'/>
-              </Button>
-                }
-
-              leftOpenValue={-75}
-              rightOpenValue={-75}
-          />
-
-        </Content>
-
-      </Container>
+          </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
 
@@ -231,6 +226,15 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
+    },
+    text: {
+      alignSelf: 'center',
+      fontWeight: 'bold'
+    },
+    cardUser: {
+      alignSelf: 'center',
+      fontSize: 10,
+      color: 'grey'
     },
     blackColor: {
       backgroundColor: '#fff',

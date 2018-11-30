@@ -19,7 +19,7 @@ export default class PaymentsScreen extends React.Component {
       listViewData: data,
       paymentName: '',
       paymentQuantity: '',
-      johns: ''
+      johns: '',
     }
   }
   componentDidMount(){
@@ -77,10 +77,21 @@ export default class PaymentsScreen extends React.Component {
         userName: userData.FirstName
       });
       console.log(that.state.houseID);
+      var userHouse = firebase.database().ref('/Houses').child(userData.HouseID);
+      userHouse.on('value', function(snapshot){
+        that.setState({
+          listViewData: snapshot.val().Users,
+        });
+        console.log('houseuserlist');
+        console.log(that.state.listViewData);
+      });
     //  return userData.HouseID;
     } , function (error) {
      console.log("Error: " + error.code);
     });
+
+
+
   }
 
 
@@ -155,6 +166,16 @@ export default class PaymentsScreen extends React.Component {
               }
               underlineColorAndroid='transparent'
             />
+
+            {/*this.state.listViewData.map((data, index) => {
+              return(
+                <Text>
+                {data.val()}
+                </Text>
+              );
+            })*/}
+            {/*<Text>this.state.listViewData</Text>
+            */}
             <TouchableOpacity
               style={buttonStyle}
               onPress={
