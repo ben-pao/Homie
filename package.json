@@ -4,7 +4,7 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!native-base-shoutem-theme|@firebase|expo-react-native-adapter|react-native|expo|@expo|native-base)"
+      "node_modules/(?!native-base-shoutem-theme|@firebase|expo-react-native-adapter|react-native|expo|@expo|native-base|jest-expo)"
     ]
   },
   "private": true,
