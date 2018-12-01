@@ -5,8 +5,11 @@ exports[`renders correctly 1`] = `
   style={
     Object {
       "alignItems": "center",
+      "backgroundColor": "#000",
       "flex": 1,
       "justifyContent": "center",
+      "paddingLeft": 40,
+      "paddingRight": 40,
     }
   }
 >
@@ -23,7 +26,7 @@ exports[`renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "stretch",
-        "backgroundColor": "#000",
+        "backgroundColor": "hotpink",
         "margin": 8,
         "opacity": 1,
         "padding": 20,
@@ -36,7 +39,8 @@ exports[`renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
-          "color": "#fff",
+          "color": "#000",
+          "fontFamily": "Cochin",
           "fontWeight": "bold",
         }
       }
@@ -57,7 +61,7 @@ exports[`renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "stretch",
-        "backgroundColor": "#000",
+        "backgroundColor": "hotpink",
         "margin": 8,
         "opacity": 1,
         "padding": 20,
@@ -70,7 +74,8 @@ exports[`renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
-          "color": "#fff",
+          "color": "#000",
+          "fontFamily": "Cochin",
           "fontWeight": "bold",
         }
       }
@@ -91,7 +96,7 @@ exports[`renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "stretch",
-        "backgroundColor": "#000",
+        "backgroundColor": "hotpink",
         "margin": 8,
         "opacity": 1,
         "padding": 20,
@@ -104,12 +109,48 @@ exports[`renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
-          "color": "#fff",
+          "color": "#000",
+          "fontFamily": "Cochin",
           "fontWeight": "bold",
         }
       }
     >
        About Homie 
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "stretch",
+        "backgroundColor": "hotpink",
+        "margin": 8,
+        "opacity": 1,
+        "padding": 20,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#000",
+          "fontFamily": "Cochin",
+          "fontWeight": "bold",
+        }
+      }
+    >
+       Sign out 
     </Text>
   </View>
 </View>
