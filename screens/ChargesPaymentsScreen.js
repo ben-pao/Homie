@@ -152,7 +152,7 @@ export default class ChargesPaymentsScreen extends React.Component {
                 <Left>
                   <Text style={styles.text}>
                     Payment Name:
-                    {/*data.val().*/}
+                    {data.val().PaymentName}
                   </Text>
                   <Text style={styles.text}>
                     Charger:
@@ -164,7 +164,7 @@ export default class ChargesPaymentsScreen extends React.Component {
                   </Text>
                 </Left>
                 <Right>
-                  
+
                 </Right>
               </CardItem>
             </Card>

@@ -178,6 +178,24 @@ export default class RequestPaymentsScreen extends React.Component {
 
                     </Right>
                   </CardItem>
+
+                  <CardItem>
+                  <Left>
+                    <Text style={styles.text}>
+                      Payment Name:
+                      {data.val().PaymentName}
+                    </Text>
+                    <Text style={styles.text}>
+                      Charged:
+                      {data.val().Johns}
+                    </Text>
+
+                    <Text style={styles.cardUser}>
+                    Amount :
+                      {"\n"}{"\n"}{"\n"}-{data.val().PaymentAmount}
+                    </Text>
+                  </Left>
+                  </CardItem>
                 </Card>
               );
             })}
