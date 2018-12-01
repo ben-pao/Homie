@@ -29,9 +29,16 @@ export default class GroceryScreen extends React.Component {
 
 
   componentDidMount(){
-    var that = this
-    console.log("in componenet did mount")
-    that.setStates();
+    var that = this;
+    console.log("in componenet did mount");
+    try {
+      that.setStates();
+    }
+    catch(err) {
+      console.log("setStates() didn't run");
+      console.log(err.toString());
+    }
+
   //  console.log(houseID);
   //  var houseid = this.getHouseID();
 //  console.log(that.state.houseID)
