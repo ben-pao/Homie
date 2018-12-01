@@ -2,7 +2,7 @@
   "name": "empty-project-template",
   "main": "node_modules/expo/AppEntry.js",
   "jest": {
-    "preset": "react-native"
+    "preset": "jest-expo"
   },
   "private": true,
   "scripts": {
@@ -22,7 +22,6 @@
     "react-navigation": "^2.18.2"
   },
   "devDependencies": {
-    "jest": "^23.6.0",
-    "jest-expo": "^31.0.0"
+    "jest-expo": "30.0.0"
   }
 }
