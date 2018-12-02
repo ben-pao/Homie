@@ -99,7 +99,7 @@ export default class GroceryScreen extends React.Component {
       that.setState({
         houseID: userData.HouseID,
         userID: uid,
-        userName: userData.FirstName
+        userName: userData.FirstName + ' ' + userData.LastName
       });
 
       //setting data with data in database
