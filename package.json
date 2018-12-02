@@ -25,6 +25,7 @@
     "react-navigation": "^2.18.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.6",
     "jest-expo": "30.0.0"
   }
 }
