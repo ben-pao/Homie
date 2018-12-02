@@ -28,11 +28,15 @@ export default class ChargesPaymentsScreen extends React.Component {
 
 
   componentDidMount(){
-    var that = this
-    console.log("in componenet did mount")
-    that.setStates();
-
-
+    var that = this;
+    console.log("in componenet did mount");
+    try {
+      that.setStates();
+    }
+    catch (err) {
+      console.log("setStates() didn't run");
+      console.log(err);
+    }
   }
 
 
@@ -164,7 +168,7 @@ export default class ChargesPaymentsScreen extends React.Component {
                   </Text>
                 </Left>
                 <Right>
-                  
+
                 </Right>
               </CardItem>
             </Card>
