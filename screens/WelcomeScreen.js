@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+
 import * as firebase from 'firebase';
 
 
 class WelcomeScreen extends Component {
 
   // For testing if user.displayName was stored in signup
-  componentDidMount() {
-    this.printUser();
-  }
+  // componentDidMount() {
+  //   this.printUser();
+  // }
 
   printUser() {
     user = firebase.auth().currentUser;

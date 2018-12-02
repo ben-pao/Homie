@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
-import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
-import { Keyboard } from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
+import { StyleSheet, Text, View, StatusBar, ListView, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem, Left, Body, Right } from 'native-base';
+
 import * as firebase from 'firebase';
 
 import { createStackNavigator } from 'react-navigation';
@@ -28,9 +29,16 @@ export default class GroceryScreen extends React.Component {
 
 
   componentDidMount(){
-    var that = this
-    console.log("in componenet did mount")
-    that.setStates();
+    var that = this;
+    console.log("in componenet did mount");
+    try {
+      that.setStates();
+    }
+    catch(err) {
+      console.log("setStates() didn't run");
+      console.log(err.toString());
+    }
+
   //  console.log(houseID);
   //  var houseid = this.getHouseID();
 //  console.log(that.state.houseID)
@@ -46,7 +54,7 @@ export default class GroceryScreen extends React.Component {
   }
 
   getPreviousItems(){
-      var that = this
+    var that = this
     var groceryhouseRef = firebase.database().ref('/Grocery').child(that.state.houseID)
        groceryhouseRef.on('child_added', function(data){
          var newData = [... that.state.listViewData]
@@ -144,39 +152,47 @@ export default class GroceryScreen extends React.Component {
   }
 
   deleteRow(data){
-      var user = firebase.auth().currentUser;
-      console.log("in deleteRow")
-      console.log(data);
-      console.log(this.state.houseID)
-      //
-      var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
-      console.log(data.val().ItemKey);
-      //remove the item
-      groceryhouseRef.child(data.val().ItemKey).remove();
-      groceryhouseRef.on('child_changed', function(snapshot){
-        var newData = snapshot.val();
-        console.log("in child changed")
-        console.log(newData);
-      });
-    //  var array = [... this.state.listViewData]; // make a separate copy of the array
-    //  var index = array.indexOf(data.target.value);
-    //  var index = array.indexOf(data);
-    //  if (index !== -1) {
-    //      array.splice(index, 1);
-    //      this.setState({listViewData : array});
-  //        console.log(this.state.listViewData);
-    //  }
+    var user = firebase.auth().currentUser;
+    console.log("in deleteRow")
+    console.log(data);
+    console.log(this.state.houseID)
+
+    var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
+    console.log(data.val().ItemKey);
+    //remove the item
+    groceryhouseRef.child(data.val().ItemKey).remove();
+    groceryhouseRef.on('child_changed', function(snapshot){
+      var newData = snapshot.val();
+      console.log("in child changed")
+      console.log(newData);
+    });
+  //  var array = [... this.state.listViewData]; // make a separate copy of the array
+  //  var index = array.indexOf(data.target.value);
+  //  var index = array.indexOf(data);
+  //  if (index !== -1) {
+  //      array.splice(index, 1);
+  //      this.setState({listViewData : array});
+  //      console.log(this.state.listViewData);
+  //  }
 
 
-      //alert(this.state.houseID);
+    //alert(this.state.houseID);
   }
 
-  iEnumerate(data){
+  deleteAll(){
+    var user = firebase.auth().currentUser;
+    console.log("in deleteAll")
+    console.log(data);
+    console.log(this.state.houseID)
 
-  }
-
-  showInformation() {
-
+    var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
+    groceryhouseRef.remove();
+    var emptyArray = [];
+    this.setState({listViewData : emptyArray});
+    //remove all the items
+    // while (groceryhouseRef.firstChild) {
+    //   groceryhouseRef.removeChild(groceryhouseRef.firstChild);
+    // }
   }
 
   render() {
@@ -188,126 +204,112 @@ export default class GroceryScreen extends React.Component {
             btnText
     } = styles;
     return(
-      <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-      <Container style={styles.container}>
-        <Content>
-          <List
-            enableEmptySections
-            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-
-            // render={data=>
-            //   <Button>
-            //     <Text> Add </Text>
-            //   </Button>
-            // }
-
-            renderRow={ data =>
-              // <Card>
-              //   <CardItem>
-              //     <Text>{data.val().Item}</Text>
-              //   </CardItem>
-              // </Card>
-              <ListItem>
-                 <Text>{data.val().Item}</Text>
-             </ListItem>
-            }
-
-            renderLeftHiddenRow={data =>
-              <Button full  onPress={ () => this.addRow(data)}>
-                <Icon name='information-circle'/>
-              </Button>
-                }
-
-            renderRightHiddenRow={data =>
-              <Button full danger  onPress={ () => this.deleteRow(data)}>
-                <Icon name='trash'/>
-              </Button>
-                }
-
-              leftOpenValue={-75}
-              rightOpenValue={-75}
-          />
-          <TextInput
-            style={textInput}
-            placeholder='Item'
-            onChangeText={
-              (groceryItem) => this.setState({groceryItem})
-            }
-            underlineColorAndroid='transparent'
-          />
-          <TouchableOpacity
-            style={btn}
-            onPress={
-              () => this.addRow(this.state.groceryItem)
-          }>
-            <Text style={btnText}> ADD ITEM </Text>
-          </TouchableOpacity>
-        </Content>
-
-      </Container>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
-
-
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <Container style={styles.container}>
+              <Content>
+                {this.state.listViewData.map((data, index) => {
+                  return(
+                    <Card key={index}>
+                      <CardItem>
+                        <Left>
+                          <Text style={styles.text}>
+                            {data.val().Item}
+                          </Text>
+                          <Text style={styles.cardUser}>
+                            {"\n"}{"\n"}{"\n"}-{data.val().UserName}
+                          </Text>
+                        </Left>
+                        <Right>
+                          <Button style={styles.btn} full danger onPress={ () => this.deleteRow(data)}>
+                            <Icon name='trash'/>
+                          </Button>
+                        </Right>
+                      </CardItem>
+                    </Card>
+                  );
+                })}
+                <Card>
+                  <CardItem>
+                    <Left>
+                      <TextInput
+                        style={styles.textInput}
+                        placeholder='Add Item'
+                        onChangeText={
+                          (groceryItem) => this.setState({groceryItem})
+                        }
+                        underlineColorAndroid='transparent'
+                      />
+                    </Left>
+                    <Right>
+                      <Button style={styles.btn} add danger onPress={ () => this.addRow(this.state.groceryItem)}>
+                        <Icon name='plus'/>
+                      </Button>
+                    </Right>
+                  </CardItem>
+                </Card>
+                <Button style={styles.clearBtn} clear danger onPress={ () => this.deleteAll()}>
+                  <Body>
+                    <Text style={styles.clearTxt}> Clear List </Text>
+                  </Body>
+                </Button>
+              </Content>
+            </Container>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </ScrollView>
     );
-
   }
 }
 
 const styles = StyleSheet.create({
-    // input:{
-    //   backgroundColor: '#000',
-    // },
-    // container: {
-    //   flex: 1,
-    //   // backgroundColor: '#2896d3',
-    //   backgroundColor: '#fff',
-    //   alignItems: 'center',
-    //   justifyContent: 'center',
-    //   paddingLeft: 40,
-    //   paddingRight: 40,
-    // },
-    // wrapper: {
-    //   flex: 1,
-    // },
-    // header: {
-    //   fontSize:24,
-    //   marginBottom:60,
-    //   color: '#000',
-    //   // color: '#fff',
-    //   fontWeight: 'bold',
-    // },
-    // textInput: {
-    //   alignSelf: 'stretch',
-    //   padding: 15,
-    //   marginBottom: 20,
-    //   backgroundColor: '#fff'
-    // },
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'transparent'
+    },
+    contentContainer: {
+      backgroundColor: 'transparent',
+      paddingVertical: 20,
+      paddingHorizontal: 20
     },
     blackColor: {
-      backgroundColor: '#fff',
+      backgroundColor: '#fff'
+    },
+    cardUser: {
+      alignSelf: 'center',
+      fontSize: 10,
+      color: 'grey'
+    },
+    text: {
+      alignSelf: 'center',
+      fontWeight: 'bold'
+    },
+    textInput: {
+      alignSelf: 'stretch',
+      backgroundColor: '#fff'
     },
     input:{
-      backgroundColor: '#000',
+      backgroundColor: '#000'
     },
     btn: {
-      alignSelf: 'stretch',
-      // backgroundColor: '#01c853',
-      backgroundColor: '#000',
-      // color: '#fff',
-      padding: 20,
-      alignItems: 'center',
-      margin: 8
+      alignSelf: 'flex-end',
+      right: 0,
+      backgroundColor: 'transparent'
     },
     btnText: {
       color: '#fff',
       fontWeight: 'bold'
     },
+    clearBtn: {
+      alignSelf: 'stretch',
+      backgroundColor: '#000'
+    },
+    clearTxt:{
+      alignSelf: 'center',
+      color: '#fff'
+    },
     wrapperStyle: {
-      flex: 1,
+      flex: 1
     }
 })

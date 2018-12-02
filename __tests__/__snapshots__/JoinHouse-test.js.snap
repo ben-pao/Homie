@@ -55,12 +55,12 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      LOGIN
+      Join a House
     </Text>
     <TextInput
       allowFontScaling={true}
       onChangeText={[Function]}
-      placeholder="Email"
+      placeholder="Enter the ID of your house"
       style={
         Object {
           "alignSelf": "stretch",
@@ -71,11 +71,23 @@ exports[`renders correctly 1`] = `
       }
       underlineColorAndroid="transparent"
     />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#000",
+          "fontWeight": "bold",
+        }
+      }
+    >
+       OR 
+    </Text>
     <TextInput
       allowFontScaling={true}
       onChangeText={[Function]}
-      placeholder="Password"
-      secureTextEntry={true}
+      placeholder="Enter your housemate's email"
       style={
         Object {
           "alignSelf": "stretch",
@@ -85,7 +97,6 @@ exports[`renders correctly 1`] = `
         }
       }
       underlineColorAndroid="transparent"
-      value=""
     />
     <View
       accessibilityComponentType={undefined}
@@ -128,7 +139,7 @@ exports[`renders correctly 1`] = `
           }
         }
       >
-         Log in 
+        Submit
       </Text>
     </View>
     <View
@@ -172,7 +183,7 @@ exports[`renders correctly 1`] = `
           }
         }
       >
-         Sign up 
+         Cancel 
       </Text>
     </View>
   </View>

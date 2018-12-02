@@ -15,11 +15,19 @@ class ChoresScreen extends Component {
   }
 
   componentDidMount() {
-    this._loadUserInfo().done();
-    this._loadHouseInfo().done();
+    try {
+      this._loadUserInfo();
+      this._loadHouseInfo();
+    }
+    catch (err) {
+      console.log("_loadUserInfo didn't run");
+      console.log("_loadHouseInfo didn't run");
+      console.log(err.toString());
+    }
+
   }
 
-  _loadUserInfo = async () => {
+  _loadUserInfo() {
     var uid = firebase.auth().currentUser.uid;
     var userRef = firebase.database().ref("/Users").child(uid);
     userRef.once("value")
@@ -41,7 +49,7 @@ class ChoresScreen extends Component {
     // console.log("Hi");
   }
 
-  _loadHouseInfo = async () => {
+  _loadHouseInfo() {
     var uid = firebase.auth().currentUser.uid;
     var houseIDRef = firebase.database().ref("/Users").child(uid).child("HouseID");
     var houseRef = firebase.database().ref("/Houses");
@@ -79,6 +87,7 @@ class ChoresScreen extends Component {
         <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
             <View style={containerStyle}>
+              <Text style={headerStyle}>Add a Chore</Text>
               <TextInput
                 style={textInputStyle}
                 placeholder="Chore"
@@ -110,7 +119,7 @@ class ChoresScreen extends Component {
                 style={buttonStyle}
                 onPress={
                   () => {
-                    this.addChore(this.state).done();
+                    this.addChore(this.state);
                     this.props.navigation.goBack();
                   }
                 }
@@ -150,7 +159,7 @@ class ChoresScreen extends Component {
     return today;
   }
 
-  addChore = async (state) => {
+  addChore(state) {
     // console.log("addChore pressed");
     // console.log(state);
     var today = this.getTodayDate();
@@ -172,9 +181,6 @@ class ChoresScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  wrapperStyle: {
-    flex: 1,
-  },
   containerStyle: {
     flex: 1,
     // backgroundColor: '#2896d3',
@@ -184,10 +190,13 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
     paddingRight: 40,
   },
+  wrapperStyle: {
+    flex: 1,
+  },
   headerStyle: {
     fontSize:24,
     marginBottom:60,
-    color: '#000',
+    color: '#fff',
     // color: '#fff',
     fontWeight: 'bold',
   },
@@ -200,7 +209,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     alignSelf: 'stretch',
     // backgroundColor: '#01c853',
-    backgroundColor: '#000',
+    backgroundColor: 'hotpink',
     // color: '#fff',
     padding: 20,
     alignItems: 'center',

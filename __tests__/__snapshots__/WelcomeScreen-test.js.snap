@@ -13,28 +13,63 @@ exports[`renders correctly 1`] = `
     }
   }
 >
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#000",
+        "fontSize": 24,
+        "fontWeight": "bold",
+        "marginBottom": 60,
+      }
+    }
+  >
+    Welcome to Homie
+  </Text>
   <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "alignSelf": "stretch",
+        "backgroundColor": "#000",
+        "margin": 8,
+        "opacity": 1,
+        "padding": 20,
       }
     }
+    testID={undefined}
+    tvParallaxProperties={undefined}
   >
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#fff",
+          "fontWeight": "bold",
+        }
+      }
     >
-      Origin: 
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Data: 
+       Join a House 
     </Text>
   </View>
   <View
@@ -58,7 +93,7 @@ exports[`renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "stretch",
-        "backgroundColor": "hotpink",
+        "backgroundColor": "#000",
         "margin": 8,
         "opacity": 1,
         "padding": 20,
@@ -73,13 +108,12 @@ exports[`renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
-          "color": "#000",
-          "fontFamily": "Cochin",
+          "color": "#fff",
           "fontWeight": "bold",
         }
       }
     >
-       Send a test notification 
+       Create a House 
     </Text>
   </View>
   <View
@@ -103,7 +137,7 @@ exports[`renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "stretch",
-        "backgroundColor": "hotpink",
+        "backgroundColor": "#000",
         "margin": 8,
         "opacity": 1,
         "padding": 20,
@@ -118,13 +152,12 @@ exports[`renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
-          "color": "#000",
-          "fontFamily": "Cochin",
+          "color": "#fff",
           "fontWeight": "bold",
         }
       }
     >
-       A dashboard for notifications and housemate updates if we have time! 
+       Sign out 
     </Text>
   </View>
 </View>

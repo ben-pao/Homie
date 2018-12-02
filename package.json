@@ -2,7 +2,10 @@
   "name": "Homie",
   "main": "node_modules/expo/AppEntry.js",
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!native-base-shoutem-theme|@firebase|expo-react-native-adapter|react-native|expo|@expo|native-base|jest-expo)"
+    ]
   },
   "private": true,
   "scripts": {
@@ -10,7 +13,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "node_modules/.bin/jest"
+    "test": "node_modules/.bin/jest -u",
+    "test-updated": "node_modules/.bin/jest -u"
   },
   "dependencies": {
     "expo": "^31.0.6",
@@ -21,9 +25,7 @@
     "react-navigation": "^2.18.2"
   },
   "devDependencies": {
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.4.2",
-    "jest": "^23.6.0",
-    "jest-expo": "^31.0.0"
+    "@babel/core": "^7.1.6",
+    "jest-expo": "30.0.0"
   }
 }

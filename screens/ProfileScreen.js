@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, createDrawerNavigator } from 'react-native';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
 class ProfileScreen extends Component {

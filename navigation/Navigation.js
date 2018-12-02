@@ -3,7 +3,6 @@ import {Ionicons} from '@expo/vector-icons';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import GroceryScreen from '../screens/GroceryScreen';
-import GroceriesScreen from '../screens/GroceriesScreen';
 import ChoresScreen from '../screens/ChoresScreen';
 import HomeScreen from '../screens/HomeScreen';
 import CreateHouseScreen from '../screens/CreateHouseScreen';
@@ -14,6 +13,9 @@ import ProfileScreen from '../screens/ProfileScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AboutScreen from '../screens/AboutScreen';
 import PaymentsScreen from '../screens/PaymentsScreen';
+import ChargesPaymentsScreen from '../screens/ChargesPaymentsScreen';
+import RequestPaymentsScreen from '../screens/RequestPaymentsScreen';
+import CreatePaymentsScreen from '../screens/CreatePaymentsScreen';
 
 import React from 'react';
 
@@ -48,10 +50,23 @@ const SettingsStack = createStackNavigator(
   }
 );
 
+const PaymentsStack = createStackNavigator(
+  {
+    Payments: PaymentsScreen,
+    Charges: ChargesPaymentsScreen,
+    Requests: RequestPaymentsScreen,
+    CreatePayments: CreatePaymentsScreen
+  },
+  {
+      navigationOptions: {
+        header: null,
+    }
+  }
+);
+
 const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    // Groceries: GroceriesScreen,
     Groceries: GroceryScreen,
     Chores: ChoresScreen,
     Payments: PaymentsScreen,
@@ -108,6 +123,7 @@ const AppStack = createStackNavigator(
   {
     TabNav: TabNavigator,
     Settings: SettingsStack,
+    Payment: PaymentsStack,
   },
   {
     // initialRouteName: 'TabNavigator',

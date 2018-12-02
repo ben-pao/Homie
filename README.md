@@ -38,6 +38,10 @@
   - [Burnup Chart](https://docs.google.com/spreadsheets/d/1rZOiwOhbMphA1m1ieavDncQGjJ5mpf-BHW9iI-H3Du0/edit#gid=0)
   - [Trello](https://trello.com/b/UOfoAKVH/sprint-3-scrum-board)
 
+- **Sprint 4**
+  - [Sprint 4 Plan](https://docs.google.com/document/d/1I_s88-6Yg74tjoLSzqI3ndNcrE1oFZkDaUCE6aRkpHc/edit)
+  - [Burnup Chart](https://docs.google.com/spreadsheets/d/1dmUvTQFbQIoUt2eB0uOFEmYWR3evO-3JU2W6icIOLt4/edit#gid=0)
+  - [Trello](https://trello.com/b/SSQiOTTP/sprint-4-scrum-board)
 
 
 ### Meeting Times
@@ -46,4 +50,4 @@
 - Saturday 12PM  Keith’s Garage
 
 
-    **Next meeting: Sunday @ 7PM location TBD!!!**
+    **Next meeting: Tuesday @ 9PM Keith's Garage**
