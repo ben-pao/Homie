@@ -4,9 +4,8 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@babel/plugin-transform-react-jsx-source"
-      ]
+      "plugins": ["transform-react-jsx-source"]
+
     }
   }
 }
