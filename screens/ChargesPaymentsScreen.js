@@ -118,7 +118,7 @@ export default class ChargesPaymentsScreen extends React.Component {
       <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
       <Container style={styles.container}>
-        <Text>YOURE BEING CHARGED</Text>
+        <Text style={styles.text}>Getting Charged</Text>
         <Content>
         {this.state.listViewData.map((data, index) => {
           return(
@@ -195,6 +195,10 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
+    },
+    headerText:{
+      alignSelf: 'center',
+      fontWeight: 'bold'
     },
     cardUser: {
       alignSelf: 'center',

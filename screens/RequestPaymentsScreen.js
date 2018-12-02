@@ -147,6 +147,10 @@ export default class RequestPaymentsScreen extends React.Component {
       //alert(this.state.houseID);
   }
 
+  remindPayment(data){
+    alert('remind ', data.val().JohnsName );
+  }
+
 
   render() {
     const { container,
@@ -161,6 +165,7 @@ export default class RequestPaymentsScreen extends React.Component {
       <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
           <Container style={styles.container}>
+            <Text style={styles.text}>Requesting Payments</Text>
             <Content>
             {this.state.listViewData.map((data, index) => {
               return(
@@ -200,6 +205,16 @@ export default class RequestPaymentsScreen extends React.Component {
 
                     </Left>
                     <Right>
+                      <TouchableOpacity
+
+                        onPress={
+                          () => {//
+                            this.remindPayment(data);
+                          }
+                        }
+                      >
+                        <Text >Remind</Text>
+                      </TouchableOpacity>
                       <TouchableOpacity
 
                         onPress={
