@@ -58,6 +58,7 @@ export default class ChargesPaymentsScreen extends React.Component {
         userID: uid,
         userName: userData.FirstName
       });
+      var newData = [... that.state.listViewData]
 
       //setting data with data in database
       var paymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
@@ -66,10 +67,11 @@ export default class ChargesPaymentsScreen extends React.Component {
       //  groceryhouseRef.on('child_changed', function(data){
            console.log("inchild_added")
            console.log(data)
-           var newData = [... that.state.listViewData]
+           // var newData = [... that.state.listViewData]
            newData.push(data)
-           that.setState({listViewData : newData})
+           // that.setState({listViewData : newData})
          });
+         that.setState({listViewData : newData})
          userPaymentsRef.on('child_removed', function(data){
       //  groceryhouseRef.on('child_changed', function(data){
            console.log("child_removed")

@@ -21,6 +21,7 @@ export default class PaymentsScreen extends React.Component {
       paymentName: '',
       paymentQuantity: '',
       johns: '',
+      name: '',
       userList: data,
     }
   }
@@ -76,7 +77,7 @@ export default class PaymentsScreen extends React.Component {
       that.setState({
         houseID: userData.HouseID,
         userID: uid,
-        userName: userData.FirstName
+        userName: userData.FirstName + ' ' +userData.LastName,
       });
       console.log(that.state.houseID);
       var userHouse = firebase.database().ref('/Houses').child(userData.HouseID);
@@ -85,21 +86,26 @@ export default class PaymentsScreen extends React.Component {
           listViewData: snapshot.val().Users,
         });
         console.log('houseuserlist');
+        console.log(snapshot.val().Users);
         console.log(that.state.listViewData);
         var objArray = [];
-        for( key in that.state.listViewData){
-          console.log("in loop");
-          console.log("hi")
-          console.log("this sucks");
-          if (that.state.listViewData.hasOwnProperty(key)) {
-          var obj = {};
-          //var objArray = [];
-          obj["UID"] = key;
-          obj["UserName"] = that.state.listViewData[key];
-          objArray.push(obj);
-          console.log(objArray);
-          that.setState({userList : objArray})
-    }
+      //  for( key in that.state.listViewData){
+      for( key in snapshot.val().Users){
+        //  console.log("in loop");
+        //  console.log("hi")
+        //  console.log("this sucks");
+        //  if (that.state.listViewData.hasOwnProperty(key)) {
+         if (snapshot.val().Users.hasOwnProperty(key)) {
+            var obj = {};
+            //var objArray = [];
+            obj["UID"] = key;
+          //  obj["UserName"] = that.state.listViewData[key];
+            obj["UserName"] = snapshot.val().Users[key];
+
+            objArray.push(obj);
+            console.log(objArray);
+            that.setState({userList : objArray})
+          }
           console.log(that.state.userList);
         }
       });
@@ -118,6 +124,15 @@ export default class PaymentsScreen extends React.Component {
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;
+    var johnsName = '';
+    var pimpName = this.state.userName;
+    for(var i=0; i<this.state.userList.length; i++ ){
+      if(this.state.userList[i].UID == johns){
+        johnsName = this.state.userList[i].UserName;
+      }
+    }
+    console.log(johnsName);
+    console.log('pimp name is ', pimpName)
   //  var key = firebase.database().ref('/Payments').push().key;
     var paymentHouseJohnsRef = firebase.database().ref('/Payments').child(this.state.houseID).child(johns)
     var paymentHousePimpRef = firebase.database().ref('/Payments').child(this.state.houseID).child(uid)
@@ -129,7 +144,8 @@ export default class PaymentsScreen extends React.Component {
         { PaymentName: paymentName,
           Johns: johns, //person whose charging
           PaymentAmount: paymentQuantity,
-          PaymentID: key
+          PaymentID: key,
+          JohnsName: johnsName,
       });
     paymentsRef.child(key)
       .set(
@@ -137,10 +153,11 @@ export default class PaymentsScreen extends React.Component {
           PaymentName: paymentName,
           Pimp: uid, //whose being charged //Maybe make it a list for utilities
           PaymentAmount: paymentQuantity,
-          PaymentID: key
+          PaymentID: key,
+          PimpName: pimpName,
         }
       );
-
+        this.props.navigation.navigate('Requests');
   }
 
 
@@ -241,7 +258,7 @@ export default class PaymentsScreen extends React.Component {
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-  
+
     );
   }
 
