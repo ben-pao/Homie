@@ -157,6 +157,7 @@ export default class RequestPaymentsScreen extends React.Component {
             btnText
     } = styles;
     return(
+      <ScrollView>
       <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
           <Container style={styles.container}>
@@ -220,6 +221,7 @@ export default class RequestPaymentsScreen extends React.Component {
           </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
+    </ScrollView>
 
 
     );
