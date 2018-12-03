@@ -44,23 +44,6 @@ class PaymentsScreen extends Component {
           <Text style={buttonTextStyle}> View Requests </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={buttonStyle}
-          onPress={
-            () => {
-              firebase.auth().signOut()
-                .then(
-                  () => {
-                    // alert("Byeeeee!");
-                    this.props.navigation.navigate('Login');
-                  }
-                ).catch(
-                  (error) => alert(error.toString())
-                );
-            }
-        }>
-          <Text style={buttonTextStyle}> Sign out </Text>
-        </TouchableOpacity>
       </View>
     );
   }
