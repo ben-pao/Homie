@@ -84,6 +84,9 @@ export default class GroceryScreen extends React.Component {
       ItemKey: key
 
     });
+    that.setState({
+      groceryItem: "",
+    });
   }
 
   setStates(){
@@ -239,6 +242,7 @@ export default class GroceryScreen extends React.Component {
                         onChangeText={
                           (groceryItem) => this.setState({groceryItem})
                         }
+                        value={this.state.groceryItem}
                         underlineColorAndroid='transparent'
                       />
                     </Left>

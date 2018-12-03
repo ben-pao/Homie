@@ -75,7 +75,7 @@ export default class RequestPaymentsScreen extends React.Component {
         userID: uid,
         userName: userData.FirstName
       });
-
+      var newData = [... that.state.listViewData]
       //setting data with data in database
       var requestpaymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
       var userRequestPaymentsRef = requestpaymentsRef.child(uid).child('Requested');
@@ -83,10 +83,14 @@ export default class RequestPaymentsScreen extends React.Component {
       //  groceryhouseRef.on('child_changed', function(data){
            console.log("inchild_added")
            console.log(data)
-           var newData = [... that.state.listViewData]
+          // var newData = [... that.state.listViewData]
            newData.push(data)
+           console.log('newData', newData);
+          // that.setState({listViewData : newData})
+           console.log("lisview data ", that.state.listViewData)
            that.setState({listViewData : newData})
          });
+         that.setState({listViewData : newData})
          userRequestPaymentsRef.on('child_removed', function(data){
       //  groceryhouseRef.on('child_changed', function(data){
            console.log("child_removed")
@@ -119,16 +123,18 @@ export default class RequestPaymentsScreen extends React.Component {
     });
   }
 
-  deleteRow(data){
+  deletePayment(data){
       var user = firebase.auth().currentUser;
       console.log("in deleteRow")
       console.log(data);
       console.log(this.state.houseID)
       //
-      var requestpaymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
-      var userRequestPaymentsRef = requestpaymentsRef.child(uid).child('Requested');
+      var requestpaymentsRef = firebase.database().ref('/Payments').child(this.state.houseID);
+      var userRequestPaymentsRef = requestpaymentsRef.child(this.state.userID).child('Requested');
+      var johnsChargedPaymentRef = requestpaymentsRef.child(data.val().Johns).child('Payment');
       //remove the item
       userRequestPaymentsRef.child(data.val().PaymentID).remove();
+      johnsChargedPaymentRef.child(data.val().PaymentID).remove();
       // userRequestPaymentsRef.on('child_changed', function(snapshot){
       //   var newData = snapshot.val();
       //   console.log("in child changed")
@@ -166,22 +172,49 @@ export default class RequestPaymentsScreen extends React.Component {
                 <Card key={index}>
                   <CardItem>
                     <Left>
+
                       <Text style={styles.text}>
-                        Payment Name:
+
+                        {data.val().JohnsName}
+                      </Text>
+
+
+                    </Left>
+
+                  </CardItem>
+
+                  <CardItem>
+                    <Left>
+
+                      <Text>
+
                         {data.val().PaymentName}
                       </Text>
-                      <Text style={styles.text}>
-                        Charged:
-                        {data.val().Johns}
-                      </Text>
+
+
+                    </Left>
+                  </CardItem>
+                  <CardItem>
+                    <Left>
 
                       <Text style={styles.cardUser}>
-                      Amount :
-                        {"\n"}{"\n"}{"\n"}-{data.val().PaymentAmount}
+                      Amount : $
+                        {data.val().PaymentAmount}
                       </Text>
+
+
                     </Left>
                     <Right>
+                      <TouchableOpacity
 
+                        onPress={
+                          () => {//
+                            this.deletePayment(data);
+                          }
+                        }
+                      >
+                        <Text >Paid</Text>
+                      </TouchableOpacity>
                     </Right>
                   </CardItem>
                 </Card>

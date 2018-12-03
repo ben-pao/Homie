@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity,  KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity,  KeyboardAvoidingView, TouchableWithoutFeedback, Picker, ScrollView } from 'react-native';
 import * as firebase from 'firebase';
+import { Card, CardItem, Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem, Left, Body, Right } from 'native-base';
 import { Keyboard } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
@@ -20,6 +21,8 @@ export default class PaymentsScreen extends React.Component {
       paymentName: '',
       paymentQuantity: '',
       johns: '',
+      name: '',
+      userList: data,
     }
   }
   componentDidMount(){
@@ -78,7 +81,7 @@ export default class PaymentsScreen extends React.Component {
       that.setState({
         houseID: userData.HouseID,
         userID: uid,
-        userName: userData.FirstName
+        userName: userData.FirstName + ' ' +userData.LastName,
       });
       console.log(that.state.houseID);
       var userHouse = firebase.database().ref('/Houses').child(userData.HouseID);
@@ -87,7 +90,28 @@ export default class PaymentsScreen extends React.Component {
           listViewData: snapshot.val().Users,
         });
         console.log('houseuserlist');
+        console.log(snapshot.val().Users);
         console.log(that.state.listViewData);
+        var objArray = [];
+      //  for( key in that.state.listViewData){
+      for( key in snapshot.val().Users){
+        //  console.log("in loop");
+        //  console.log("hi")
+        //  console.log("this sucks");
+        //  if (that.state.listViewData.hasOwnProperty(key)) {
+         if (snapshot.val().Users.hasOwnProperty(key)) {
+            var obj = {};
+            //var objArray = [];
+            obj["UID"] = key;
+          //  obj["UserName"] = that.state.listViewData[key];
+            obj["UserName"] = snapshot.val().Users[key];
+
+            objArray.push(obj);
+            console.log(objArray);
+            that.setState({userList : objArray})
+          }
+          console.log(that.state.userList);
+        }
       });
     //  return userData.HouseID;
     } , function (error) {
@@ -104,6 +128,15 @@ export default class PaymentsScreen extends React.Component {
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;
+    var johnsName = '';
+    var pimpName = this.state.userName;
+    for(var i=0; i<this.state.userList.length; i++ ){
+      if(this.state.userList[i].UID == johns){
+        johnsName = this.state.userList[i].UserName;
+      }
+    }
+    console.log(johnsName);
+    console.log('pimp name is ', pimpName)
   //  var key = firebase.database().ref('/Payments').push().key;
     var paymentHouseJohnsRef = firebase.database().ref('/Payments').child(this.state.houseID).child(johns)
     var paymentHousePimpRef = firebase.database().ref('/Payments').child(this.state.houseID).child(uid)
@@ -115,7 +148,8 @@ export default class PaymentsScreen extends React.Component {
         { PaymentName: paymentName,
           Johns: johns, //person whose charging
           PaymentAmount: paymentQuantity,
-          PaymentID: key
+          PaymentID: key,
+          JohnsName: johnsName,
       });
     paymentsRef.child(key)
       .set(
@@ -123,10 +157,11 @@ export default class PaymentsScreen extends React.Component {
           PaymentName: paymentName,
           Pimp: uid, //whose being charged //Maybe make it a list for utilities
           PaymentAmount: paymentQuantity,
-          PaymentID: key
+          PaymentID: key,
+          PimpName: pimpName,
         }
       );
-
+        this.props.navigation.navigate('Requests');
   }
 
 
@@ -142,6 +177,7 @@ export default class PaymentsScreen extends React.Component {
     // const { navigate, goBack } = this.props.navigation;
 
     return (
+
       <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
           <View style={containerStyle}>
@@ -162,7 +198,7 @@ export default class PaymentsScreen extends React.Component {
               }
               underlineColorAndroid='transparent'
             />
-            <TextInput
+    {/*       <TextInput
               style={textInputStyle}
               placeholder='Enter the Housemate to Charge'
               onChangeText={
@@ -170,16 +206,38 @@ export default class PaymentsScreen extends React.Component {
               }
               underlineColorAndroid='transparent'
             />
-
-            {/*this.state.listViewData.map((data, index) => {
-              return(
-                <Text>
-                {data.val()}
-                </Text>
-              );
-            })*/}
-            {/*<Text>this.state.listViewData</Text>
             */}
+      {/*      <Picker
+              selectedValue={this.state.language}
+              style={{ height: 50, width: 100 }}
+              onValueChange={(itemValue, itemIndex) => this.setState({johns: itemValue})}
+            >
+            {this.state.userList.map((data, index) => {
+              return(
+                <Picker.Item label={data.UserName} value={data.UID} />
+              );
+            })}
+            </Picker>
+
+          */}
+          {/*this.state.userList.map((data, index) => {
+            return(
+              <Text style={headerStyle} >{data.UserName} </Text>
+            );
+          })*/}
+          <Picker
+  selectedValue={this.state.johns}
+  style={{backgroundColor: '#fafafa', width: '100%', height:'20%'}}
+  onValueChange={(itemValue, itemIndex) => this.setState({johns: itemValue})}>
+  {this.state.userList.map((data, index) => {
+    return(
+      <Picker.Item label={data.UserName} value={data.UID} />
+    );
+  })}
+
+</Picker>
+
+
             <TouchableOpacity
               style={buttonStyle}
               onPress={
@@ -204,6 +262,7 @@ export default class PaymentsScreen extends React.Component {
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
+
     );
   }
 
@@ -221,6 +280,10 @@ const styles = StyleSheet.create({
   },
   wrapperStyle: {
     flex: 1,
+  },
+  contentContainer: {
+    backgroundColor: 'transparent',
+
   },
   headerStyle: {
     fontSize:24,
