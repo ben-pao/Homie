@@ -60,7 +60,7 @@ export default class ChargesPaymentsScreen extends React.Component {
       that.setState({
         houseID: userData.HouseID,
         userID: uid,
-        userName: userData.FirstName
+        userName: userData.FirstName + ' ' + userData.LastName,
       });
       var newData = [... that.state.listViewData]
 
@@ -71,9 +71,9 @@ export default class ChargesPaymentsScreen extends React.Component {
       //  groceryhouseRef.on('child_changed', function(data){
            console.log("inchild_added")
            console.log(data)
-           // var newData = [... that.state.listViewData]
-           newData.push(data)
-           // that.setState({listViewData : newData})
+            //var newData = [... that.state.listViewData]
+            newData.push(data)
+            that.setState({listViewData : newData})
          });
          that.setState({listViewData : newData})
          userPaymentsRef.on('child_removed', function(data){
@@ -108,33 +108,6 @@ export default class ChargesPaymentsScreen extends React.Component {
     });
   }
 
-  deleteRow(data){
-      var user = firebase.auth().currentUser;
-      console.log("in deleteRow")
-      console.log(data);
-      console.log(this.state.houseID)
-      //
-      var paymentsRef = firebase.database().ref('/Payments').child(userData.HouseID);
-      var userPaymentsRef = paymentsRef.child(uid).child('Payment');
-      //remove the item
-      userPaymentsRef.child(data.val().PaymentID).remove();
-      // userRequestPaymentsRef.on('child_changed', function(snapshot){
-      //   var newData = snapshot.val();
-      //   console.log("in child changed")
-      //   console.log(newData);
-      // });
-    //  var array = [... this.state.listViewData]; // make a separate copy of the array
-    //  var index = array.indexOf(data.target.value);
-    //  var index = array.indexOf(data);
-    //  if (index !== -1) {
-    //      array.splice(index, 1);
-    //      this.setState({listViewData : array});
-  //        console.log(this.state.listViewData);
-    //  }
-
-
-      //alert(this.state.houseID);
-  }
 
 
   render() {
@@ -149,7 +122,7 @@ export default class ChargesPaymentsScreen extends React.Component {
       <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
       <Container style={styles.container}>
-        <Text>YOURE BEING CHARGED</Text>
+        <Text style={styles.text}>Getting Charged</Text>
         <Content>
         {this.state.listViewData.map((data, index) => {
           return(
@@ -157,21 +130,24 @@ export default class ChargesPaymentsScreen extends React.Component {
               <CardItem>
                 <Left>
                   <Text style={styles.text}>
-                    Payment Name:
-                    {data.val().PaymentName}
-                  </Text>
-                  <Text style={styles.text}>
-                    Charger:
-                    {data.val().Pimp}
-                  </Text>
-                  <Text style={styles.cardUser}>
-                  Amount :
-                    {"\n"}{"\n"}{"\n"}-{data.val().PaymentAmount}
+                    {data.val().PimpName}
                   </Text>
                 </Left>
-                <Right>
-
-                </Right>
+              </CardItem>
+              <CardItem>
+                <Left>
+                  <Text>
+                    {data.val().PaymentName}
+                  </Text>
+                </Left>
+              </CardItem>
+              <CardItem>
+                <Left>
+                  <Text>
+                  Amount :
+                    ${data.val().PaymentAmount}
+                  </Text>
+                </Left>
               </CardItem>
             </Card>
           );
@@ -221,6 +197,10 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
+    },
+    headerText:{
+      alignSelf: 'center',
+      fontWeight: 'bold'
     },
     cardUser: {
       alignSelf: 'center',

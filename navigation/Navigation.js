@@ -4,6 +4,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import GroceryScreen from '../screens/GroceryScreen';
 import ChoresScreen from '../screens/ChoresScreen';
+import AddChoreScreen from '../screens/AddChoreScreen';
 import HomeScreen from '../screens/HomeScreen';
 import CreateHouseScreen from '../screens/CreateHouseScreen';
 import JoinHouseScreen from '../screens/JoinHouseScreen';
@@ -50,6 +51,19 @@ const SettingsStack = createStackNavigator(
   }
 );
 
+
+const ChoresStack = createStackNavigator(
+  {
+    Chores: ChoresScreen,
+    AddChore: AddChoreScreen,
+  },
+  {
+    navigationOptions: {
+      header: null,
+    }
+  }
+);
+
 const PaymentsStack = createStackNavigator(
   {
     Payments: PaymentsScreen,
@@ -58,8 +72,8 @@ const PaymentsStack = createStackNavigator(
     CreatePayments: CreatePaymentsScreen
   },
   {
-      navigationOptions: {
-        header: null,
+    navigationOptions: {
+      header: null,
     }
   }
 );
@@ -68,7 +82,7 @@ const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
     Groceries: GroceryScreen,
-    Chores: ChoresScreen,
+    Chores: ChoresStack,
     Payments: PaymentsScreen,
     Settings: SettingsStack,
   },

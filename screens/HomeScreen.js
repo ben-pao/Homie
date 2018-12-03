@@ -8,21 +8,6 @@ import SettingsScreen from './SettingsScreen';
 import NotificationContainer from '../components/NotificationContainer';
 
 class HomeScreen extends Component {
-// class LogoTitle extends React.Component {
-//   render() {
-//     return (
-//       <Image
-//         source={require('../assets/homieIcon.png')}
-//         style={{ width: 30, height: 30 }}
-//       />
-//     );
-//   }
-// }
-//
-// class HomeScreen extends Component {
-//   static navigationOptions = {
-//     headerTitle: <LogoTitle />,
-//   };
   state = {
     token: ""
   }

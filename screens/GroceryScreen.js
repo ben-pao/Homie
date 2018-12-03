@@ -109,7 +109,7 @@ export default class GroceryScreen extends React.Component {
       that.setState({
         houseID: userData.HouseID,
         userID: uid,
-        userName: userData.FirstName
+        userName: userData.FirstName + ' ' + userData.LastName
       });
 
       //setting data with data in database
@@ -188,11 +188,11 @@ export default class GroceryScreen extends React.Component {
     console.log(data);
     console.log(this.state.houseID)
 
+    // remove all the items
     var groceryhouseRef = firebase.database().ref('/Grocery').child(this.state.houseID);
     groceryhouseRef.remove();
     var emptyArray = [];
     this.setState({listViewData : emptyArray});
-    //remove all the items
     // while (groceryhouseRef.firstChild) {
     //   groceryhouseRef.removeChild(groceryhouseRef.firstChild);
     // }
