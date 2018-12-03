@@ -154,7 +154,7 @@ export default class ChoresScreen extends React.Component {
            console.log("child_removed")
            console.log(data)
            //console.log(data.val().ItemKey)
-           var newData = [... that.state.listViewData]
+           //var newData = [... that.state.listViewData]
 
           // newData.push(data)
           //var index = newData.indexOf(data.target);
