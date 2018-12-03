@@ -350,6 +350,14 @@ export default class ChoresScreen extends React.Component {
                       </CardItem>
                       <CardItem>
                         <Left>
+                          <Text style={styles.choreInfo}>
+                          
+                            {data.Date}
+                          </Text>
+                        </Left>
+                      </CardItem>
+                      <CardItem>
+                        <Left>
                           <Text style={styles.cardUser}>
                             {data.ChoreUser}
                           </Text>
