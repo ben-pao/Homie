@@ -235,9 +235,6 @@ const styles = StyleSheet.create({
       paddingVertical: 20,
       paddingHorizontal: 20
     },
-    blackColor: {
-      backgroundColor: '#fff'
-    },
     cardUser: {
       alignSelf: 'center',
       fontSize: 10,
