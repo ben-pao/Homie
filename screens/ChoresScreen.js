@@ -197,12 +197,6 @@ export default class ChoresScreen extends React.Component {
                           <Text style={styles.choreText}>
                             {data.val().ChoreName}
                           </Text>
-                          <Text style={styles.choreInfo}>
-                            {data.val().Description}
-                          </Text>
-                          <Text style={styles.cardUser}>
-                            {data.val().Current}
-                          </Text>
                         </Left>
                         <Right>
                           <Button style={styles.btn} full danger onPress={ () => this.deleteRow(data)}>
@@ -210,12 +204,29 @@ export default class ChoresScreen extends React.Component {
                           </Button>
                         </Right>
                       </CardItem>
+                      <CardItem>
+                        <Left>
+                          <Text style={styles.choreInfo}>
+                            {data.val().Description}
+                          </Text>
+                        </Left>
+                      </CardItem>
+                      <CardItem>
+                        <Left>
+                          <Text style={styles.cardUser}>
+                            {data.val().Current}
+                          </Text>
+                        </Left>
+                      </CardItem>
                     </Card>
                   );
                 })}
                 <TouchableOpacity style={styles.buttonStyle} onPress={ () => this.props.navigation.navigate('AddChore')}>
                   <Text style={styles.btnText}> Add a Chore </Text>
                 </TouchableOpacity>
+                <Button style={styles.buttonStyle}>
+                  <Text style={styles.btnText}> Rotate Chores! </Text>
+                </Button>
               </Content>
             </Container>
           </TouchableWithoutFeedback>
