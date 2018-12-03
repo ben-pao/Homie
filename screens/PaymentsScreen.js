@@ -43,7 +43,6 @@ class PaymentsScreen extends Component {
         }>
           <Text style={buttonTextStyle}> View Requests </Text>
         </TouchableOpacity>
-
       </View>
     );
   }
