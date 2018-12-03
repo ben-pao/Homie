@@ -132,11 +132,9 @@ export default class ChargesPaymentsScreen extends React.Component {
               </CardItem>
               <CardItem>
                 <Left>
-
                   <Text>
                     {data.val().PaymentName}
                   </Text>
-
                 </Left>
               </CardItem>
               <CardItem>
