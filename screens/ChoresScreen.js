@@ -107,19 +107,52 @@ export default class ChoresScreen extends React.Component {
       });
     //  var newData = [... that.state.listViewData];
       //setting data with data in database
+      var newData = [... that.state.listViewData]
       var chorehouseRef = firebase.database().ref('/Chores').child(userData.HouseID)
          chorehouseRef.on('child_added', function(data){
-           console.log("inchild_added")
-           console.log(data)
-           var newData = [... that.state.listViewData]
-           newData.push(data)
+           console.log("inchild_added");
+           console.log(data);
+           var obj = {};
+           var currentChore = data.val().Current;
+           console.log('currentChore ', currentChore);
+           var currentUID = data.val().Users[currentChore];
+           obj = data;
+           // console.log('currentUID ', currentUID );
+           // console.log('currentChore ', currentChore);
+           //  console.log('currentUID ', data.Users );
+
+           var getUserName = firebase.database().ref('/Users').child(currentUID);
+      //     console.log(getUserName.val().FirstName);
+           getUserName.on('value', function(snapshot){
+             var choreData = snapshot.val();
+          //   console.log(choreData.FirstName, ' ', choreData.LastName)
+          //  obj['NewUser']= choreData.FirstName;
+            var newobj = {...obj.val(), "ChoreUser":  choreData.FirstName + ' ' + choreData.LastName};
+            // for( key in obj.val()){
+            //   console.log(key);
+            // }
+
+          //  newobj.NewUser = choreData.FirstName;
+            console.log(newobj)
+
+            // var newData = [... that.state.listViewData]
+            //newData.push(data)
+            newData.push(newobj);
+          //  console.log(obj);
+            that.setState({listViewData : newData})
+           });
            that.setState({listViewData : newData})
+
+
+           // var newData = [... that.state.listViewData]
+           // newData.push(data)
+           // that.setState({listViewData : newData})
          });
          //that.setState({listViewData : newData})
          chorehouseRef.on('child_removed', function(data){
            console.log("child_removed")
            console.log(data)
-           console.log(data.val().ItemKey)
+           //console.log(data.val().ItemKey)
            var newData = [... that.state.listViewData]
 
           // newData.push(data)
@@ -128,8 +161,8 @@ export default class ChoresScreen extends React.Component {
           for(var i = newData.length - 1; i >= 0; i--){
             console.log(i);
             console.log(newData)
-            if(newData[i].val().ItemKey == data.val().ItemKey){
-              console.log(newData[i].val().ItemKey)
+            if(newData[i].ChoreKey == data.val().ChoreKey){
+              console.log(newData[i].ChoreKey)
               console.log("hit at index")
               console.log(i);
               newData.splice(i, 1);
@@ -139,8 +172,11 @@ export default class ChoresScreen extends React.Component {
         //  console.log(index);
         //  newData.splice(index, 1);
            that.setState({listViewData : newData})
+           console.log(that.state.listViewData)
          });
-      console.log(that.state.houseID);
+         that.setState({listViewData : newData})
+         //console.log(that.state.listViewData)
+      //console.log(that.state.houseID);
     //  return userData.HouseID;
     } , function (error) {
      console.log("Error: " + error.code);
@@ -154,14 +190,15 @@ export default class ChoresScreen extends React.Component {
     console.log(this.state.houseID)
 
     var chorehouseRef = firebase.database().ref('/Chores').child(this.state.houseID);
-    console.log(data.val().ItemKey);
+    console.log(data.ChoreKey);
     //remove the item
-    chorehouseRef.child(data.val().ItemKey).remove();
-    chorehouseRef.on('child_changed', function(snapshot){
-      var newData = snapshot.val();
-      console.log("in child changed")
-      console.log(newData);
-    });
+    chorehouseRef.child(data.ChoreKey).remove();
+
+    // chorehouseRef.on('child_changed', function(snapshot){
+    //   var newData = snapshot.val();
+    //   console.log("in child changed")
+    //   console.log(newData);
+    // });
   //  var array = [... this.state.listViewData]; // make a separate copy of the array
   //  var index = array.indexOf(data.target.value);
   //  var index = array.indexOf(data);
@@ -174,6 +211,61 @@ export default class ChoresScreen extends React.Component {
 
     //alert(this.state.houseID);
   }
+
+  async rotateChores(){
+    var that = this;
+    var newchoreUser = '';
+    var currentList = [... this.state.listViewData]
+    console.log(currentList)
+    for( i = 0; i< currentList.length; i++){
+      var currentNum = currentList[i].Current;
+      console.log(currentNum);
+      console.log(currentList[i].Users.length, 'listlength');
+      if(currentNum == currentList[i].Users.length-1){
+        console.log("its is at its last user");
+        currentNum = 0;
+      }else{
+        currentNum = currentNum + 1;
+      }
+      var choresRef = firebase.database().ref("/Chores").child(this.state.houseID);
+      var choreItemRef = choresRef.child(currentList[i].ChoreKey);
+      // choreItemRef.on('value').then(
+      //   function(snapshot){
+      //     if(snapshot.exist()){
+      //       choreItemRef.update({
+      //         Current: currentNum
+      //       });
+      //     }
+      //   }
+      // );
+      choreItemRef.update({
+        Current: currentNum
+      });
+      // choresRef.child(currentList[i].ChoreKey).update({
+      //   Current: currentNum
+      // });
+      currentList[i].Current = currentNum;
+      console.log(currentNum);
+      console.log(currentList[i].Users[currentNum]);
+      console.log(currentList[i].ChoreUser);
+      var getUserName = firebase.database().ref('/Users').child(currentList[i].Users[currentNum]);
+      await getUserName.on('value', function(snapshot){
+        var choreData = snapshot.val();
+        console.log( choreData.FirstName)
+      //  console.log(currentList[i].ChoreUser);
+        //var newobj = {...obj.val(), "ChoreUser":  choreData.FirstName + ' ' + choreData.LastName};
+        // currentList[i].Current = currentNum;
+       //currentList[i].ChoreUser = choreData.FirstName + ' ' + choreData.LastName;
+      //  that.setState({listViewData: currentList});
+      newchoreUser = choreData.FirstName + ' ' + choreData.LastName;
+      });
+      currentList[i].ChoreUser = newchoreUser;
+
+      that.setState({listViewData: currentList});
+    }
+  }
+
+
 
   render() {
     const { container,
@@ -195,7 +287,7 @@ export default class ChoresScreen extends React.Component {
                       <CardItem>
                         <Left>
                           <Text style={styles.choreText}>
-                            {data.val().ChoreName}
+                            {data.ChoreName}
                           </Text>
                         </Left>
                         <Right>
@@ -207,14 +299,14 @@ export default class ChoresScreen extends React.Component {
                       <CardItem>
                         <Left>
                           <Text style={styles.choreInfo}>
-                            {data.val().Description}
+                            {data.Description}
                           </Text>
                         </Left>
                       </CardItem>
                       <CardItem>
                         <Left>
                           <Text style={styles.cardUser}>
-                            {data.val().Current}
+                            {data.ChoreUser}
                           </Text>
                         </Left>
                       </CardItem>
@@ -224,7 +316,7 @@ export default class ChoresScreen extends React.Component {
                 <TouchableOpacity style={styles.buttonStyle} onPress={ () => this.props.navigation.navigate('AddChore')}>
                   <Text style={styles.btnText}> Add a Chore </Text>
                 </TouchableOpacity>
-                <Button style={styles.buttonStyle}>
+                <Button style={styles.buttonStyle}onPress={ () => {this.rotateChores()}}>
                   <Text style={styles.btnText}> Rotate Chores! </Text>
                 </Button>
               </Content>

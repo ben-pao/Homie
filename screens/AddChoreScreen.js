@@ -160,11 +160,12 @@ class AddChoreScreen extends Component {
     var key = choresRef.push().key;
     choresRef.child(key).set({
       ChoreName: state.choreName,
+      ChoreKey: key,
       Description: state.description,
       Date: today,
       Freq: state.frequency,
       Users: state.users,
-      Current: 1
+      Current: 0
     });
     //
     // console.log(userData);
