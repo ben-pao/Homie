@@ -83,7 +83,7 @@ export default class ChoresScreen extends React.Component {
     });
   }
 
-  setStates(){
+  async setStates(){
     var that = this;
     var user = firebase.auth().currentUser;
     if(user == null){
@@ -97,7 +97,7 @@ export default class ChoresScreen extends React.Component {
     var userDBref = firebase.database().ref('/Users').child(uid)
 
     //set the states with info in users table
-    userDBref.on('value', function(snapshot){
+    await userDBref.on('value', function(snapshot){
       userData = snapshot.val();
       console.log(userData.HouseID);
       that.setState({
@@ -109,7 +109,8 @@ export default class ChoresScreen extends React.Component {
       //setting data with data in database
       var newData = [... that.state.listViewData]
       var chorehouseRef = firebase.database().ref('/Chores').child(userData.HouseID)
-         chorehouseRef.on('child_added', function(data){
+        chorehouseRef.on('child_added', function(data){
+           //var newData = [... that.state.listViewData]
            console.log("inchild_added");
            console.log(data);
            var obj = {};
@@ -212,6 +213,48 @@ export default class ChoresScreen extends React.Component {
     //alert(this.state.houseID);
   }
 
+  async rotateCard(data){
+    var that = this;
+    var newchoreUser = '';
+    var currentList = [... this.state.listViewData]
+    console.log(currentList)
+    console.log('in roate card')
+    console.log(data)
+    for( i = 0; i< currentList.length; i++){
+      if(data == currentList[i].ChoreKey){
+        console.log(currentList[i].ChoreKey, data)
+        console.log(currentList[i])
+        var currentNum = currentList[i].Current;
+        if(currentNum == currentList[i].Users.length-1){
+          console.log("its is at its last user");
+          currentNum = 0;
+        }else{
+          currentNum = currentNum + 1;
+        }
+        currentList[i].Current = currentNum;
+        console.log(currentNum)
+        var choresRef = firebase.database().ref("/Chores").child(this.state.houseID);
+        var choreItemRef = choresRef.child(currentList[i].ChoreKey);
+        await choreItemRef.update({
+          Current: currentNum,
+        });
+        var getUserName = firebase.database().ref('/Users').child(currentList[i].Users[currentNum]);
+        await getUserName.on('value', function(snapshot){
+          var choreData = snapshot.val();
+          console.log( choreData.FirstName)
+          newchoreUser = choreData.FirstName + ' ' + choreData.LastName;
+        });
+
+        currentList[i].ChoreUser = newchoreUser;
+
+        that.setState({listViewData: currentList});
+        break;
+      }
+    }
+
+  }
+
+
   async rotateChores(){
     var that = this;
     var newchoreUser = '';
@@ -238,7 +281,7 @@ export default class ChoresScreen extends React.Component {
       //     }
       //   }
       // );
-      choreItemRef.update({
+      await choreItemRef.update({
         Current: currentNum
       });
       // choresRef.child(currentList[i].ChoreKey).update({
@@ -276,10 +319,12 @@ export default class ChoresScreen extends React.Component {
             btnText
     } = styles;
     return(
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <KeyboardAvoidingView behavior='padding' style={styles.wrapperStyle} enabled>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
+
+
+            <ScrollView>
             <Container style={styles.container}>
+
               <Content>
                 {this.state.listViewData.map((data, index) => {
                   return(
@@ -309,6 +354,11 @@ export default class ChoresScreen extends React.Component {
                             {data.ChoreUser}
                           </Text>
                         </Left>
+                        <Right>
+                        <Button style={styles.buttonStyle} onPress={ () => {this.rotateCard(data.ChoreKey)}}>
+                          <Text style={styles.btnText}> Rotate This Chore! </Text>
+                        </Button>
+                        </Right>
                       </CardItem>
                     </Card>
                   );
@@ -317,13 +367,17 @@ export default class ChoresScreen extends React.Component {
                   <Text style={styles.btnText}> Add a Chore </Text>
                 </TouchableOpacity>
                 <Button style={styles.buttonStyle}onPress={ () => {this.rotateChores()}}>
-                  <Text style={styles.btnText}> Rotate Chores! </Text>
+                  <Text style={styles.btnText}> Rotate ALL! </Text>
                 </Button>
               </Content>
+
             </Container>
-          </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
-      </ScrollView>
+            </ScrollView>
+
+
+
+
+
     );
   }
 }
