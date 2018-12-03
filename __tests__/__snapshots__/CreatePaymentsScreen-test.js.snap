@@ -85,20 +85,31 @@ exports[`renders correctly 1`] = `
       }
       underlineColorAndroid="transparent"
     />
-    <TextInput
-      allowFontScaling={true}
-      onChangeText={[Function]}
-      placeholder="Enter the Housemate to Charge"
+    <View
       style={
         Object {
-          "alignSelf": "stretch",
-          "backgroundColor": "#fff",
-          "marginBottom": 20,
-          "padding": 15,
+          "backgroundColor": "#fafafa",
+          "height": "20%",
+          "width": "100%",
         }
       }
-      underlineColorAndroid="transparent"
-    />
+    >
+      <RCTPicker
+        items={Array []}
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        selectedIndex={0}
+        style={
+          Array [
+            Object {
+              "height": 216,
+            },
+            undefined,
+          ]
+        }
+      />
+    </View>
     <View
       accessibilityComponentType={undefined}
       accessibilityLabel={undefined}
