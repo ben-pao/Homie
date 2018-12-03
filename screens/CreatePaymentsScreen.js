@@ -7,7 +7,7 @@ import { createStackNavigator } from 'react-navigation';
 
 var data = []
 
-export default class PaymentsScreen extends React.Component {
+export default class CreatePaymentsScreen extends React.Component {
 
   constructor(props){
     super(props);
@@ -173,7 +173,7 @@ export default class PaymentsScreen extends React.Component {
     // const { navigate, goBack } = this.props.navigation;
 
     return (
-
+      <ScrollView>
       <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
           <View style={containerStyle}>
@@ -258,7 +258,7 @@ export default class PaymentsScreen extends React.Component {
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-
+      </ScrollView>
     );
   }
 
