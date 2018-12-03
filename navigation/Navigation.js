@@ -55,7 +55,14 @@ const SettingsStack = createStackNavigator(
 const ChoresStack = createStackNavigator(
   {
     Chores: ChoresScreen,
-    AddChore: AddChoreScreen
+    AddChore: AddChoreScreen,
+  },
+  {
+    navigationOptions: {
+      header: null,
+    }
+  }
+);
 
 const PaymentsStack = createStackNavigator(
   {

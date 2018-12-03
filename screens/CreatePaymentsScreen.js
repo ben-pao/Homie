@@ -7,7 +7,7 @@ import { createStackNavigator } from 'react-navigation';
 
 var data = []
 
-export default class PaymentsScreen extends React.Component {
+export default class CreatePaymentsScreen extends React.Component {
 
   constructor(props){
     super(props);
