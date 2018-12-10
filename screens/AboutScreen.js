@@ -21,8 +21,8 @@ class AboutScreen extends Component {
     } = styles;
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text> About Homie </Text>
+      <View style={containerStyle}>
+        <Text style={buttonTextStyle}> About Homie </Text>
       </View>
     );
   }
@@ -31,26 +31,23 @@ class AboutScreen extends Component {
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-    // backgroundColor: '#2896d3',
-    backgroundColor: '#fff',
+    backgroundColor: '#1c1c1c',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
     paddingRight: 40,
   },
   headerStyle: {
-    fontSize:24,
+    fontSize: 24,
     marginBottom:60,
     color: '#000',
-    // color: '#fff',
     fontWeight: 'bold',
   },
   buttonStyle: {
     alignSelf: 'stretch',
-    // backgroundColor: '#01c853',
-    backgroundColor: '#000',
-    // color: '#fff',
+    backgroundColor: '#eac784',
     padding: 20,
+    borderRadius: 30,
     alignItems: 'center',
     margin: 8
   },

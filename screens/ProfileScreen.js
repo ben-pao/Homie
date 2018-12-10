@@ -4,15 +4,6 @@ import * as firebase from 'firebase';
 import { Keyboard } from 'react-native';
 
 class ProfileScreen extends Component {
-  // static navigationOptions = {
-  //   drawerLabel: 'Home',
-  //   // drawerIcon: ({ tintColor }) => (
-  //   //   <Image
-  //   //     source={require('./chats-icon.png')}
-  //   //     style={[styles.icon, {tintColor: tintColor}]}
-  //   //   />
-  //   // ),
-  // };
   render() {
     const { containerStyle,
             headerStyle,
@@ -21,8 +12,8 @@ class ProfileScreen extends Component {
     } = styles;
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text> You can view your profile and edit your profile here! </Text>
+      <View style={containerStyle}>
+        <Text style={buttonTextStyle}> You can view your profile and edit your profile here! </Text>
       </View>
     );
   }
@@ -31,8 +22,7 @@ class ProfileScreen extends Component {
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-    // backgroundColor: '#2896d3',
-    backgroundColor: '#fff',
+    backgroundColor: '#1c1c1c',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
@@ -41,16 +31,14 @@ const styles = StyleSheet.create({
   headerStyle: {
     fontSize:24,
     marginBottom:60,
-    color: '#000',
-    // color: '#fff',
+    color: '#fff',
     fontWeight: 'bold',
   },
   buttonStyle: {
     alignSelf: 'stretch',
-    // backgroundColor: '#01c853',
-    backgroundColor: '#000',
-    // color: '#fff',
+    backgroundColor: '#eac784',
     padding: 20,
+    borderRadius: 30,
     alignItems: 'center',
     margin: 8
   },

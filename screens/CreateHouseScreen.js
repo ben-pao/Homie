@@ -84,8 +84,7 @@ class CreateHouseScreen extends Component {
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-    // backgroundColor: '#2896d3',
-    backgroundColor: '#fff',
+    backgroundColor: '#1c1c1c',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
@@ -97,22 +96,21 @@ const styles = StyleSheet.create({
   headerStyle: {
     fontSize:24,
     marginBottom:60,
-    color: '#000',
-    // color: '#fff',
+    color: '#fff',
     fontWeight: 'bold',
   },
   textInputStyle: {
     alignSelf: 'stretch',
     padding: 15,
     marginBottom: 20,
+    borderRadius: 10,
     backgroundColor: '#fff'
   },
   buttonStyle: {
     alignSelf: 'stretch',
-    // backgroundColor: '#01c853',
-    backgroundColor: '#000',
-    // color: '#fff',
+    backgroundColor: '#eac784',
     padding: 20,
+    borderRadius: 30,
     alignItems: 'center',
     margin: 8
   },

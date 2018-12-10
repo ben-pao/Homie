@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     // },
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#1c1c1c',
     },
     headerText:{
       alignSelf: 'center',
@@ -205,7 +205,8 @@ const styles = StyleSheet.create({
     },
     text: {
       alignSelf: 'center',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      color: '#fff'
     },
     blackColor: {
       backgroundColor: '#fff',
@@ -215,10 +216,9 @@ const styles = StyleSheet.create({
     },
     btn: {
       alignSelf: 'stretch',
-      // backgroundColor: '#01c853',
-      backgroundColor: '#000',
-      // color: '#fff',
+      backgroundColor: '#eac784',
       padding: 20,
+      borderRadius: 30,
       alignItems: 'center',
       margin: 8
     },

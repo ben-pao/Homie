@@ -351,7 +351,7 @@ export default class ChoresScreen extends React.Component {
                       <CardItem>
                         <Left>
                           <Text style={styles.choreInfo}>
-                          
+
                             {data.Date}
                           </Text>
                         </Left>
@@ -363,9 +363,9 @@ export default class ChoresScreen extends React.Component {
                           </Text>
                         </Left>
                         <Right>
-                        <Button style={styles.buttonStyle} onPress={ () => {this.rotateCard(data.ChoreKey)}}>
-                          <Text style={styles.btnText}> Rotate This Chore! </Text>
-                        </Button>
+                        <TouchableOpacity style={styles.buttonStyle} onPress={ () => {this.rotateCard(data.ChoreKey)}}>
+                          <Text style={styles.btnText}> Rotate </Text>
+                        </TouchableOpacity>
                         </Right>
                       </CardItem>
                     </Card>
@@ -374,9 +374,9 @@ export default class ChoresScreen extends React.Component {
                 <TouchableOpacity style={styles.buttonStyle} onPress={ () => this.props.navigation.navigate('AddChore')}>
                   <Text style={styles.btnText}> Add a Chore </Text>
                 </TouchableOpacity>
-                <Button style={styles.buttonStyle}onPress={ () => {this.rotateChores()}}>
+                <TouchableOpacity style={styles.buttonStyle}onPress={ () => {this.rotateChores()}}>
                   <Text style={styles.btnText}> Rotate ALL! </Text>
-                </Button>
+                </TouchableOpacity>
               </Content>
 
             </Container>
@@ -393,7 +393,7 @@ export default class ChoresScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'transparent'
+      backgroundColor: '#1c1c1c'
     },
     contentContainer: {
       backgroundColor: 'transparent',
@@ -421,9 +421,10 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
       alignSelf: 'stretch',
-      backgroundColor: '#000',
+      backgroundColor: '#eac784',
       padding: 20,
       alignItems: 'center',
+      borderRadius: 30,
       margin: 8
     },
     btn: {

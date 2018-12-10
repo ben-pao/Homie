@@ -180,8 +180,7 @@ export default class SignupScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#2896d3',
-    backgroundColor: '#fff',
+    backgroundColor: '#1c1c1c',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
@@ -193,20 +192,21 @@ const styles = StyleSheet.create({
   header: {
     fontSize:24,
     marginBottom:60,
-    color: '#000',
+    color: '#fff',
     fontWeight: 'bold',
   },
   textInput: {
     alignSelf: 'stretch',
     padding: 15,
     marginBottom: 20,
+    borderRadius: 10,
     backgroundColor: '#fff'
   },
   btn: {
     alignSelf: 'stretch',
-    backgroundColor: '#000',
-    // color: '#fff',
+    backgroundColor: '#eac784',
     padding: 20,
+    borderRadius: 30,
     alignItems: 'center',
     margin: 8
   },

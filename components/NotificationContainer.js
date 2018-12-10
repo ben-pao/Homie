@@ -5,6 +5,7 @@ import {
 import {
   Text,
   View,
+  StyleSheet
 } from 'react-native';
 
 // This refers to the function defined earlier in this guide
@@ -14,6 +15,7 @@ export default class NotificationContainer extends React.Component {
   state = {
     notification: {},
   };
+
 
   componentDidMount() {
     registerForPushNotificationsAsync();
@@ -31,11 +33,21 @@ export default class NotificationContainer extends React.Component {
   };
 
   render() {
+    const {
+      textStyle
+    } = styles;
+
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Origin: {this.state.notification.origin}</Text>
-        <Text>Data: {JSON.stringify(this.state.notification.data)}</Text>
+        <Text style={textStyle}> Origin: {this.state.notification.origin} </Text>
+        <Text style={textStyle}>Data: {JSON.stringify(this.state.notification.data)}</Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  textStyle: {
+    color: '#fff'
+  }
+});

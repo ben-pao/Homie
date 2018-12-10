@@ -20,6 +20,7 @@ class SettingsScreen extends Component {
 
     return (
       <View style={containerStyle}>
+        <Text style={headerStyle}> Settings </Text>
         <TouchableOpacity
           style={buttonStyle}
           onPress={
@@ -69,8 +70,7 @@ class SettingsScreen extends Component {
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-    // backgroundColor: '#2896d3',
-    backgroundColor: '#000',
+    backgroundColor: '#1c1c1c',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
@@ -82,26 +82,26 @@ const styles = StyleSheet.create({
   headerStyle: {
     fontSize:24,
     marginBottom:60,
-    color: '#000',
-    // color: '#fff',
+    color: '#fff',
     fontWeight: 'bold',
   },
   textInputStyle: {
     alignSelf: 'stretch',
     padding: 15,
     marginBottom: 20,
+    borderRadius: 10,
     backgroundColor: '#fff'
   },
   buttonStyle: {
     alignSelf: 'stretch',
-    backgroundColor: 'hotpink',
-    // color: '#fff',
     padding: 20,
+    borderRadius: 30,
+    backgroundColor: '#eac784',
     alignItems: 'center',
     margin: 8
   },
   buttonTextStyle: {
-    color: '#000',
+    color: '#fff',
     fontWeight: 'bold',
     fontFamily: 'Cochin',
   }

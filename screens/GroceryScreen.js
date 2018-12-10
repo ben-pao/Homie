@@ -263,15 +263,12 @@ export default class GroceryScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'transparent'
+      backgroundColor: '#1c1c1c'
     },
     contentContainer: {
-      backgroundColor: 'transparent',
+      backgroundColor: '#1c1c1c',
       paddingVertical: 20,
       paddingHorizontal: 20
-    },
-    blackColor: {
-      backgroundColor: '#fff'
     },
     cardUser: {
       alignSelf: 'center',
@@ -296,11 +293,12 @@ const styles = StyleSheet.create({
     },
     btnText: {
       color: '#fff',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      alignSelf: 'center'
     },
     clearBtn: {
       alignSelf: 'stretch',
-      backgroundColor: '#000'
+      backgroundColor: '#eac784'
     },
     clearTxt:{
       alignSelf: 'center',

@@ -245,58 +245,27 @@ export default class RequestPaymentsScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    // input:{
-    //   backgroundColor: '#000',
-    // },
-    // container: {
-    //   flex: 1,
-    //   // backgroundColor: '#2896d3',
-    //   backgroundColor: '#fff',
-    //   alignItems: 'center',
-    //   justifyContent: 'center',
-    //   paddingLeft: 40,
-    //   paddingRight: 40,
-    // },
-    // wrapper: {
-    //   flex: 1,
-    // },
-    // header: {
-    //   fontSize:24,
-    //   marginBottom:60,
-    //   color: '#000',
-    //   // color: '#fff',
-    //   fontWeight: 'bold',
-    // },
-    // textInput: {
-    //   alignSelf: 'stretch',
-    //   padding: 15,
-    //   marginBottom: 20,
-    //   backgroundColor: '#fff'
-    // },
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#1c1c1c',
     },
     text: {
       alignSelf: 'center',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      color: '#fff'
     },
     cardUser: {
       alignSelf: 'center',
       fontSize: 10,
       color: 'grey'
     },
-    blackColor: {
-      backgroundColor: '#fff',
-    },
     input:{
       backgroundColor: '#000',
     },
     btn: {
       alignSelf: 'stretch',
-      // backgroundColor: '#01c853',
-      backgroundColor: '#000',
-      // color: '#fff',
+      backgroundColor: '#eac784',
+      borderRadius: 30,
       padding: 20,
       alignItems: 'center',
       margin: 8

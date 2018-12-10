@@ -88,10 +88,10 @@ const TabNavigator = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeBackgroundColor: 'hotpink',
+      activeBackgroundColor: '#eac784',
       activeTintColor: '#000',
       inactiveTintColor: '#fff',
-      inactiveBackgroundColor: '#000',
+      inactiveBackgroundColor: '#1c1c1c',
       style: {
         backgroundColor: '#000',
       },
@@ -143,15 +143,11 @@ const AppStack = createStackNavigator(
     // initialRouteName: 'TabNavigator',
     navigationOptions: {
       headerStyle: {
-        // backgroundColor: '#FF69B4',
-        backgroundColor: '#000',
+        backgroundColor: '#1c1c1c',
         borderBottomWidth: 0,
       },
       headerTintColor: '#fff',
-      // headerTintColor: '#000',
       headerTitleStyle: {
-        // fontWeight: 'bold',
-        // font: 'cambria'
         fontFamily: 'Cochin',
       },
       gesturesEnabled: false,

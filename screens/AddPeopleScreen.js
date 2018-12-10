@@ -159,8 +159,7 @@ class AddPeopleScreen extends Component {
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-    // backgroundColor: '#2896d3',
-    backgroundColor: '#000',
+    backgroundColor: '#1c1c1c',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 40,
@@ -173,19 +172,19 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     padding: 15,
     marginBottom: 20,
+    borderRadius: 10,
     backgroundColor: '#fff'
   },
   buttonStyle: {
     alignSelf: 'stretch',
-    // backgroundColor: '#01c853',
-    backgroundColor: 'hotpink',
-    // color: '#fff',
+    backgroundColor: '#eac784',
     padding: 20,
+    borderRadius: 30,
     alignItems: 'center',
     margin: 8
   },
   buttonTextStyle: {
-    color: '#000',
+    color: '#fff',
     fontWeight: 'bold'
   }
 });
