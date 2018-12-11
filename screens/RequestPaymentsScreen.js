@@ -173,7 +173,7 @@ export default class RequestPaymentsScreen extends React.Component {
                   <CardItem>
                     <Left>
 
-                      <Text style={styles.text}>
+                      <Text style={styles.nametext}>
 
                         {data.val().JohnsName}
                       </Text>
@@ -253,6 +253,11 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       fontWeight: 'bold',
       color: '#fff'
+    },
+    nametext: {
+      alignSelf: 'center',
+      fontWeight: 'bold',
+      color: '#000'
     },
     cardUser: {
       alignSelf: 'center',

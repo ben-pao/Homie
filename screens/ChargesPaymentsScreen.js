@@ -125,7 +125,7 @@ export default class ChargesPaymentsScreen extends React.Component {
             <Card key={index}>
               <CardItem>
                 <Left>
-                  <Text style={styles.text}>
+                  <Text style={styles.nametext}>
                     {data.val().PimpName}
                   </Text>
                 </Left>
@@ -207,6 +207,11 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       fontWeight: 'bold',
       color: '#fff'
+    },
+    nametext: {
+      alignSelf: 'center',
+      fontWeight: 'bold',
+      color: '#000'
     },
     blackColor: {
       backgroundColor: '#fff',
