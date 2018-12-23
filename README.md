@@ -1,6 +1,14 @@
 # Homie
 ### *An app that helps housemates keep track of their chores, bills, and groceries*
-[Demo](https://www.youtube.com/watch?v=H6YTE3IECxQ&t=55s)
+
+
+### Demo
+[YouTube](https://www.youtube.com/watch?v=H6YTE3IECxQ&t=55s)
+
+
+### Final Presentation
+[YouTube](https://www.youtube.com/watch?v=H6YTE3IECxQ&t=55s)
+
 
 ### Members
 - [Ben Pao](https://github.com/ben-pao)
