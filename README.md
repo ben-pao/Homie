@@ -10,7 +10,7 @@
 
 
 ### Demo
-[YouTube](https://www.youtube.com/watch?v=H6YTE3IECxQ&t=55s)
+[![Demo](http://img.youtube.com/vi/H6YTE3IECxQ/0.jpg)](http://www.youtube.com/watch?v=H6YTE3IECxQ)
 
 
 ### Final Presentation
@@ -18,7 +18,10 @@
 
 
 ### Installation Guide
-
+```
+npm install -g expo-cli
+expo start
+```
 
 ### Links
 - [Team Drive](https://drive.google.com/drive/u/0/folders/0ADWe_V7lqyX1Uk9PVA)
