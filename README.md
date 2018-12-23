@@ -1,4 +1,4 @@
-## Homie :house_with_garden:
+# Homie :house_with_garden:
 
 > #### *An iOS app that helps housemates keep track of their chores, bills, and groceries*
 
