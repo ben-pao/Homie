@@ -80,7 +80,7 @@ expo start
 - Saturday 12PM  Keith’s Garage
 
 
-## Meeting Times this sprint
+## Meeting Times for Sprint 3
 - 11/8 Thursday 5pm J Baskin 316 (with TA)
 -	11/12 Monday 1pm Keith’s Garage
 -	11/13 Tuesday 8pm Keith’s Garage
