@@ -18,10 +18,31 @@
 
 
 ### Installation Guide
+
+#### 1. Clone Homie
+```
+git clone https://github.com/ben-pao/Homie.git
+```
+
+#### 2. Install Expo
 ```
 npm install -g expo-cli
+```
+
+#### 3. Navigate to root directory
+```
+cd Homie
+```
+
+#### 4. Start project
+```
+npm start
+```
+##### or
+```
 expo start
 ```
+
 
 ### Links
 - [Team Drive](https://drive.google.com/drive/u/0/folders/0ADWe_V7lqyX1Uk9PVA)
