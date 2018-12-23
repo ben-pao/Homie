@@ -3,39 +3,39 @@
 ### *An app that helps housemates keep track of their chores, bills, and groceries*
 
 
-### Members
+# Members
 - [Ben Pao](https://github.com/ben-pao)
 - [Mary Chern](https://github.com/marychern)
 - [Andy Wong](https://github.com/ankwwong)
 - [Keith Ho](https://github.com/hkeithk)
 
 
-### Demo
+# Demo
 [![Demo](http://img.youtube.com/vi/H6YTE3IECxQ/0.jpg)](http://www.youtube.com/watch?v=H6YTE3IECxQ)
 
 
-### Final Presentation
+# Final Presentation
 [Google Slides](https://docs.google.com/presentation/d/1Sgz9xZJIlzmjI_2VkdQ9nXXSGWo_aQn4NOHeKrpPMSo/edit?usp=sharing)
 
 
-### Installation Guide
+# Installation Guide
 
-#### 1. Clone Homie
+### 1. Clone Homie
 ```
 git clone https://github.com/ben-pao/Homie.git
 ```
 
-#### 2. Install Expo
+### 2. Install Expo
 ```
 npm install -g expo-cli
 ```
 
-#### 3. Navigate to root directory
+### 3. Navigate to root directory
 ```
 cd Homie
 ```
 
-#### 4. Start project
+### 4. Start project
 ```
 npm start
 ```
@@ -45,7 +45,7 @@ expo start
 ```
 
 
-### Links
+# Links
 - [Team Drive](https://drive.google.com/drive/u/0/folders/0ADWe_V7lqyX1Uk9PVA)
 - [Initial Presentation](https://docs.google.com/presentation/d/1sRWfeSazIiWJtqXJdJSJwQfQrMCYdjYDVDm9w8_U_a0/edit#slide=id.g43bf131c52_0_0)
 - [Release Plan](./Documentation/Release%20Plan.pdf)
@@ -74,13 +74,13 @@ expo start
   - [Trello](https://trello.com/b/SSQiOTTP/sprint-4-scrum-board)
 
 
-### Meeting Times
+# Meeting Times
 - Tuesday   7PM  Keith’s Garage
 - Thursday  5PM  J Baskin 316 (with TA)
 - Saturday 12PM  Keith’s Garage
 
 
-### Meeting Times this sprint
+# Meeting Times this sprint
 - 11/8 Thursday 5pm J Baskin 316 (with TA)
 -	11/12 Monday 1pm Keith’s Garage
 -	11/13 Tuesday 8pm Keith’s Garage
