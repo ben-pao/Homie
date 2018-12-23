@@ -1,6 +1,6 @@
 # Homie :house_with_garden:
 
-### *An app that helps housemates keep track of their chores, bills, and groceries*
+> ### *An iOS app that helps housemates keep track of their chores, bills, and groceries*
 
 
 # Members
