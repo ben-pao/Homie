@@ -2,14 +2,6 @@
 ### *An app that helps housemates keep track of their chores, bills, and groceries*
 
 
-### Demo
-[YouTube](https://www.youtube.com/watch?v=H6YTE3IECxQ&t=55s)
-
-
-### Final Presentation
-[YouTube](https://www.youtube.com/watch?v=H6YTE3IECxQ&t=55s)
-
-
 ### Members
 - [Ben Pao](https://github.com/ben-pao)
 - [Mary Chern](https://github.com/marychern)
@@ -17,12 +9,15 @@
 - [Keith Ho](https://github.com/hkeithk)
 
 
-### Meeting Times this sprint
-- 11/8 Thursday 5pm J Baskin 316 (with TA)
--	11/12 Monday 1pm Keith’s Garage
--	11/13 Tuesday 8pm Keith’s Garage
--	11/15 Thursday 5pm J Baskin 316 (with TA)
--	11/17 Saturday  10am Keith’s Garage
+### Demo
+[YouTube](https://www.youtube.com/watch?v=H6YTE3IECxQ&t=55s)
+
+
+### Final Presentation
+[Google Slides](https://docs.google.com/presentation/d/1Sgz9xZJIlzmjI_2VkdQ9nXXSGWo_aQn4NOHeKrpPMSo/edit?usp=sharing)
+
+
+### Installation Guide
 
 
 ### Links
@@ -58,3 +53,11 @@
 - Tuesday   7PM  Keith’s Garage
 - Thursday  5PM  J Baskin 316 (with TA)
 - Saturday 12PM  Keith’s Garage
+
+
+### Meeting Times this sprint
+- 11/8 Thursday 5pm J Baskin 316 (with TA)
+-	11/12 Monday 1pm Keith’s Garage
+-	11/13 Tuesday 8pm Keith’s Garage
+-	11/15 Thursday 5pm J Baskin 316 (with TA)
+-	11/17 Saturday  10am Keith’s Garage
