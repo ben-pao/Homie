@@ -13,7 +13,12 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
-    this.getMyToken().done();
+    try{
+      this.getMyToken();
+    }catch(err){
+      console.log("getMyToken didn't run");
+      console.log(err.toString() );
+    }
   }
 
   render() {
@@ -70,7 +75,7 @@ class HomeScreen extends Component {
     }
   }
 
-  getMyToken = async () => {
+  getMyToken() {
     var user = firebase.auth().currentUser;
     var userName = user.providerData[0].displayName;
     var uid = user.uid;

@@ -11,3 +11,12 @@ test('renders correctly', () => {
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+test('should be able to get todays date', () => {
+  const tree = renderer.create(
+    <ChoresScreen />
+  );
+  const ret = tree.getInstance().getTodayDate();
+  console.log("Todya's date: " + ret);
+  expect(ret).toBeDefined();
+});

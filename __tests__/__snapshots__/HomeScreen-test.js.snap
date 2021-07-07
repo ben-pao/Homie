@@ -5,28 +5,20 @@ exports[`renders correctly 1`] = `
   style={
     Object {
       "alignItems": "center",
+      "backgroundColor": "#fff",
       "flex": 1,
       "justifyContent": "center",
+      "paddingLeft": 40,
+      "paddingRight": 40,
     }
   }
 >
   <View
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
-        "alignSelf": "stretch",
-        "backgroundColor": "#000",
-        "margin": 8,
-        "opacity": 1,
-        "padding": 20,
+        "flex": 1,
+        "justifyContent": "center",
       }
     }
   >
@@ -34,19 +26,28 @@ exports[`renders correctly 1`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
-      style={
-        Object {
-          "color": "#fff",
-          "fontWeight": "bold",
-        }
-      }
     >
-       Groceries 
+      Origin: 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Data: 
     </Text>
   </View>
   <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
     accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
     isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -57,12 +58,14 @@ exports[`renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "stretch",
-        "backgroundColor": "#000",
+        "backgroundColor": "hotpink",
         "margin": 8,
         "opacity": 1,
         "padding": 20,
       }
     }
+    testID={undefined}
+    tvParallaxProperties={undefined}
   >
     <Text
       accessible={true}
@@ -70,17 +73,26 @@ exports[`renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
-          "color": "#fff",
+          "color": "#000",
+          "fontFamily": "Cochin",
           "fontWeight": "bold",
         }
       }
     >
-       Chore Wheel 
+       Send a test notification 
     </Text>
   </View>
   <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
     accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
     isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -91,12 +103,14 @@ exports[`renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "stretch",
-        "backgroundColor": "#000",
+        "backgroundColor": "hotpink",
         "margin": 8,
         "opacity": 1,
         "padding": 20,
       }
     }
+    testID={undefined}
+    tvParallaxProperties={undefined}
   >
     <Text
       accessible={true}
@@ -104,46 +118,13 @@ exports[`renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
-          "color": "#fff",
+          "color": "#000",
+          "fontFamily": "Cochin",
           "fontWeight": "bold",
         }
       }
     >
-       Settings 
-    </Text>
-  </View>
-  <View
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "alignSelf": "stretch",
-        "backgroundColor": "#000",
-        "margin": 8,
-        "opacity": 1,
-        "padding": 20,
-      }
-    }
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Object {
-          "color": "#fff",
-          "fontWeight": "bold",
-        }
-      }
-    >
-       Sign out 
+       A dashboard for notifications and housemate updates if we have time! 
     </Text>
   </View>
 </View>

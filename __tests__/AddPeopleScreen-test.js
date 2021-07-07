@@ -11,3 +11,30 @@ test('renders correctly', () => {
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+test('adding a person with their email should pass', () => {
+  const tree = renderer.create(
+    <AddPeopleScreen />
+  );
+  email = "turkeyNroll@gmail.com";
+  const ret = tree.getInstance().emailNotNull(email);
+  expect(ret).toBeTruthy();
+});
+
+test('adding a person with null email should be detected', () => {
+  const tree = renderer.create(
+    <AddPeopleScreen />
+  );
+  email = null;
+  const ret = tree.getInstance().emailNotNull(email);
+  expect(ret).toBeFalsy();
+});
+
+test('adding a person with empty email should be detected', () => {
+  const tree = renderer.create(
+    <AddPeopleScreen />
+  );
+  email = "";
+  const ret = tree.getInstance().emailNotNull(email);
+  expect(ret).toBeFalsy();
+});

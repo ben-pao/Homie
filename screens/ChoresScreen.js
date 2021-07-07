@@ -102,6 +102,7 @@ export default class ChoresScreen extends React.Component {
       console.log(userData.HouseID);
       that.setState({
         houseID: userData.HouseID,
+
         userID: uid,
         userName: userData.FirstName + ' ' + userData.LastName
       });
@@ -213,6 +214,7 @@ export default class ChoresScreen extends React.Component {
     //alert(this.state.houseID);
   }
 
+
   async rotateCard(data){
     var that = this;
     var newchoreUser = '';
@@ -237,6 +239,7 @@ export default class ChoresScreen extends React.Component {
         var choreItemRef = choresRef.child(currentList[i].ChoreKey);
         await choreItemRef.update({
           Current: currentNum,
+
         });
         var getUserName = firebase.database().ref('/Users').child(currentList[i].Users[currentNum]);
         await getUserName.on('value', function(snapshot){
@@ -322,6 +325,7 @@ export default class ChoresScreen extends React.Component {
 
 
 
+
             <ScrollView>
             <Container style={styles.container}>
 
@@ -382,11 +386,8 @@ export default class ChoresScreen extends React.Component {
             </Container>
             </ScrollView>
 
-
-
-
-
     );
+
   }
 }
 

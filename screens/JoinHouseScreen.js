@@ -20,7 +20,7 @@ class JoinHouseScreen extends Component {
             buttonTextStyle
     } = styles;
 
-    const { navigate, goBack } = this.props.navigation;
+    // const { navigate, goBack } = this.props.navigation;
 
     return (
       <KeyboardAvoidingView behavior='padding' style={wrapperStyle} enabled>
@@ -59,7 +59,7 @@ class JoinHouseScreen extends Component {
             <TouchableOpacity
               style={buttonStyle}
               onPress={
-                () => goBack()
+                () => this.props.navigation.goBack()
             }>
               <Text style={buttonTextStyle}> Cancel </Text>
             </TouchableOpacity>
